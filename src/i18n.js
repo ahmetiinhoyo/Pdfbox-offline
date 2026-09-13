@@ -44,6 +44,8 @@ export const translations = {
     accentPink: "🎨 Pembe",
     onlyPdf: "Sadece PDF dosyaları kabul edilir",
     oneFileSplit: "PDF Böl için tek dosya seç",
+
+    statsLine: (files, pages) => `📄 ${files} dosya · ${pages} sayfa toplam`,
   },
   en: {
     tagline: "Your file never leaves your device. No ads. No tracking.",
@@ -90,6 +92,8 @@ export const translations = {
     accentPink: "🎨 Pink",
     onlyPdf: "Only PDF files are accepted",
     oneFileSplit: "Pick one file for Split",
+
+    statsLine: (files, pages) => `📄 ${files} files · ${pages} pages total`,
   },
   ru: {
     tagline: "Ваш файл не покидает устройство. Без рекламы. Без слежки.",
@@ -136,6 +140,8 @@ export const translations = {
     accentPink: "🎨 Розовый",
     onlyPdf: "Принимаются только PDF файлы",
     oneFileSplit: "Выберите один файл для Разделения",
+
+    statsLine: (files, pages) => `📄 ${files} файлов · ${pages} страниц всего`,
   },
 };
 

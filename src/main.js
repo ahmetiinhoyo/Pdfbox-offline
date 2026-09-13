@@ -181,10 +181,12 @@ const mergeList = document.getElementById('list');
 const mergeBtn = document.getElementById('merge');
 const mergeDropText = document.querySelector('.file-drop .drop-text');
 const mergeDrop = document.querySelector('.file-drop[for="files"]');
+const mergeStatsEl = document.getElementById('mergeStats');
+const mergeStatsText = document.getElementById('mergeStatsText');
 
 let mergeFiles = [];
 
-function addMergeFiles(newFiles) {
+async function addMergeFiles(newFiles) {
   const pdfs = newFiles.filter(f =>
     f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf')
   );
@@ -194,10 +196,19 @@ function addMergeFiles(newFiles) {
     return;
   }
 
-  pdfs.forEach(f => {
+  for (const f of pdfs) {
     const already = mergeFiles.some(s => s.name === f.name && s.size === f.size);
-    if (!already) mergeFiles.push(f);
-  });
+    if (!already) {
+      try {
+        const bytes = await f.arrayBuffer();
+        const pdf = await PDFDocument.load(bytes);
+        f._pageCount = pdf.getPageCount();
+      } catch {
+        f._pageCount = 0;
+      }
+      mergeFiles.push(f);
+    }
+  }
 
   renderMergeList();
 }
@@ -216,10 +227,15 @@ function renderMergeList() {
   if (mergeFiles.length === 0) {
     mergeDropText.textContent = t(currentLang, 'dropText');
     mergeBtn.disabled = true;
+    mergeStatsEl.hidden = true;
     return;
   }
 
   mergeDropText.textContent = t(currentLang, 'dropTextMulti', mergeFiles.length);
+
+  const totalPages = mergeFiles.reduce((sum, f) => sum + (f._pageCount || 0), 0);
+  mergeStatsText.textContent = t(currentLang, 'statsLine', mergeFiles.length, totalPages);
+  mergeStatsEl.hidden = false;
 
   mergeFiles.forEach((file, i) => {
     const li = document.createElement('li');

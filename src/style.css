@@ -48,23 +48,10 @@
   --danger-text: #dc2626;
 }
 
-/* Renk paletleri */
-[data-accent="blue"] {
-  --accent-1: #3b82f6;
-  --accent-2: #8b5cf6;
-}
-[data-accent="green"] {
-  --accent-1: #10b981;
-  --accent-2: #06b6d4;
-}
-[data-accent="orange"] {
-  --accent-1: #f97316;
-  --accent-2: #fbbf24;
-}
-[data-accent="pink"] {
-  --accent-1: #ec4899;
-  --accent-2: #a855f7;
-}
+[data-accent="blue"] { --accent-1: #3b82f6; --accent-2: #8b5cf6; }
+[data-accent="green"] { --accent-1: #10b981; --accent-2: #06b6d4; }
+[data-accent="orange"] { --accent-1: #f97316; --accent-2: #fbbf24; }
+[data-accent="pink"] { --accent-1: #ec4899; --accent-2: #a855f7; }
 
 /* ==========================================================
    GENEL
@@ -92,7 +79,7 @@ main {
 }
 
 /* ==========================================================
-   ÜST BAR (dil, tema, renk)
+   ÜST BAR
    ========================================================== */
 .top-bar {
   position: fixed;
@@ -329,6 +316,22 @@ h2 {
 .remove:hover {
   background: var(--danger-bg);
   color: var(--danger-text);
+}
+
+/* ==========================================================
+   SAYFA SAYACI
+   ========================================================== */
+.merge-stats {
+  margin-top: 1rem;
+  padding: 0.6rem 0.9rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.08));
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  text-align: center;
+  font-weight: 500;
+  animation: slideIn 0.25s ease-out;
 }
 
 /* ==========================================================
