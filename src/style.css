@@ -122,6 +122,7 @@ h2 {
   background: #0d1015;
   cursor: pointer;
   transition: all 0.2s;
+  position: relative;
 }
 
 .file-drop:hover {
@@ -129,8 +130,26 @@ h2 {
   background: #111520;
 }
 
+.file-drop.dragover {
+  border-color: #8b5cf6;
+  border-style: solid;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(139, 92, 246, 0.12));
+  transform: scale(1.02);
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15), 0 10px 30px rgba(139, 92, 246, 0.2);
+}
+
+.file-drop.dragover .drop-icon {
+  animation: bounce 0.6s infinite alternate;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+
 .drop-icon {
   font-size: 2rem;
+  transition: transform 0.2s;
 }
 
 .drop-text {
@@ -354,28 +373,12 @@ footer a {
   animation: toastOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.toast.success {
-  border-left-color: #10b981;
-}
+.toast.success { border-left-color: #10b981; }
+.toast.error { border-left-color: #ef4444; }
+.toast.info { border-left-color: #3b82f6; }
 
-.toast.error {
-  border-left-color: #ef4444;
-}
-
-.toast.info {
-  border-left-color: #3b82f6;
-}
-
-.toast-icon {
-  font-size: 1.1rem;
-  flex-shrink: 0;
-}
-
-.toast-message {
-  flex: 1;
-  line-height: 1.4;
-  word-break: break-word;
-}
+.toast-icon { font-size: 1.1rem; flex-shrink: 0; }
+.toast-message { flex: 1; line-height: 1.4; word-break: break-word; }
 
 .toast-close {
   background: transparent;
@@ -396,56 +399,21 @@ footer a {
 }
 
 @keyframes toastIn {
-  from {
-    opacity: 0;
-    transform: translateX(100%) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
+  from { opacity: 0; transform: translateX(100%) scale(0.9); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
 }
 
 @keyframes toastOut {
-  from {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(100%) scale(0.9);
-  }
+  from { opacity: 1; transform: translateX(0) scale(1); }
+  to { opacity: 0; transform: translateX(100%) scale(0.9); }
 }
 
 /* ========== MOBİL ========== */
 @media (max-width: 480px) {
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  .card {
-    padding: 1.5rem;
-  }
-
-  .lang-switch {
-    top: 0.5rem;
-    right: 0.5rem;
-  }
-
-  .lang-switch button {
-    font-size: 0.65rem;
-    padding: 0.3rem 0.4rem;
-    min-width: 30px;
-  }
-
-  .toast-container {
-    left: 1rem;
-    right: 1rem;
-    bottom: 1rem;
-  }
-
-  .toast {
-    min-width: auto;
-    width: 100%;
-  }
+  h1 { font-size: 1.8rem; }
+  .card { padding: 1.5rem; }
+  .lang-switch { top: 0.5rem; right: 0.5rem; }
+  .lang-switch button { font-size: 0.65rem; padding: 0.3rem 0.4rem; min-width: 30px; }
+  .toast-container { left: 1rem; right: 1rem; bottom: 1rem; }
+  .toast { min-width: auto; width: 100%; }
 }

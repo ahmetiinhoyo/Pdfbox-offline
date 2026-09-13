@@ -77,9 +77,6 @@ function downloadPdf(bytes, filename) {
   URL.revokeObjectURL(url);
 }
 
-/**
- * "1-3, 5, 7-9" → [0,1,2,4,6,7,8]  (0-indexed)
- */
 function parsePageRange(input, maxPage) {
   const trimmed = input.trim();
   if (trimmed === '') {
@@ -113,26 +110,74 @@ function parsePageRange(input, maxPage) {
 }
 
 // ============================================================
+// SÜRÜKLE-BIRAK ALTYAPISI
+// ============================================================
+function setupDropZone(dropElement, onFiles) {
+  if (!dropElement) return;
+
+  ['dragenter', 'dragover'].forEach(evt => {
+    dropElement.addEventListener(evt, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropElement.classList.add('dragover');
+    });
+  });
+
+  dropElement.addEventListener('dragleave', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (dropElement.contains(e.relatedTarget)) return;
+    dropElement.classList.remove('dragover');
+  });
+
+  dropElement.addEventListener('drop', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dropElement.classList.remove('dragover');
+
+    const files = e.dataTransfer?.files;
+    if (files && files.length > 0) {
+      onFiles(Array.from(files));
+    }
+  });
+}
+
+// ============================================================
 // BİRLEŞTİR
 // ============================================================
 const mergeInput = document.getElementById('files');
 const mergeList = document.getElementById('list');
 const mergeBtn = document.getElementById('merge');
 const mergeDropText = document.querySelector('.file-drop .drop-text');
+const mergeDrop = document.querySelector('.file-drop[for="files"]');
 
 let mergeFiles = [];
 
-mergeInput.addEventListener('change', () => {
-  const newFiles = Array.from(mergeInput.files);
-  newFiles.forEach(f => {
+function addMergeFiles(newFiles) {
+  const pdfs = newFiles.filter(f => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf'));
+
+  if (pdfs.length === 0) {
+    showToast('Sadece PDF dosyaları kabul edilir', 'error');
+    return;
+  }
+
+  pdfs.forEach(f => {
     const already = mergeFiles.some(
       s => s.name === f.name && s.size === f.size
     );
     if (!already) mergeFiles.push(f);
   });
-  mergeInput.value = '';
+
   renderMergeList();
+}
+
+mergeInput.addEventListener('change', () => {
+  const files = Array.from(mergeInput.files);
+  mergeInput.value = '';
+  addMergeFiles(files);
 });
+
+setupDropZone(mergeDrop, addMergeFiles);
 
 function renderMergeList() {
   mergeList.innerHTML = '';
@@ -210,30 +255,44 @@ const splitInput = document.getElementById('splitFile');
 const splitBtn = document.getElementById('split');
 const splitDropText = document.getElementById('splitDropText');
 const rangeInput = document.getElementById('pageRange');
+const splitDrop = document.querySelector('.file-drop[for="splitFile"]');
 
 let splitFile = null;
 let splitPageCount = 0;
 
-splitInput.addEventListener('change', async () => {
-  const file = splitInput.files[0];
+async function handleSplitFile(file) {
   if (!file) return;
 
-  splitFile = file;
+  if (!(file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf'))) {
+    showToast('Sadece PDF dosyaları kabul edilir', 'error');
+    return;
+  }
 
   try {
     const bytes = await file.arrayBuffer();
     const pdf = await PDFDocument.load(bytes);
     splitPageCount = pdf.getPageCount();
+    splitFile = file;
+    renderSplitDrop();
   } catch (err) {
     console.error(err);
     showToast(t(currentLang, 'error') + err.message, 'error');
     splitFile = null;
-    splitInput.value = '';
-    return;
+    renderSplitDrop();
   }
+}
 
+splitInput.addEventListener('change', () => {
+  const file = splitInput.files[0];
   splitInput.value = '';
-  renderSplitDrop();
+  handleSplitFile(file);
+});
+
+setupDropZone(splitDrop, (files) => {
+  if (files.length > 1) {
+    showToast('PDF Böl için tek dosya seç', 'info');
+  }
+  handleSplitFile(files[0]);
 });
 
 function renderSplitDrop() {
