@@ -14,6 +14,21 @@ export const translations = {
     remove: "Kaldır",
     footer: "%100 offline çalışır · Dosyalar sunucuya gitmez",
     needTwo: "En az 2 PDF seçmelisin",
+
+    // YENİ: PDF Böl
+    splitTitle: "✂️ PDF Böl",
+    splitDesc: "PDF'ten istediğin sayfaları ayır, yeni bir dosya olarak indir.",
+    splitDropText: "PDF seçmek için tıkla",
+    splitDropSelected: (name, total) => `📄 ${name} · ${total} sayfa`,
+    splitRangeLabel: "Sayfa aralığı",
+    splitRangePlaceholder: "örn: 1-3, 5, 7-9",
+    splitRangeHint: "Virgülle ayır, tire ile aralık ver. Boş bırakırsan tüm sayfalar alınır.",
+    splitBtn: "Böl ve İndir",
+    splitting: "Bölünüyor...",
+    splitDone: "✅ İndirildi!",
+    splitNeedFile: "Önce bir PDF seç 😄",
+    splitInvalidRange: "Geçersiz sayfa aralığı. Örnek: 1-3, 5, 7-9",
+    splitOutOfRange: (max) => `Sayfa numarası dosyada yok. En fazla ${max} sayfa var.`,
   },
   en: {
     tagline: "Your file never leaves your device. No ads. No tracking.",
@@ -30,6 +45,21 @@ export const translations = {
     remove: "Remove",
     footer: "100% offline · Files never touch a server",
     needTwo: "You need at least 2 PDFs",
+
+    // NEW: Split
+    splitTitle: "✂️ Split PDF",
+    splitDesc: "Extract specific pages from a PDF and download as a new file.",
+    splitDropText: "Click to select a PDF",
+    splitDropSelected: (name, total) => `📄 ${name} · ${total} pages`,
+    splitRangeLabel: "Page range",
+    splitRangePlaceholder: "e.g. 1-3, 5, 7-9",
+    splitRangeHint: "Separate with commas, use dash for ranges. Leave empty for all pages.",
+    splitBtn: "Split & Download",
+    splitting: "Splitting...",
+    splitDone: "✅ Downloaded!",
+    splitNeedFile: "Pick a PDF first 😄",
+    splitInvalidRange: "Invalid page range. Example: 1-3, 5, 7-9",
+    splitOutOfRange: (max) => `Page number out of range. This PDF has ${max} pages.`,
   },
   ru: {
     tagline: "Ваш файл не покидает устройство. Без рекламы. Без слежки.",
@@ -46,19 +76,29 @@ export const translations = {
     remove: "Удалить",
     footer: "100% офлайн · Файлы не отправляются на сервер",
     needTwo: "Нужно минимум 2 PDF",
+
+    // НОВОЕ: Разделить
+    splitTitle: "✂️ Разделить PDF",
+    splitDesc: "Извлеките нужные страницы из PDF и скачайте как новый файл.",
+    splitDropText: "Нажмите, чтобы выбрать PDF",
+    splitDropSelected: (name, total) => `📄 ${name} · ${total} стр.`,
+    splitRangeLabel: "Диапазон страниц",
+    splitRangePlaceholder: "напр: 1-3, 5, 7-9",
+    splitRangeHint: "Разделяйте запятыми, диапазон через дефис. Пусто — все страницы.",
+    splitBtn: "Разделить и скачать",
+    splitting: "Разделение...",
+    splitDone: "✅ Загружено!",
+    splitNeedFile: "Сначала выберите PDF 😄",
+    splitInvalidRange: "Неверный диапазон. Пример: 1-3, 5, 7-9",
+    splitOutOfRange: (max) => `Номер страницы вне диапазона. В PDF ${max} страниц.`,
   },
 };
 
 export function detectLang() {
-  // 1. Kullanıcı daha önce seçtiyse onu kullan
   const saved = localStorage.getItem('pdfbox-lang');
   if (saved && translations[saved]) return saved;
-
-  // 2. Tarayıcı diline bak
   const browserLang = (navigator.language || 'en').slice(0, 2).toLowerCase();
   if (translations[browserLang]) return browserLang;
-
-  // 3. Varsayılan: İngilizce
   return 'en';
 }
 

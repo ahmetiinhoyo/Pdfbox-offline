@@ -254,3 +254,49 @@ footer a:hover {
     min-width: 30px;
   }
 }
+/* ========== SAYFA ARALIĞI ========== */
+.range-block {
+  margin-top: 1.2rem;
+}
+
+.range-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #a0a6b0;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.range-input {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  background: #0d1015;
+  border: 1px solid #1f232b;
+  border-radius: 10px;
+  color: #eaeaea;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.range-input::placeholder {
+  color: #4b5563;
+}
+
+.range-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.range-hint {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+/* Kartlar arası boşluk */
+.card + .card {
+  margin-top: 1.5rem;
+}

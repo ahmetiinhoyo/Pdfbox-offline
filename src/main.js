@@ -1,99 +1,158 @@
 import { PDFDocument } from 'pdf-lib';
 import { detectLang, t } from './i18n.js';
 
-const input = document.getElementById('files');
-const list = document.getElementById('list');
-const button = document.getElementById('merge');
-const dropText = document.querySelector('.drop-text');
-
-let selectedFiles = [];
 let currentLang = detectLang();
 
-// ---------- DİL ----------
+// ============================================================
+// DİL
+// ============================================================
 function applyLang(lang) {
   currentLang = lang;
   localStorage.setItem('pdfbox-lang', lang);
   document.documentElement.lang = lang;
 
-  // data-i18n olan tüm elementleri güncelle
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
     el.textContent = t(lang, key);
   });
 
-  // Aktif butonu işaretle
+  // Placeholder'ları da çevir
+  const rangeInput = document.getElementById('pageRange');
+  if (rangeInput) {
+    rangeInput.placeholder = t(lang, 'splitRangePlaceholder');
+  }
+
   document.querySelectorAll('.lang-switch button').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
 
-  // Dosya listesi varsa yeniden render et (çeviriler için)
-  renderList();
+  renderMergeList();
+  renderSplitDrop();
 }
 
-// Dil butonları
 document.querySelectorAll('.lang-switch button').forEach(btn => {
   btn.addEventListener('click', () => applyLang(btn.dataset.lang));
 });
 
-// ---------- DOSYA SEÇİMİ ----------
-input.addEventListener('change', () => {
-  const newFiles = Array.from(input.files);
+// ============================================================
+// ORTAK YARDIMCILAR
+// ============================================================
+function downloadPdf(bytes, filename) {
+  const blob = new Blob([bytes], { type: 'application/pdf' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+/**
+ * "1-3, 5, 7-9" → [0,1,2,4,6,7,8]  (0-indexed)
+ * Geçersizse null döner.
+ */
+function parsePageRange(input, maxPage) {
+  const trimmed = input.trim();
+  if (trimmed === '') {
+    // Boş → tüm sayfalar
+    return Array.from({ length: maxPage }, (_, i) => i);
+  }
+
+  const parts = trimmed.split(',').map(p => p.trim()).filter(Boolean);
+  if (parts.length === 0) return null;
+
+  const pages = new Set();
+
+  for (const part of parts) {
+    if (part.includes('-')) {
+      const [a, b] = part.split('-').map(x => x.trim());
+      const start = Number(a);
+      const end = Number(b);
+      if (!Number.isInteger(start) || !Number.isInteger(end)) return null;
+      if (start < 1 || end < 1 || start > end) return null;
+      if (end > maxPage) return { error: 'outOfRange', max: maxPage };
+      for (let i = start; i <= end; i++) pages.add(i - 1);
+    } else {
+      const n = Number(part);
+      if (!Number.isInteger(n) || n < 1) return null;
+      if (n > maxPage) return { error: 'outOfRange', max: maxPage };
+      pages.add(n - 1);
+    }
+  }
+
+  if (pages.size === 0) return null;
+
+  // Orijinal sırayı koru
+  return Array.from(pages).sort((a, b) => a - b);
+}
+
+// ============================================================
+// BİRLEŞTİR
+// ============================================================
+const mergeInput = document.getElementById('files');
+const mergeList = document.getElementById('list');
+const mergeBtn = document.getElementById('merge');
+const mergeDropText = document.querySelector('.file-drop .drop-text');
+
+let mergeFiles = [];
+
+mergeInput.addEventListener('change', () => {
+  const newFiles = Array.from(mergeInput.files);
   newFiles.forEach(f => {
-    const already = selectedFiles.some(
+    const already = mergeFiles.some(
       s => s.name === f.name && s.size === f.size
     );
-    if (!already) selectedFiles.push(f);
+    if (!already) mergeFiles.push(f);
   });
-  input.value = '';
-  renderList();
+  mergeInput.value = '';
+  renderMergeList();
 });
 
-function renderList() {
-  list.innerHTML = '';
+function renderMergeList() {
+  mergeList.innerHTML = '';
 
-  if (selectedFiles.length === 0) {
-    dropText.textContent = t(currentLang, 'dropText');
-    button.disabled = true;
+  if (mergeFiles.length === 0) {
+    mergeDropText.textContent = t(currentLang, 'dropText');
+    mergeBtn.disabled = true;
     return;
   }
 
-  dropText.textContent = t(currentLang, 'dropTextMulti', selectedFiles.length);
+  mergeDropText.textContent = t(currentLang, 'dropTextMulti', mergeFiles.length);
 
-  selectedFiles.forEach((file, i) => {
+  mergeFiles.forEach((file, i) => {
     const li = document.createElement('li');
     li.innerHTML = `
       <span class="file-name">${i + 1}. ${file.name}</span>
       <span class="file-size">${(file.size / 1024).toFixed(0)} KB</span>
       <button class="remove" data-i="${i}" title="${t(currentLang, 'remove')}">✕</button>
     `;
-    list.appendChild(li);
+    mergeList.appendChild(li);
   });
 
-  list.querySelectorAll('.remove').forEach(btn => {
+  mergeList.querySelectorAll('.remove').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const idx = Number(e.target.dataset.i);
-      selectedFiles.splice(idx, 1);
-      renderList();
+      mergeFiles.splice(idx, 1);
+      renderMergeList();
     });
   });
 
-  button.disabled = selectedFiles.length < 2;
+  mergeBtn.disabled = mergeFiles.length < 2;
 }
 
-// ---------- BİRLEŞTİR ----------
-button.addEventListener('click', async () => {
-  if (selectedFiles.length < 2) {
+mergeBtn.addEventListener('click', async () => {
+  if (mergeFiles.length < 2) {
     alert(t(currentLang, 'needTwo'));
     return;
   }
 
-  button.disabled = true;
-  button.textContent = t(currentLang, 'merging');
+  mergeBtn.disabled = true;
+  mergeBtn.textContent = t(currentLang, 'merging');
 
   try {
     const merged = await PDFDocument.create();
 
-    for (const file of selectedFiles) {
+    for (const file of mergeFiles) {
       const bytes = await file.arrayBuffer();
       const pdf = await PDFDocument.load(bytes);
       const pages = await merged.copyPages(pdf, pdf.getPageIndices());
@@ -101,27 +160,115 @@ button.addEventListener('click', async () => {
     }
 
     const outBytes = await merged.save();
-    const blob = new Blob([outBytes], { type: 'application/pdf' });
-    const url = URL.createObjectURL(blob);
+    downloadPdf(outBytes, 'birlestirilmis.pdf');
 
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'birlestirilmis.pdf';
-    a.click();
-    URL.revokeObjectURL(url);
-
-    button.textContent = t(currentLang, 'done');
+    mergeBtn.textContent = t(currentLang, 'done');
     setTimeout(() => {
-      button.textContent = t(currentLang, 'mergeBtn');
-      button.disabled = false;
+      mergeBtn.textContent = t(currentLang, 'mergeBtn');
+      mergeBtn.disabled = false;
     }, 1500);
   } catch (err) {
     console.error(err);
     alert(t(currentLang, 'error') + err.message);
-    button.textContent = t(currentLang, 'mergeBtn');
-    button.disabled = false;
+    mergeBtn.textContent = t(currentLang, 'mergeBtn');
+    mergeBtn.disabled = false;
   }
 });
 
-// ---------- BAŞLAT ----------
+// ============================================================
+// BÖL
+// ============================================================
+const splitInput = document.getElementById('splitFile');
+const splitBtn = document.getElementById('split');
+const splitDropText = document.getElementById('splitDropText');
+const rangeInput = document.getElementById('pageRange');
+
+let splitFile = null;
+let splitPageCount = 0;
+
+splitInput.addEventListener('change', async () => {
+  const file = splitInput.files[0];
+  if (!file) return;
+
+  splitFile = file;
+
+  try {
+    const bytes = await file.arrayBuffer();
+    const pdf = await PDFDocument.load(bytes);
+    splitPageCount = pdf.getPageCount();
+  } catch (err) {
+    console.error(err);
+    alert(t(currentLang, 'error') + err.message);
+    splitFile = null;
+    splitInput.value = '';
+    return;
+  }
+
+  splitInput.value = '';
+  renderSplitDrop();
+});
+
+function renderSplitDrop() {
+  if (!splitFile) {
+    splitDropText.textContent = t(currentLang, 'splitDropText');
+    splitBtn.disabled = true;
+    return;
+  }
+
+  splitDropText.textContent = t(
+    currentLang,
+    'splitDropSelected',
+    splitFile.name,
+    splitPageCount
+  );
+  splitBtn.disabled = false;
+}
+
+splitBtn.addEventListener('click', async () => {
+  if (!splitFile) {
+    alert(t(currentLang, 'splitNeedFile'));
+    return;
+  }
+
+  const parsed = parsePageRange(rangeInput.value, splitPageCount);
+
+  if (parsed === null) {
+    alert(t(currentLang, 'splitInvalidRange'));
+    return;
+  }
+
+  if (parsed && typeof parsed === 'object' && parsed.error === 'outOfRange') {
+    alert(t(currentLang, 'splitOutOfRange', parsed.max));
+    return;
+  }
+
+  splitBtn.disabled = true;
+  splitBtn.textContent = t(currentLang, 'splitting');
+
+  try {
+    const bytes = await splitFile.arrayBuffer();
+    const source = await PDFDocument.load(bytes);
+    const output = await PDFDocument.create();
+    const copied = await output.copyPages(source, parsed);
+    copied.forEach(p => output.addPage(p));
+
+    const outBytes = await output.save();
+    downloadPdf(outBytes, 'bolunmus.pdf');
+
+    splitBtn.textContent = t(currentLang, 'splitDone');
+    setTimeout(() => {
+      splitBtn.textContent = t(currentLang, 'splitBtn');
+      splitBtn.disabled = false;
+    }, 1500);
+  } catch (err) {
+    console.error(err);
+    alert(t(currentLang, 'error') + err.message);
+    splitBtn.textContent = t(currentLang, 'splitBtn');
+    splitBtn.disabled = false;
+  }
+});
+
+// ============================================================
+// BAŞLAT
+// ============================================================
 applyLang(currentLang);
