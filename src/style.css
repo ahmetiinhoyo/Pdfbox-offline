@@ -19,7 +19,47 @@ main {
   max-width: 640px;
 }
 
-/* HEADER */
+/* ========== DİL DEĞİŞTİRİCİ ========== */
+.lang-switch {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.15rem;
+  background: #13161c;
+  border: 1px solid #1f232b;
+  border-radius: 8px;
+  padding: 0.2rem;
+  z-index: 100;
+}
+
+.lang-switch button {
+  background: transparent;
+  border: none;
+  color: #8a8f99;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.5rem;
+  min-width: 34px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  line-height: 1;
+  font-family: inherit;
+}
+
+.lang-switch button:hover {
+  background: #1f232b;
+  color: #eaeaea;
+}
+
+.lang-switch button.active {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: white;
+}
+
+/* ========== HEADER ========== */
 header {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -44,7 +84,7 @@ h1 span {
   font-size: 0.95rem;
 }
 
-/* CARD */
+/* ========== CARD ========== */
 .card {
   background: #13161c;
   border: 1px solid #1f232b;
@@ -65,7 +105,7 @@ h2 {
   margin-bottom: 1.5rem;
 }
 
-/* FILE DROP */
+/* ========== FILE DROP ========== */
 .file-drop {
   display: flex;
   flex-direction: column;
@@ -92,9 +132,10 @@ h2 {
 .drop-text {
   color: #a0a6b0;
   font-size: 0.95rem;
+  text-align: center;
 }
 
-/* FILE LIST */
+/* ========== FILE LIST ========== */
 .file-list {
   list-style: none;
   margin-top: 1.2rem;
@@ -148,7 +189,7 @@ h2 {
   color: #fca5a5;
 }
 
-/* BUTTON */
+/* ========== BUTON ========== */
 #merge {
   width: 100%;
   margin-top: 1.5rem;
@@ -161,6 +202,7 @@ h2 {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+  font-family: inherit;
 }
 
 #merge:hover:not(:disabled) {
@@ -174,7 +216,7 @@ h2 {
   background: #2a2f3a;
 }
 
-/* FOOTER */
+/* ========== FOOTER ========== */
 footer {
   text-align: center;
   margin-top: 2rem;
@@ -189,4 +231,26 @@ footer a {
 
 footer a:hover {
   text-decoration: underline;
+}
+
+/* ========== MOBİL ========== */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .lang-switch {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .lang-switch button {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.4rem;
+    min-width: 30px;
+  }
 }

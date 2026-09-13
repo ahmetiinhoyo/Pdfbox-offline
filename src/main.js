@@ -1,4 +1,5 @@
 import { PDFDocument } from 'pdf-lib';
+import { detectLang, t } from './i18n.js';
 
 const input = document.getElementById('files');
 const list = document.getElementById('list');
@@ -6,22 +7,44 @@ const button = document.getElementById('merge');
 const dropText = document.querySelector('.drop-text');
 
 let selectedFiles = [];
+let currentLang = detectLang();
 
+// ---------- DİL ----------
+function applyLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('pdfbox-lang', lang);
+  document.documentElement.lang = lang;
+
+  // data-i18n olan tüm elementleri güncelle
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    el.textContent = t(lang, key);
+  });
+
+  // Aktif butonu işaretle
+  document.querySelectorAll('.lang-switch button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+
+  // Dosya listesi varsa yeniden render et (çeviriler için)
+  renderList();
+}
+
+// Dil butonları
+document.querySelectorAll('.lang-switch button').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+});
+
+// ---------- DOSYA SEÇİMİ ----------
 input.addEventListener('change', () => {
-  // Yeni seçilen dosyaları mevcut listeye EKLE (üzerine yazma)
   const newFiles = Array.from(input.files);
-
-  // Aynı isimli dosyayı tekrar eklemesin
   newFiles.forEach(f => {
     const already = selectedFiles.some(
       s => s.name === f.name && s.size === f.size
     );
     if (!already) selectedFiles.push(f);
   });
-
-  // Input'u sıfırla ki aynı dosyayı tekrar seçebilesin
   input.value = '';
-
   renderList();
 });
 
@@ -29,19 +52,19 @@ function renderList() {
   list.innerHTML = '';
 
   if (selectedFiles.length === 0) {
-    dropText.textContent = 'PDF seçmek için tıkla';
+    dropText.textContent = t(currentLang, 'dropText');
     button.disabled = true;
     return;
   }
 
-  dropText.textContent = `${selectedFiles.length} dosya seçildi`;
+  dropText.textContent = t(currentLang, 'dropTextMulti', selectedFiles.length);
 
   selectedFiles.forEach((file, i) => {
     const li = document.createElement('li');
     li.innerHTML = `
       <span class="file-name">${i + 1}. ${file.name}</span>
       <span class="file-size">${(file.size / 1024).toFixed(0)} KB</span>
-      <button class="remove" data-i="${i}" title="Kaldır">✕</button>
+      <button class="remove" data-i="${i}" title="${t(currentLang, 'remove')}">✕</button>
     `;
     list.appendChild(li);
   });
@@ -57,9 +80,15 @@ function renderList() {
   button.disabled = selectedFiles.length < 2;
 }
 
+// ---------- BİRLEŞTİR ----------
 button.addEventListener('click', async () => {
+  if (selectedFiles.length < 2) {
+    alert(t(currentLang, 'needTwo'));
+    return;
+  }
+
   button.disabled = true;
-  button.textContent = 'Birleştiriliyor...';
+  button.textContent = t(currentLang, 'merging');
 
   try {
     const merged = await PDFDocument.create();
@@ -81,15 +110,18 @@ button.addEventListener('click', async () => {
     a.click();
     URL.revokeObjectURL(url);
 
-    button.textContent = '✅ İndirildi!';
+    button.textContent = t(currentLang, 'done');
     setTimeout(() => {
-      button.textContent = 'Birleştir ve İndir';
+      button.textContent = t(currentLang, 'mergeBtn');
       button.disabled = false;
     }, 1500);
   } catch (err) {
     console.error(err);
-    alert('Hata: ' + err.message);
-    button.textContent = 'Birleştir ve İndir';
+    alert(t(currentLang, 'error') + err.message);
+    button.textContent = t(currentLang, 'mergeBtn');
     button.disabled = false;
   }
 });
+
+// ---------- BAŞLAT ----------
+applyLang(currentLang);
