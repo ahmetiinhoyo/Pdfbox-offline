@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDFBox Offline — PDF Araçları</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <h1>📦 PDFBox <span>Offline</span></h1>
+      <p class="tagline">Dosyan cihazından çıkmaz. Reklam yok. Kayıt yok.</p>
+    </header>
+
+    <section class="card">
+      <h2>📎 PDF Birleştir</h2>
+      <p class="desc">Birden fazla PDF seç, sırala, tek dosya olarak indir.</p>
+
+      <label class="file-drop" for="files">
+        <input type="file" id="files" accept="application/pdf" multiple hidden />
+        <span class="drop-icon">⬆️</span>
+        <span class="drop-text">PDF seçmek için tıkla</span>
+      </label>
+
+      <ul id="list" class="file-list"></ul>
+
+      <button id="merge" disabled>Birleştir ve İndir</button>
+    </section>
+
+    <footer>
+      <p>%100 offline çalışır · Dosyalar sunucuya gitmez · <a href="#">GitHub</a></p>
+    </footer>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
