@@ -3,13 +3,37 @@
 
 > Offline PDF araç kutusu — birleştir, böl, temizle. Yükleme yok. Reklam yok. Takip yok.
 
-**🌐 Canlı:** [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
+[![Canlı](https://img.shields.io/badge/🌐_Canlı-Demo-blue?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
+[![Kahve Ismarla](https://img.shields.io/badge/☕_Kahve_Ismarla-destek-yellow?style=flat)](https://www.buymeacoffee.com/Thorix)
+[![GitHub stars](https://img.shields.io/github/stars/ahmetiinhoyo/Pdfbox-offline?style=social)](https://github.com/ahmetiinhoyo/Pdfbox-offline)
 
 **Diller:** [🇬🇧 English](README.md) · 🇹🇷 Türkçe · [🇷🇺 Русский](README.ru.md)
 
 ---
 
-## Neden PDFBox?
+## ✨ Özellikler
+
+| Özellik | Durum |
+|---|---|
+| 📎 PDF Birleştir | ✅ Hazır |
+| ✂️ PDF Böl | ✅ Hazır |
+| 🌍 Çoklu Dil (TR/EN/RU) | ✅ Hazır |
+| 🧹 Metadata Temizle | 🚧 Yakında |
+| 🖼️ Görselden PDF | 🚧 Yakında |
+| 🔄 Sayfa Sil / Sırala | 🚧 Yakında |
+| 🗜️ Sıkıştır | 🚧 Yakında |
+
+---
+
+## 🚀 Canlı Demo
+
+**→ [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)**
+
+Tamamen tarayıcında çalışır. Kurulum yok, kayıt yok.
+
+---
+
+## 🤔 Neden PDFBox?
 
 Çoğu online PDF aracı:
 - ❌ Dosyanı **sunucularına** yükler
@@ -27,27 +51,11 @@
 
 ---
 
-## ✨ Özellikler
-
-| Özellik | Durum |
-|---|---|
-| 📎 PDF Birleştir | ✅ Hazır |
-| ✂️ PDF Böl | ✅ Hazır |
-| 🧹 Metadata Temizle | 🚧 Yakında |
-| 🖼️ Görselden PDF | 🚧 Yakında |
-| 🔄 Sayfa Sil / Sırala | 🚧 Yakında |
-| 🗜️ Sıkıştır | 🚧 Yakında |
-| 🌍 Çoklu Dil (TR/EN/RU) | ✅ Hazır |
-
----
-
-## 🚀 Kullanım
-
-Siteyi aç: [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
+## 📖 Kullanım
 
 ### 📎 PDF Birleştir
 1. **PDF Birleştir** alanına tıkla
-2. Birden fazla PDF seç (her seferinde birer tane eklenir)
+2. Birden fazla PDF seç (her seferinde birer tane — listede birikir)
 3. İstemediğini **✕** ile kaldır
 4. **"Birleştir ve İndir"** butonuna bas
 5. `birlestirilmis.pdf` inecek 🎉
@@ -57,15 +65,13 @@ Siteyi aç: [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoy
 2. **Sayfa aralığı** kutusuna yaz:
    - `1-3` → 1, 2, 3. sayfalar
    - `1, 3, 5` → sadece 1, 3, 5
-   - `1-2, 5, 7-9` → karışık
-   - Boş → tüm sayfalar
+   - `1-2, 5, 7-9` → karışık aralıklar
+   - Boş bırak → tüm sayfalar
 3. **"Böl ve İndir"** butonuna bas
 4. `bolunmus.pdf` inecek 🎉
 
 ### 🌍 Dil Değiştir
 Sağ üstteki **TR / ENG / RU** butonlarına bas. Seçim hatırlanır.
-
-**Not:** Dosyalar **asla** sunucuya gitmez. Tüm işlem tarayıcında (WebAssembly) olur.
 
 ---
 
@@ -74,7 +80,7 @@ Sağ üstteki **TR / ENG / RU** butonlarına bas. Seçim hatırlanır.
 - **[Vite](https://vitejs.dev/)** — build tool
 - **[pdf-lib](https://pdf-lib.js.org/)** — PDF işlemleri
 - **Vanilla JS** — framework yok, hafif ve hızlı
-- **GitHub Actions** — CI/CD
+- **GitHub Actions** — CI/CD (otomatik build + deploy)
 - **GitHub Pages** — bedava hosting
 
 ---

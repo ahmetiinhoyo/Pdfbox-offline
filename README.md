@@ -2,13 +2,37 @@
 
 > Offline PDF toolbox — merge, split, clean. No upload. No ads. No tracking.
 
-**🌐 Live:** [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
+[![Live](https://img.shields.io/badge/🌐_Live-Demo-blue?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
+[![Buy Me a Coffee](https://img.shields.io/badge/☕_Buy_me_a_coffee-support-yellow?style=flat)](https://www.buymeacoffee.com/Thorix)
+[![GitHub stars](https://img.shields.io/github/stars/ahmetiinhoyo/Pdfbox-offline?style=social)](https://github.com/ahmetiinhoyo/Pdfbox-offline)
 
 **Languages:** 🇬🇧 English · [🇹🇷 Türkçe](README.tr.md) · [🇷🇺 Русский](README.ru.md)
 
 ---
 
-## Why PDFBox?
+## ✨ Features
+
+| Feature | Status |
+|---|---|
+| 📎 Merge PDFs | ✅ Ready |
+| ✂️ Split PDF | ✅ Ready |
+| 🌍 Multilingual (EN/TR/RU) | ✅ Ready |
+| 🧹 Clean Metadata | 🚧 Soon |
+| 🖼️ Images to PDF | 🚧 Soon |
+| 🔄 Delete / Reorder pages | 🚧 Soon |
+| 🗜️ Compress | 🚧 Soon |
+
+---
+
+## 🚀 Live Demo
+
+**→ [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)**
+
+Runs entirely in your browser. No installation, no sign-up.
+
+---
+
+## 🤔 Why PDFBox?
 
 Most online PDF tools:
 - ❌ Upload your file to **their servers**
@@ -26,27 +50,11 @@ Most online PDF tools:
 
 ---
 
-## ✨ Features
-
-| Feature | Status |
-|---|---|
-| 📎 Merge PDFs | ✅ Ready |
-| ✂️ Split PDF | ✅ Ready |
-| 🧹 Clean Metadata | 🚧 Soon |
-| 🖼️ Images to PDF | 🚧 Soon |
-| 🔄 Delete / Reorder pages | 🚧 Soon |
-| 🗜️ Compress | 🚧 Soon |
-| 🌍 Multilingual (EN/TR/RU) | ✅ Ready |
-
----
-
-## 🚀 Usage
-
-Open: [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
+## 📖 Usage
 
 ### 📎 Merge PDFs
 1. Click the **Merge PDFs** area
-2. Pick multiple PDFs (one at a time, they pile up)
+2. Select multiple PDFs (one at a time — they pile up)
 3. Remove unwanted ones with **✕**
 4. Hit **"Merge & Download"**
 5. `merged.pdf` gets downloaded 🎉
@@ -63,8 +71,6 @@ Open: [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.gith
 
 ### 🌍 Change Language
 Click **TR / ENG / RU** in the top right. Your choice is remembered.
-
-**Note:** Files **never** touch a server. Everything runs in your browser (WebAssembly).
 
 ---
 
