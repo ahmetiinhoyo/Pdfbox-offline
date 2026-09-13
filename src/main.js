@@ -16,7 +16,6 @@ function applyLang(lang) {
     el.textContent = t(lang, key);
   });
 
-  // Placeholder'ları da çevir
   const rangeInput = document.getElementById('pageRange');
   if (rangeInput) {
     rangeInput.placeholder = t(lang, 'splitRangePlaceholder');
@@ -49,12 +48,10 @@ function downloadPdf(bytes, filename) {
 
 /**
  * "1-3, 5, 7-9" → [0,1,2,4,6,7,8]  (0-indexed)
- * Geçersizse null döner.
  */
 function parsePageRange(input, maxPage) {
   const trimmed = input.trim();
   if (trimmed === '') {
-    // Boş → tüm sayfalar
     return Array.from({ length: maxPage }, (_, i) => i);
   }
 
@@ -81,8 +78,6 @@ function parsePageRange(input, maxPage) {
   }
 
   if (pages.size === 0) return null;
-
-  // Orijinal sırayı koru
   return Array.from(pages).sort((a, b) => a - b);
 }
 

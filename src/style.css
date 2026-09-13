@@ -93,6 +93,10 @@ h1 span {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
+.card + .card {
+  margin-top: 1.5rem;
+}
+
 h2 {
   font-size: 1.3rem;
   font-weight: 600;
@@ -190,7 +194,7 @@ h2 {
 }
 
 /* ========== BUTON ========== */
-#merge {
+#merge, #split {
   width: 100%;
   margin-top: 1.5rem;
   padding: 0.9rem;
@@ -205,55 +209,17 @@ h2 {
   font-family: inherit;
 }
 
-#merge:hover:not(:disabled) {
+#merge:hover:not(:disabled), #split:hover:not(:disabled) {
   transform: translateY(-1px);
   box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
 }
 
-#merge:disabled {
+#merge:disabled, #split:disabled {
   opacity: 0.4;
   cursor: not-allowed;
   background: #2a2f3a;
 }
 
-/* ========== FOOTER ========== */
-footer {
-  text-align: center;
-  margin-top: 2rem;
-  color: #6b7280;
-  font-size: 0.85rem;
-}
-
-footer a {
-  color: #3b82f6;
-  text-decoration: none;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-/* ========== MOBİL ========== */
-@media (max-width: 480px) {
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  .card {
-    padding: 1.5rem;
-  }
-
-  .lang-switch {
-    top: 0.5rem;
-    right: 0.5rem;
-  }
-
-  .lang-switch button {
-    font-size: 0.65rem;
-    padding: 0.3rem 0.4rem;
-    min-width: 30px;
-  }
-}
 /* ========== SAYFA ARALIĞI ========== */
 .range-block {
   margin-top: 1.2rem;
@@ -296,7 +262,82 @@ footer a:hover {
   line-height: 1.4;
 }
 
-/* Kartlar arası boşluk */
-.card + .card {
-  margin-top: 1.5rem;
+/* ========== FOOTER ========== */
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.footer-line {
+  margin-bottom: 1rem;
+}
+
+footer a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.footer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.9rem;
+  background: #13161c;
+  border: 1px solid #1f232b;
+  border-radius: 8px;
+  color: #a0a6b0;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.footer-btn:hover {
+  background: #1f232b;
+  color: #eaeaea;
+  border-color: #3b82f6;
+  transform: translateY(-1px);
+}
+
+.footer-btn.coffee {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  border-color: transparent;
+  color: #1a1d24;
+  font-weight: 600;
+}
+
+.footer-btn.coffee:hover {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #1a1d24;
+  border-color: transparent;
+}
+
+/* ========== MOBİL ========== */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .lang-switch {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .lang-switch button {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.4rem;
+    min-width: 30px;
+  }
 }

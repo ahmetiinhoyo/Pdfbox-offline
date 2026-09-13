@@ -15,7 +15,6 @@ export const translations = {
     footer: "%100 offline çalışır · Dosyalar sunucuya gitmez",
     needTwo: "En az 2 PDF seçmelisin",
 
-    // YENİ: PDF Böl
     splitTitle: "✂️ PDF Böl",
     splitDesc: "PDF'ten istediğin sayfaları ayır, yeni bir dosya olarak indir.",
     splitDropText: "PDF seçmek için tıkla",
@@ -29,6 +28,10 @@ export const translations = {
     splitNeedFile: "Önce bir PDF seç 😄",
     splitInvalidRange: "Geçersiz sayfa aralığı. Örnek: 1-3, 5, 7-9",
     splitOutOfRange: (max) => `Sayfa numarası dosyada yok. En fazla ${max} sayfa var.`,
+
+    buyCoffee: "Kahve Ismarla",
+    giveStar: "Yıldız Ver",
+    feedback: "Geri Bildirim",
   },
   en: {
     tagline: "Your file never leaves your device. No ads. No tracking.",
@@ -46,7 +49,6 @@ export const translations = {
     footer: "100% offline · Files never touch a server",
     needTwo: "You need at least 2 PDFs",
 
-    // NEW: Split
     splitTitle: "✂️ Split PDF",
     splitDesc: "Extract specific pages from a PDF and download as a new file.",
     splitDropText: "Click to select a PDF",
@@ -60,6 +62,10 @@ export const translations = {
     splitNeedFile: "Pick a PDF first 😄",
     splitInvalidRange: "Invalid page range. Example: 1-3, 5, 7-9",
     splitOutOfRange: (max) => `Page number out of range. This PDF has ${max} pages.`,
+
+    buyCoffee: "Buy me a coffee",
+    giveStar: "Star on GitHub",
+    feedback: "Feedback",
   },
   ru: {
     tagline: "Ваш файл не покидает устройство. Без рекламы. Без слежки.",
@@ -77,7 +83,6 @@ export const translations = {
     footer: "100% офлайн · Файлы не отправляются на сервер",
     needTwo: "Нужно минимум 2 PDF",
 
-    // НОВОЕ: Разделить
     splitTitle: "✂️ Разделить PDF",
     splitDesc: "Извлеките нужные страницы из PDF и скачайте как новый файл.",
     splitDropText: "Нажмите, чтобы выбрать PDF",
@@ -91,6 +96,10 @@ export const translations = {
     splitNeedFile: "Сначала выберите PDF 😄",
     splitInvalidRange: "Неверный диапазон. Пример: 1-3, 5, 7-9",
     splitOutOfRange: (max) => `Номер страницы вне диапазона. В PDF ${max} страниц.`,
+
+    buyCoffee: "Угостить кофе",
+    giveStar: "Звезда на GitHub",
+    feedback: "Обратная связь",
   },
 };
 
