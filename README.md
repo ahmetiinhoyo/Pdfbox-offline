@@ -2,63 +2,83 @@
 
 > Offline PDF toolbox — merge, split, clean. No upload. No ads. No tracking.
 
-**🌐 Canlı:** [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
+**🌐 Live:** [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
+
+**Languages:** 🇬🇧 English · [🇹🇷 Türkçe](README.tr.md) · [🇷🇺 Русский](README.ru.md)
 
 ---
 
-## Neden PDFBox?
+## Why PDFBox?
 
-Çoğu online PDF aracı:
-- ❌ Dosyanı **sunucularına** yükler
-- ❌ Reklam ve takip scripti doludur
-- ❌ Boyut sınırı koyar
-- ❌ Kayıt zorunlu tutar
+Most online PDF tools:
+- ❌ Upload your file to **their servers**
+- ❌ Are full of ads and tracking scripts
+- ❌ Impose file size limits
+- ❌ Require registration
 
 **PDFBox Offline:**
-- ✅ **%100 offline** — dosyan cihazdan çıkmaz
-- ✅ **Reklamsız, takipsiz**
-- ✅ **Sınırsız** dosya boyutu
-- ✅ **Kayıt yok**, kullan direkt
-- ✅ **Açık kaynak** — istersen kodu incele
+- ✅ **100% offline** — your file never leaves your device
+- ✅ **No ads, no tracking**
+- ✅ **Unlimited** file size
+- ✅ **No sign-up**, just use it
+- ✅ **Multilingual** — English / Türkçe / Русский
+- ✅ **Open source** — inspect the code yourself
 
 ---
 
-## ✨ Özellikler
+## ✨ Features
 
-| Özellik | Durum |
+| Feature | Status |
 |---|---|
-| 📎 PDF Birleştir | ✅ Hazır |
-| ✂️ PDF Böl | 🚧 Yakında |
-| 🧹 Metadata Temizle | 🚧 Yakında |
-| 🗜️ Sıkıştır | 🚧 Yakında |
-| 🔄 Sayfa Sil / Döndür | 🚧 Yakında |
-| 🖼️ Görselden PDF | 🚧 Yakında |
+| 📎 Merge PDFs | ✅ Ready |
+| ✂️ Split PDF | ✅ Ready |
+| 🧹 Clean Metadata | 🚧 Soon |
+| 🖼️ Images to PDF | 🚧 Soon |
+| 🔄 Delete / Reorder pages | 🚧 Soon |
+| 🗜️ Compress | 🚧 Soon |
+| 🌍 Multilingual (EN/TR/RU) | ✅ Ready |
 
 ---
 
-## 🚀 Kullanım
+## 🚀 Usage
 
-1. Siteyi aç: [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
-2. **PDF Birleştir** alanına tıkla
-3. Birden fazla PDF seç (her seferinde birer tane ekleyebilirsin)
-4. İstemediğin dosyayı **✕** ile kaldır
-5. **"Birleştir ve İndir"** butonuna bas
-6. `birlestirilmis.pdf` inecek 🎉
+Open: [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
 
-**Not:** Dosyalar **asla** internete gitmez. Tüm işlem tarayıcında (WebAssembly) olur.
+### 📎 Merge PDFs
+1. Click the **Merge PDFs** area
+2. Pick multiple PDFs (one at a time, they pile up)
+3. Remove unwanted ones with **✕**
+4. Hit **"Merge & Download"**
+5. `merged.pdf` gets downloaded 🎉
+
+### ✂️ Split PDF
+1. Click the **Split PDF** area, pick a PDF
+2. In **Page range**, type what you want:
+   - `1-3` → pages 1, 2, 3
+   - `1, 3, 5` → only 1, 3, 5
+   - `1-2, 5, 7-9` → mixed ranges
+   - Empty → all pages
+3. Hit **"Split & Download"**
+4. `split.pdf` gets downloaded 🎉
+
+### 🌍 Change Language
+Click **TR / ENG / RU** in the top right. Your choice is remembered.
+
+**Note:** Files **never** touch a server. Everything runs in your browser (WebAssembly).
 
 ---
 
-## 🛠️ Teknolojiler
+## 🛠️ Tech Stack
 
 - **[Vite](https://vitejs.dev/)** — build tool
-- **[pdf-lib](https://pdf-lib.js.org/)** — PDF işlemleri
-- **Vanilla JS** — framework yok, hafif ve hızlı
-- **GitHub Pages** — bedava hosting
+- **[pdf-lib](https://pdf-lib.js.org/)** — PDF manipulation
+- **Vanilla JS** — no framework, fast and light
+- **GitHub Actions** — CI/CD (auto build + deploy)
+- **GitHub Pages** — free hosting
 
 ---
 
-## 💻 Yerel Geliştirme
+## 💻 Local Development
 
 ```bash
 git clone https://github.com/ahmetiinhoyo/Pdfbox-offline.git
