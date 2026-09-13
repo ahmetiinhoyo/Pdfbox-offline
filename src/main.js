@@ -4,6 +4,37 @@ import { detectLang, t } from './i18n.js';
 let currentLang = detectLang();
 
 // ============================================================
+// TOAST BİLDİRİMLERİ
+// ============================================================
+const toastContainer = document.getElementById('toast-container');
+
+function showToast(message, type = 'info', duration = 3500) {
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+
+  const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
+
+  toast.innerHTML = `
+    <span class="toast-icon">${icon}</span>
+    <span class="toast-message">${message}</span>
+    <button class="toast-close" aria-label="Close">✕</button>
+  `;
+
+  toastContainer.appendChild(toast);
+
+  const remove = () => {
+    if (!toast.parentNode) return;
+    toast.classList.add('removing');
+    setTimeout(() => toast.remove(), 300);
+  };
+
+  toast.querySelector('.toast-close').addEventListener('click', remove);
+  setTimeout(remove, duration);
+
+  return toast;
+}
+
+// ============================================================
 // DİL
 // ============================================================
 function applyLang(lang) {
@@ -137,7 +168,7 @@ function renderMergeList() {
 
 mergeBtn.addEventListener('click', async () => {
   if (mergeFiles.length < 2) {
-    alert(t(currentLang, 'needTwo'));
+    showToast(t(currentLang, 'needTwo'), 'error');
     return;
   }
 
@@ -157,6 +188,8 @@ mergeBtn.addEventListener('click', async () => {
     const outBytes = await merged.save();
     downloadPdf(outBytes, 'birlestirilmis.pdf');
 
+    showToast(t(currentLang, 'mergeSuccess'), 'success');
+
     mergeBtn.textContent = t(currentLang, 'done');
     setTimeout(() => {
       mergeBtn.textContent = t(currentLang, 'mergeBtn');
@@ -164,7 +197,7 @@ mergeBtn.addEventListener('click', async () => {
     }, 1500);
   } catch (err) {
     console.error(err);
-    alert(t(currentLang, 'error') + err.message);
+    showToast(t(currentLang, 'error') + err.message, 'error');
     mergeBtn.textContent = t(currentLang, 'mergeBtn');
     mergeBtn.disabled = false;
   }
@@ -193,7 +226,7 @@ splitInput.addEventListener('change', async () => {
     splitPageCount = pdf.getPageCount();
   } catch (err) {
     console.error(err);
-    alert(t(currentLang, 'error') + err.message);
+    showToast(t(currentLang, 'error') + err.message, 'error');
     splitFile = null;
     splitInput.value = '';
     return;
@@ -221,19 +254,19 @@ function renderSplitDrop() {
 
 splitBtn.addEventListener('click', async () => {
   if (!splitFile) {
-    alert(t(currentLang, 'splitNeedFile'));
+    showToast(t(currentLang, 'splitNeedFile'), 'error');
     return;
   }
 
   const parsed = parsePageRange(rangeInput.value, splitPageCount);
 
   if (parsed === null) {
-    alert(t(currentLang, 'splitInvalidRange'));
+    showToast(t(currentLang, 'splitInvalidRange'), 'error');
     return;
   }
 
   if (parsed && typeof parsed === 'object' && parsed.error === 'outOfRange') {
-    alert(t(currentLang, 'splitOutOfRange', parsed.max));
+    showToast(t(currentLang, 'splitOutOfRange', parsed.max), 'error');
     return;
   }
 
@@ -250,6 +283,8 @@ splitBtn.addEventListener('click', async () => {
     const outBytes = await output.save();
     downloadPdf(outBytes, 'bolunmus.pdf');
 
+    showToast(t(currentLang, 'splitSuccess'), 'success');
+
     splitBtn.textContent = t(currentLang, 'splitDone');
     setTimeout(() => {
       splitBtn.textContent = t(currentLang, 'splitBtn');
@@ -257,7 +292,7 @@ splitBtn.addEventListener('click', async () => {
     }, 1500);
   } catch (err) {
     console.error(err);
-    alert(t(currentLang, 'error') + err.message);
+    showToast(t(currentLang, 'error') + err.message, 'error');
     splitBtn.textContent = t(currentLang, 'splitBtn');
     splitBtn.disabled = false;
   }

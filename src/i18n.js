@@ -32,6 +32,9 @@ export const translations = {
     buyCoffee: "Kahve Ismarla",
     giveStar: "Yıldız Ver",
     feedback: "Geri Bildirim",
+
+    mergeSuccess: "PDF başarıyla birleştirildi!",
+    splitSuccess: "PDF başarıyla bölündü!",
   },
   en: {
     tagline: "Your file never leaves your device. No ads. No tracking.",
@@ -66,6 +69,9 @@ export const translations = {
     buyCoffee: "Buy me a coffee",
     giveStar: "Star on GitHub",
     feedback: "Feedback",
+
+    mergeSuccess: "PDFs merged successfully!",
+    splitSuccess: "PDF split successfully!",
   },
   ru: {
     tagline: "Ваш файл не покидает устройство. Без рекламы. Без слежки.",
@@ -100,6 +106,9 @@ export const translations = {
     buyCoffee: "Угостить кофе",
     giveStar: "Звезда на GitHub",
     feedback: "Обратная связь",
+
+    mergeSuccess: "PDF успешно объединён!",
+    splitSuccess: "PDF успешно разделён!",
   },
 };
 
