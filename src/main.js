@@ -4,6 +4,37 @@ import { detectLang, t } from './i18n.js';
 let currentLang = detectLang();
 
 // ============================================================
+// TEMA & RENK
+// ============================================================
+const ACCENTS = ['blue', 'green', 'orange', 'pink'];
+
+function getSavedTheme() {
+  const saved = localStorage.getItem('pdfbox-theme');
+  if (saved === 'light' || saved === 'dark') return saved;
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    return 'light';
+  }
+  return 'dark';
+}
+
+function getSavedAccent() {
+  const saved = localStorage.getItem('pdfbox-accent');
+  return ACCENTS.includes(saved) ? saved : 'blue';
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('pdfbox-theme', theme);
+  const btn = document.getElementById('themeToggle');
+  if (btn) btn.textContent = theme === 'dark' ? '🌙' : '☀️';
+}
+
+function applyAccent(accent) {
+  document.documentElement.setAttribute('data-accent', accent);
+  localStorage.setItem('pdfbox-accent', accent);
+}
+
+// ============================================================
 // TOAST BİLDİRİMLERİ
 // ============================================================
 const toastContainer = document.getElementById('toast-container');
@@ -110,7 +141,7 @@ function parsePageRange(input, maxPage) {
 }
 
 // ============================================================
-// SÜRÜKLE-BIRAK ALTYAPISI
+// SÜRÜKLE-BIRAK
 // ============================================================
 function setupDropZone(dropElement, onFiles) {
   if (!dropElement) return;
@@ -154,17 +185,17 @@ const mergeDrop = document.querySelector('.file-drop[for="files"]');
 let mergeFiles = [];
 
 function addMergeFiles(newFiles) {
-  const pdfs = newFiles.filter(f => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf'));
+  const pdfs = newFiles.filter(f =>
+    f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf')
+  );
 
   if (pdfs.length === 0) {
-    showToast('Sadece PDF dosyaları kabul edilir', 'error');
+    showToast(t(currentLang, 'onlyPdf'), 'error');
     return;
   }
 
   pdfs.forEach(f => {
-    const already = mergeFiles.some(
-      s => s.name === f.name && s.size === f.size
-    );
+    const already = mergeFiles.some(s => s.name === f.name && s.size === f.size);
     if (!already) mergeFiles.push(f);
   });
 
@@ -264,7 +295,7 @@ async function handleSplitFile(file) {
   if (!file) return;
 
   if (!(file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf'))) {
-    showToast('Sadece PDF dosyaları kabul edilir', 'error');
+    showToast(t(currentLang, 'onlyPdf'), 'error');
     return;
   }
 
@@ -290,7 +321,7 @@ splitInput.addEventListener('change', () => {
 
 setupDropZone(splitDrop, (files) => {
   if (files.length > 1) {
-    showToast('PDF Böl için tek dosya seç', 'info');
+    showToast(t(currentLang, 'oneFileSplit'), 'info');
   }
   handleSplitFile(files[0]);
 });
@@ -358,6 +389,31 @@ splitBtn.addEventListener('click', async () => {
 });
 
 // ============================================================
+// TEMA & RENK BUTONLARI
+// ============================================================
+const themeToggle = document.getElementById('themeToggle');
+const accentBtn = document.getElementById('accentBtn');
+
+themeToggle.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  showToast(t(currentLang, next === 'dark' ? 'themeDark' : 'themeLight'), 'info', 2000);
+});
+
+accentBtn.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-accent') || 'blue';
+  const idx = ACCENTS.indexOf(current);
+  const next = ACCENTS[(idx + 1) % ACCENTS.length];
+  applyAccent(next);
+
+  const key = 'accent' + next.charAt(0).toUpperCase() + next.slice(1);
+  showToast(t(currentLang, key), 'info', 2000);
+});
+
+// ============================================================
 // BAŞLAT
 // ============================================================
+applyTheme(getSavedTheme());
+applyAccent(getSavedAccent());
 applyLang(currentLang);

@@ -35,6 +35,15 @@ export const translations = {
 
     mergeSuccess: "PDF başarıyla birleştirildi!",
     splitSuccess: "PDF başarıyla bölündü!",
+
+    themeLight: "☀️ Açık tema",
+    themeDark: "🌙 Koyu tema",
+    accentBlue: "🎨 Mavi",
+    accentGreen: "🎨 Yeşil",
+    accentOrange: "🎨 Turuncu",
+    accentPink: "🎨 Pembe",
+    onlyPdf: "Sadece PDF dosyaları kabul edilir",
+    oneFileSplit: "PDF Böl için tek dosya seç",
   },
   en: {
     tagline: "Your file never leaves your device. No ads. No tracking.",
@@ -72,6 +81,15 @@ export const translations = {
 
     mergeSuccess: "PDFs merged successfully!",
     splitSuccess: "PDF split successfully!",
+
+    themeLight: "☀️ Light theme",
+    themeDark: "🌙 Dark theme",
+    accentBlue: "🎨 Blue",
+    accentGreen: "🎨 Green",
+    accentOrange: "🎨 Orange",
+    accentPink: "🎨 Pink",
+    onlyPdf: "Only PDF files are accepted",
+    oneFileSplit: "Pick one file for Split",
   },
   ru: {
     tagline: "Ваш файл не покидает устройство. Без рекламы. Без слежки.",
@@ -109,6 +127,15 @@ export const translations = {
 
     mergeSuccess: "PDF успешно объединён!",
     splitSuccess: "PDF успешно разделён!",
+
+    themeLight: "☀️ Светлая тема",
+    themeDark: "🌙 Тёмная тема",
+    accentBlue: "🎨 Синий",
+    accentGreen: "🎨 Зелёный",
+    accentOrange: "🎨 Оранжевый",
+    accentPink: "🎨 Розовый",
+    onlyPdf: "Принимаются только PDF файлы",
+    oneFileSplit: "Выберите один файл для Разделения",
   },
 };
 

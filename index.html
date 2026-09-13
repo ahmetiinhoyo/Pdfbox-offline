@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="dark" data-accent="blue">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,10 +8,14 @@
 </head>
 <body>
   <main>
-    <div class="lang-switch">
-      <button data-lang="tr" title="Türkçe">TR</button>
-      <button data-lang="en" title="English">ENG</button>
-      <button data-lang="ru" title="Русский">RU</button>
+    <div class="top-bar">
+      <div class="lang-switch">
+        <button data-lang="tr" title="Türkçe">TR</button>
+        <button data-lang="en" title="English">ENG</button>
+        <button data-lang="ru" title="Русский">RU</button>
+      </div>
+      <button id="accentBtn" class="icon-btn accent-btn" title="Renk">🎨</button>
+      <button id="themeToggle" class="icon-btn" title="Tema">🌙</button>
     </div>
 
     <header>

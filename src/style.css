@@ -1,3 +1,74 @@
+/* ==========================================================
+   TEMA DEĞİŞKENLERİ
+   ========================================================== */
+:root,
+[data-theme="dark"] {
+  --bg-1: #1a1d24;
+  --bg-2: #0a0b0f;
+  --text: #eaeaea;
+  --text-muted: #8a8f99;
+  --text-dim: #6b7280;
+  --text-soft: #a0a6b0;
+  --card-bg: #13161c;
+  --card-border: #1f232b;
+  --input-bg: #0d1015;
+  --input-border: #1f232b;
+  --input-placeholder: #4b5563;
+  --btn-disabled-bg: #2a2f3a;
+  --hover-bg: #1f232b;
+  --drop-bg: #0d1015;
+  --drop-border: #2a2f3a;
+  --drop-hover-bg: #111520;
+  --shadow: rgba(0, 0, 0, 0.4);
+  --shadow-lg: rgba(0, 0, 0, 0.5);
+  --danger-bg: #7f1d1d;
+  --danger-text: #fca5a5;
+}
+
+[data-theme="light"] {
+  --bg-1: #f8fafc;
+  --bg-2: #e2e8f0;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+  --text-soft: #475569;
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --input-bg: #f8fafc;
+  --input-border: #e2e8f0;
+  --input-placeholder: #94a3b8;
+  --btn-disabled-bg: #e2e8f0;
+  --hover-bg: #f1f5f9;
+  --drop-bg: #f8fafc;
+  --drop-border: #cbd5e1;
+  --drop-hover-bg: #f1f5f9;
+  --shadow: rgba(15, 23, 42, 0.06);
+  --shadow-lg: rgba(15, 23, 42, 0.12);
+  --danger-bg: #fee2e2;
+  --danger-text: #dc2626;
+}
+
+/* Renk paletleri */
+[data-accent="blue"] {
+  --accent-1: #3b82f6;
+  --accent-2: #8b5cf6;
+}
+[data-accent="green"] {
+  --accent-1: #10b981;
+  --accent-2: #06b6d4;
+}
+[data-accent="orange"] {
+  --accent-1: #f97316;
+  --accent-2: #fbbf24;
+}
+[data-accent="pink"] {
+  --accent-1: #ec4899;
+  --accent-2: #a855f7;
+}
+
+/* ==========================================================
+   GENEL
+   ========================================================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,12 +77,13 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  background: radial-gradient(ellipse at top, #1a1d24 0%, #0a0b0f 100%);
-  color: #eaeaea;
+  background: radial-gradient(ellipse at top, var(--bg-1) 0%, var(--bg-2) 100%);
+  color: var(--text);
   min-height: 100vh;
   padding: 2rem 1rem;
   display: flex;
   justify-content: center;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 main {
@@ -19,24 +91,33 @@ main {
   max-width: 640px;
 }
 
-/* ========== DİL DEĞİŞTİRİCİ ========== */
-.lang-switch {
+/* ==========================================================
+   ÜST BAR (dil, tema, renk)
+   ========================================================== */
+.top-bar {
   position: fixed;
   top: 1rem;
   right: 1rem;
   display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  z-index: 100;
+}
+
+.lang-switch {
+  display: flex;
   gap: 0.15rem;
-  background: #13161c;
-  border: 1px solid #1f232b;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 8px;
   padding: 0.2rem;
-  z-index: 100;
+  transition: all 0.3s ease;
 }
 
 .lang-switch button {
   background: transparent;
   border: none;
-  color: #8a8f99;
+  color: var(--text-muted);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -50,16 +131,47 @@ main {
 }
 
 .lang-switch button:hover {
-  background: #1f232b;
-  color: #eaeaea;
+  background: var(--hover-bg);
+  color: var(--text);
 }
 
 .lang-switch button.active {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
   color: white;
 }
 
-/* ========== HEADER ========== */
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0;
+  font-family: inherit;
+}
+
+.icon-btn:hover {
+  background: var(--hover-bg);
+  color: var(--text);
+  transform: scale(1.05);
+}
+
+.accent-btn {
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  border-color: transparent;
+  color: white;
+}
+
+/* ==========================================================
+   HEADER
+   ========================================================== */
 header {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -72,25 +184,29 @@ h1 {
 }
 
 h1 span {
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  transition: background 0.3s ease;
 }
 
 .tagline {
-  color: #8a8f99;
+  color: var(--text-muted);
   margin-top: 0.5rem;
   font-size: 0.95rem;
 }
 
-/* ========== CARD ========== */
+/* ==========================================================
+   CARD
+   ========================================================== */
 .card {
-  background: #13161c;
-  border: 1px solid #1f232b;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 16px;
   padding: 2rem;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 40px var(--shadow);
+  transition: all 0.3s ease;
 }
 
 .card + .card {
@@ -104,12 +220,14 @@ h2 {
 }
 
 .desc {
-  color: #8a8f99;
+  color: var(--text-muted);
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
 }
 
-/* ========== FILE DROP ========== */
+/* ==========================================================
+   FILE DROP
+   ========================================================== */
 .file-drop {
   display: flex;
   flex-direction: column;
@@ -117,21 +235,20 @@ h2 {
   justify-content: center;
   gap: 0.6rem;
   padding: 2.5rem 1rem;
-  border: 2px dashed #2a2f3a;
+  border: 2px dashed var(--drop-border);
   border-radius: 12px;
-  background: #0d1015;
+  background: var(--drop-bg);
   cursor: pointer;
   transition: all 0.2s;
-  position: relative;
 }
 
 .file-drop:hover {
-  border-color: #3b82f6;
-  background: #111520;
+  border-color: var(--accent-1);
+  background: var(--drop-hover-bg);
 }
 
 .file-drop.dragover {
-  border-color: #8b5cf6;
+  border-color: var(--accent-2);
   border-style: solid;
   background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(139, 92, 246, 0.12));
   transform: scale(1.02);
@@ -153,12 +270,14 @@ h2 {
 }
 
 .drop-text {
-  color: #a0a6b0;
+  color: var(--text-soft);
   font-size: 0.95rem;
   text-align: center;
 }
 
-/* ========== FILE LIST ========== */
+/* ==========================================================
+   FILE LIST
+   ========================================================== */
 .file-list {
   list-style: none;
   margin-top: 1.2rem;
@@ -172,8 +291,8 @@ h2 {
   align-items: center;
   gap: 0.7rem;
   padding: 0.7rem 0.9rem;
-  background: #0d1015;
-  border: 1px solid #1f232b;
+  background: var(--drop-bg);
+  border: 1px solid var(--card-border);
   border-radius: 8px;
   font-size: 0.9rem;
   animation: slideIn 0.2s ease-out;
@@ -192,14 +311,14 @@ h2 {
 }
 
 .file-size {
-  color: #6b7280;
+  color: var(--text-dim);
   font-size: 0.8rem;
 }
 
 .remove {
   background: transparent;
   border: none;
-  color: #6b7280;
+  color: var(--text-dim);
   cursor: pointer;
   font-size: 1rem;
   padding: 0.2rem 0.4rem;
@@ -208,16 +327,18 @@ h2 {
 }
 
 .remove:hover {
-  background: #7f1d1d;
-  color: #fca5a5;
+  background: var(--danger-bg);
+  color: var(--danger-text);
 }
 
-/* ========== BUTON ========== */
+/* ==========================================================
+   BUTONLAR
+   ========================================================== */
 #merge, #split {
   width: 100%;
   margin-top: 1.5rem;
   padding: 0.9rem;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
   border: none;
   border-radius: 10px;
   color: white;
@@ -236,10 +357,12 @@ h2 {
 #merge:disabled, #split:disabled {
   opacity: 0.4;
   cursor: not-allowed;
-  background: #2a2f3a;
+  background: var(--btn-disabled-bg);
 }
 
-/* ========== SAYFA ARALIĞI ========== */
+/* ==========================================================
+   SAYFA ARALIĞI
+   ========================================================== */
 .range-block {
   margin-top: 1.2rem;
 }
@@ -247,7 +370,7 @@ h2 {
 .range-label {
   display: block;
   font-size: 0.85rem;
-  color: #a0a6b0;
+  color: var(--text-soft);
   font-weight: 600;
   margin-bottom: 0.4rem;
 }
@@ -255,47 +378,44 @@ h2 {
 .range-input {
   width: 100%;
   padding: 0.75rem 0.9rem;
-  background: #0d1015;
-  border: 1px solid #1f232b;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
   border-radius: 10px;
-  color: #eaeaea;
+  color: var(--text);
   font-size: 0.95rem;
   font-family: inherit;
   transition: all 0.15s;
 }
 
 .range-input::placeholder {
-  color: #4b5563;
+  color: var(--input-placeholder);
 }
 
 .range-input:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: var(--accent-1);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 .range-hint {
   margin-top: 0.5rem;
   font-size: 0.75rem;
-  color: #6b7280;
+  color: var(--text-dim);
   line-height: 1.4;
 }
 
-/* ========== FOOTER ========== */
+/* ==========================================================
+   FOOTER
+   ========================================================== */
 footer {
   text-align: center;
   margin-top: 2rem;
-  color: #6b7280;
+  color: var(--text-dim);
   font-size: 0.85rem;
 }
 
 .footer-line {
   margin-bottom: 1rem;
-}
-
-footer a {
-  color: #3b82f6;
-  text-decoration: none;
 }
 
 .footer-links {
@@ -310,19 +430,19 @@ footer a {
   align-items: center;
   gap: 0.4rem;
   padding: 0.5rem 0.9rem;
-  background: #13161c;
-  border: 1px solid #1f232b;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 8px;
-  color: #a0a6b0;
+  color: var(--text-soft);
   text-decoration: none;
   font-size: 0.85rem;
   transition: all 0.2s;
 }
 
 .footer-btn:hover {
-  background: #1f232b;
-  color: #eaeaea;
-  border-color: #3b82f6;
+  background: var(--hover-bg);
+  color: var(--text);
+  border-color: var(--accent-1);
   transform: translateY(-1px);
 }
 
@@ -339,7 +459,9 @@ footer a {
   border-color: transparent;
 }
 
-/* ========== TOAST BİLDİRİMLERİ ========== */
+/* ==========================================================
+   TOAST
+   ========================================================== */
 .toast-container {
   position: fixed;
   bottom: 1.5rem;
@@ -356,15 +478,15 @@ footer a {
   align-items: center;
   gap: 0.7rem;
   padding: 0.85rem 1.1rem;
-  background: #13161c;
-  border: 1px solid #1f232b;
-  border-left: 4px solid #3b82f6;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-left: 4px solid var(--accent-1);
   border-radius: 10px;
-  color: #eaeaea;
+  color: var(--text);
   font-size: 0.9rem;
   min-width: 260px;
   max-width: 380px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px var(--shadow-lg);
   pointer-events: auto;
   animation: toastIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -375,7 +497,7 @@ footer a {
 
 .toast.success { border-left-color: #10b981; }
 .toast.error { border-left-color: #ef4444; }
-.toast.info { border-left-color: #3b82f6; }
+.toast.info { border-left-color: var(--accent-1); }
 
 .toast-icon { font-size: 1.1rem; flex-shrink: 0; }
 .toast-message { flex: 1; line-height: 1.4; word-break: break-word; }
@@ -383,7 +505,7 @@ footer a {
 .toast-close {
   background: transparent;
   border: none;
-  color: #6b7280;
+  color: var(--text-dim);
   cursor: pointer;
   font-size: 1rem;
   padding: 0.1rem 0.3rem;
@@ -394,8 +516,8 @@ footer a {
 }
 
 .toast-close:hover {
-  background: #1f232b;
-  color: #eaeaea;
+  background: var(--hover-bg);
+  color: var(--text);
 }
 
 @keyframes toastIn {
@@ -408,12 +530,15 @@ footer a {
   to { opacity: 0; transform: translateX(100%) scale(0.9); }
 }
 
-/* ========== MOBİL ========== */
+/* ==========================================================
+   MOBİL
+   ========================================================== */
 @media (max-width: 480px) {
   h1 { font-size: 1.8rem; }
   .card { padding: 1.5rem; }
-  .lang-switch { top: 0.5rem; right: 0.5rem; }
+  .top-bar { top: 0.5rem; right: 0.5rem; gap: 0.3rem; }
   .lang-switch button { font-size: 0.65rem; padding: 0.3rem 0.4rem; min-width: 30px; }
+  .icon-btn { width: 32px; height: 32px; font-size: 0.9rem; }
   .toast-container { left: 1rem; right: 1rem; bottom: 1rem; }
   .toast { min-width: auto; width: 100%; }
 }
