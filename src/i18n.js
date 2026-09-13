@@ -46,6 +46,8 @@ export const translations = {
     oneFileSplit: "PDF Böl için tek dosya seç",
 
     statsLine: (files, pages) => `📄 ${files} dosya · ${pages} sayfa toplam`,
+
+    darkReaderWarning: "💡 Dark Reader eklentisi açık. Daha iyi görünüm için kapatabilirsin.",
   },
   en: {
     tagline: "Your file never leaves your device. No ads. No tracking.",
@@ -94,6 +96,8 @@ export const translations = {
     oneFileSplit: "Pick one file for Split",
 
     statsLine: (files, pages) => `📄 ${files} files · ${pages} pages total`,
+
+    darkReaderWarning: "💡 Dark Reader extension detected. Turn it off for best experience.",
   },
   ru: {
     tagline: "Ваш файл не покидает устройство. Без рекламы. Без слежки.",
@@ -142,6 +146,8 @@ export const translations = {
     oneFileSplit: "Выберите один файл для Разделения",
 
     statsLine: (files, pages) => `📄 ${files} файлов · ${pages} страниц всего`,
+
+    darkReaderWarning: "💡 Обнаружено расширение Dark Reader. Отключите для лучшего вида.",
   },
 };
 

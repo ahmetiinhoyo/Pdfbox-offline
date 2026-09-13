@@ -428,6 +428,23 @@ accentBtn.addEventListener('click', () => {
 });
 
 // ============================================================
+// DARK READER UYARISI
+// ============================================================
+function detectDarkReader() {
+  if (document.querySelector('style.darkreader')) return true;
+  if (document.querySelector('style[class*="darkreader"]')) return true;
+  if (document.documentElement.hasAttribute('data-darkreader-scheme')) return true;
+  if (document.documentElement.hasAttribute('data-darkreader-mode')) return true;
+  return false;
+}
+
+setTimeout(() => {
+  if (detectDarkReader()) {
+    showToast(t(currentLang, 'darkReaderWarning'), 'info', 7000);
+  }
+}, 2000);
+
+// ============================================================
 // BAŞLAT
 // ============================================================
 applyTheme(getSavedTheme());
