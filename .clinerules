@@ -1,0 +1,101 @@
+# Cline Kalıcı Kurallar — PDFBox Offline
+
+## 🚨 KRİTİK: Tool Parametre Formatı (Parametre Hatası Önleme)
+
+Bu sohbette replace_in_file ve write_to_file tool'larında **path parametresi birden fazla kez bozuldu** ve "diff parameter was empty" hatası alındı. Bunu bir daha YAPMA.
+
+### DOĞRU format
+
+Her replace_in_file çağrısında parametreler AYRI etiketler olmalı:
+
+- Birinci parametre etiketi: `path` → içeriği sadece dosya yolu (örn. src/main.js)
+- İkinci parametre etiketi: `diff` → içeriği SEARCH/REPLACE blokları
+- Üçüncü parametre etiketi: `task_progress` → içeriği todo listesi
+
+Yani XML yapısı şöyle olmalı:
+<replace_in_file>
+<path>src/main.js</path>
+<diff>
+------- SEARCH
+aranacak satırlar
+=======
+yeni satırlar
++++++++ REPLACE
+</diff>
+</replace_in_file>
+
+### YANLIŞ format (ASLA yapma)
+
+path etiketinin İÇİNE `parameter name="diff"` gibi ikinci bir etiket GÖMME. Örnek YANLIŞ kullanım:
+<path>src/main.js</parameter name="diff"> ... </path>
+
+Bu, "diff parameter was empty" hatasına yol açar.
+
+### Kesin kurallar
+
+1. **path etiketi TEK kelimedir**, içine `parameter name=` YAZMA. Sadece `<path>dosya/yolu.js</path>` şeklinde.
+2. **diff etiketi ayrı bir etikettir**, path içine gömme. Sıra: önce path, sonra diff, sonra task_progress.
+3. **diff içeriğini ASLA boş bırakma.** En az bir SEARCH/REPLACE bloğu olmalı.
+4. **SEARCH/REPLACE marker'ları tam olarak şöyle olmalı:**
+   - Başlangıç: 7 tire + boşluk + SEARCH → `------- SEARCH`
+   - Orta: 7 eşittir → `=======`
+   - Bitiş: 7 artı + boşluk + REPLACE → `+++++++ REPLACE`
+   - Marker'lara fazladan karakter EKLEME.
+5. **SEARCH bloğu dosyadaki içerikle BİREBİR eşleşmeli** — whitespace, girinti, satır sonları dahil.
+6. **Bir dosyada birden fazla değişiklik varsa**, hepsini TEK replace_in_file çağrısında birden fazla SEARCH/REPLACE bloğuyla yap. Dosyadaki sırayla listele.
+7. **Büyük dosyalarda** tek seferde 5'ten fazla blok kullanma; sonucu bekle, sonra devam et.
+8. **2-3 kez üst üste hata alırsan** write_to_file ile dosyanın tamamını yaz (fallback).
+9. **write_to_file içeriğinde XML benzeri örnek kod varsa**, `<` ve `>` HTML entity kullan — düz `<` `>` karakterleri parser'ı bozar.
+
+---
+
+## 📁 Proje Bilgileri
+
+- **Proje:** PDFBox Offline — 100% offline PDF birleştirme/bölme aracı
+- **Teknoloji:** Vite + Vanilla JS + pdf-lib + pdfjs-dist
+- **Git remote:** https://github.com/ahmetiinhoyo/Pdfbox-offline.git (branch: main)
+- **Deploy:** GitHub Pages (push edince otomatik deploy)
+
+## 📂 Dosya Yapısı
+
+- index.html — Ana HTML (modal, viewer yapısı burada)
+- src/main.js — Tüm uygulama mantığı
+- src/style.css — Tüm stiller
+- src/i18n.js — TR/EN/RU çeviriler
+- vite.config.js — Vite config (base path: /Pdfbox-offline/)
+
+## 🌐 Çoklu Dil (i18n)
+
+- translations objesi: tr, en, ru — üç dil de güncel tutulmalı
+- Yeni metin eklerken ÜÇ DİLE de ekle (tr, en, ru)
+- Fonksiyonlu çeviriler: key: (arg1, arg2) => `...`
+- Kullanım: t(currentLang, 'key', arg1, arg2)
+
+## 🎨 Tema & Renk
+
+- data-theme = dark | light
+- data-accent = blue | green | orange | pink
+- Renkler CSS değişkenleri: --accent-1, --accent-2, --bg-1, --card-bg vb.
+- localStorage anahtarları: pdfbox-theme, pdfbox-accent, pdfbox-lang
+
+## ⚙️ İş Akışı Kuralları
+
+1. Değişiklikten sonra her zaman `npm run build` çalıştır, hata var mı kontrol et.
+2. Build temizse commit + push yap:
+   `git add . && git commit -m "..." && git pull --rebase origin main && git push`
+3. Commit mesajları Türkçe, kısa ve açıklayıcı.
+4. index.html ve i18n.js'e dokunmadan çözülebilecek şeyleri JS/CSS ile çözmeyi tercih et.
+5. Kullanıcı git push gibi işlemler için requires_approval: true bekler.
+
+## 🖼️ Önizleme (Preview) Sistemi
+
+- openPreview(files, showHeaders) — tek dosya veya dosya dizisi kabul eder
+- Çoklu modda her dosyanın üstünde başlık (.preview-file-header), altında sayfalar
+- flatPages[] — tüm dosyaların sayfalarını düz (flat) haritada tutar, viewer bunun üzerinden gezer
+- Viewer'da ok tuşları dosyalar arası geçiş yapar (sayaç toplam sayfa üzerinden)
+- Yüksek çözünürlük render: devicePixelRatio hesaba katılır, CSS ile küçültülür
+- "Tümünü Önizle" butonu 2+ dosya varsa görünür (dinamik oluşturulur, HTML'de yok)
+
+## 🇹🇷 Dil Tercihi
+
+Kullanıcıyla Türkçe konuş. Samimi ama teknik ol. Kod, değişken ve fonksiyon isimleri İngilizce kalabilir.
