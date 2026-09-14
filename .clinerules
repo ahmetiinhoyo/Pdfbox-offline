@@ -99,7 +99,7 @@ Bu, "diff parameter was empty" hatasına yol açar.
 ## 🧹 Metadata Temizleme Sistemi
 
 - `handleMetaFile(file)` — PDF yükleyip metadata'sını (yazar, başlık, konu, oluşturan, üreten, anahtar kelimeler) okur ve `.meta-info` kutusunda gösterir
-- `metaBtn` → `pdf.setAuthor('')`, `setTitle('')`, `setSubject('')`, `setKeywords([])`, `setCreator('')`, `setProducer('')`, `setCreationDate(new Date(0))`, `setModificationDate(new Date(0))` ile tüm metadata'yı sıfırlar
+- `metaBtn` → `pdf.setAuthor('')`, `setTitle('')`, `setSubject('')`, `setKeywords([])`, `setCreator('')`, `setProducer('')` ile metadata'yı sıfırlar (tarihler silinmez)
 - İnen dosya adı: `metadata-temiz.pdf`
 - `renderMetaDrop()` dil değişiminde çağrılır (applyLang içinde)
 

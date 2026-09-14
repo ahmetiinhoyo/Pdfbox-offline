@@ -780,8 +780,6 @@ metaBtn.addEventListener('click', async () => {
     pdf.setKeywords([]);
     pdf.setCreator('');
     pdf.setProducer('');
-    pdf.setCreationDate(new Date(0));
-    pdf.setModificationDate(new Date(0));
 
     const outBytes = await pdf.save();
     downloadPdf(outBytes, 'metadata-temiz.pdf');
