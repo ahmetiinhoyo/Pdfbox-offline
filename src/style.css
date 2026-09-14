@@ -360,6 +360,61 @@ h2 {
 }
 
 /* ==========================================================
+   METADATA INFO KUTUSU
+   ========================================================== */
+.meta-info {
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.08));
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  animation: slideIn 0.25s ease-out;
+}
+
+.meta-info-title {
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.7rem;
+  font-size: 0.9rem;
+}
+
+.meta-line {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px dashed var(--card-border);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.meta-line:last-of-type {
+  border-bottom: none;
+}
+
+.meta-label {
+  color: var(--text-muted);
+  font-weight: 600;
+  flex-shrink: 0;
+  min-width: 90px;
+}
+
+.meta-value {
+  color: var(--text);
+  word-break: break-word;
+  flex: 1;
+}
+
+.meta-info-hint {
+  margin-top: 0.8rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--card-border);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+/* ==========================================================
    SPLIT ACTIONS
    ========================================================== */
 .split-actions {
@@ -425,7 +480,7 @@ h2 {
 /* ==========================================================
    BUTONLAR
    ========================================================== */
-#merge, #split {
+#merge, #split, #metaBtn {
   width: 100%;
   margin-top: 1.5rem;
   padding: 0.9rem;
@@ -440,12 +495,12 @@ h2 {
   font-family: inherit;
 }
 
-#merge:hover:not(:disabled), #split:hover:not(:disabled) {
+#merge:hover:not(:disabled), #split:hover:not(:disabled), #metaBtn:hover:not(:disabled) {
   transform: translateY(-1px);
   box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
 }
 
-#merge:disabled, #split:disabled {
+#merge:disabled, #split:disabled, #metaBtn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
   background: var(--btn-disabled-bg);

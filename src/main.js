@@ -315,6 +315,7 @@ function applyLang(lang) {
 
   renderMergeList();
   renderSplitDrop();
+  renderMetaDrop();
 }
 
 document.querySelectorAll('.lang-switch button').forEach(btn => {
@@ -658,6 +659,145 @@ splitBtn.addEventListener('click', async () => {
     showToast(t(currentLang, 'error') + err.message, 'error');
     splitBtn.textContent = t(currentLang, 'splitBtn');
     splitBtn.disabled = false;
+  }
+});
+
+// ============================================================
+// METADATA TEMİZLE
+// ============================================================
+const metaInput = document.getElementById('metaFile');
+const metaBtn = document.getElementById('metaBtn');
+const metaDropText = document.getElementById('metaDropText');
+const metaDrop = document.querySelector('.file-drop[for="metaFile"]');
+const metaActions = document.getElementById('metaActions');
+const metaPreviewBtn = document.getElementById('metaPreviewBtn');
+const metaInfo = document.getElementById('metaInfo');
+
+let metaFile = null;
+
+function formatMetaLine(label, value) {
+  if (!value) return '';
+  return `<div class="meta-line"><span class="meta-label">${label}:</span> <span class="meta-value">${value}</span></div>`;
+}
+
+async function handleMetaFile(file) {
+  if (!file) return;
+
+  if (!(file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf'))) {
+    showToast(t(currentLang, 'onlyPdf'), 'error');
+    return;
+  }
+
+  try {
+    const bytes = await file.arrayBuffer();
+    const pdf = await PDFDocument.load(bytes);
+    metaFile = file;
+
+    const author = pdf.getAuthor() || '';
+    const title = pdf.getTitle() || '';
+    const subject = pdf.getSubject() || '';
+    const creator = pdf.getCreator() || '';
+    const producer = pdf.getProducer() || '';
+    const keywords = (pdf.getKeywords() || []).join(', ');
+
+    // Info kutusu
+    const foundItems = [];
+    if (author) foundItems.push(formatMetaLine(t(currentLang, 'metaAuthor'), author));
+    if (title) foundItems.push(formatMetaLine(t(currentLang, 'metaTitleField'), title));
+    if (subject) foundItems.push(formatMetaLine(t(currentLang, 'metaSubject'), subject));
+    if (creator) foundItems.push(formatMetaLine(t(currentLang, 'metaCreator'), creator));
+    if (producer) foundItems.push(formatMetaLine(t(currentLang, 'metaProducer'), producer));
+    if (keywords) foundItems.push(formatMetaLine(t(currentLang, 'metaKeywords'), keywords));
+
+    if (foundItems.length > 0) {
+      metaInfo.innerHTML = `
+        <div class="meta-info-title">${t(currentLang, 'metaWhatFound')}</div>
+        ${foundItems.join('')}
+        <div class="meta-info-hint">${t(currentLang, 'metaWhatClean')}</div>
+      `;
+    } else {
+      metaInfo.innerHTML = `<div class="meta-info-hint">${t(currentLang, 'metaNoInfo')}</div>`;
+    }
+    metaInfo.hidden = false;
+
+    renderMetaDrop();
+  } catch (err) {
+    console.error(err);
+    showToast(t(currentLang, 'error') + err.message, 'error');
+    metaFile = null;
+    renderMetaDrop();
+  }
+}
+
+metaInput.addEventListener('change', () => {
+  const file = metaInput.files[0];
+  metaInput.value = '';
+  handleMetaFile(file);
+});
+
+setupDropZone(metaDrop, (files) => {
+  if (files.length > 1) {
+    showToast(t(currentLang, 'oneFileSplit'), 'info');
+  }
+  handleMetaFile(files[0]);
+});
+
+metaPreviewBtn.addEventListener('click', () => {
+  if (metaFile) openPreview(metaFile);
+});
+
+function renderMetaDrop() {
+  if (!metaFile) {
+    metaDropText.textContent = t(currentLang, 'metaDropText');
+    metaBtn.disabled = true;
+    metaActions.hidden = true;
+    metaInfo.hidden = true;
+    return;
+  }
+
+  metaDropText.textContent = t(currentLang, 'metaDropSelected', metaFile.name);
+  metaBtn.disabled = false;
+  metaActions.hidden = false;
+}
+
+metaBtn.addEventListener('click', async () => {
+  if (!metaFile) {
+    showToast(t(currentLang, 'metaNeedFile'), 'error');
+    return;
+  }
+
+  metaBtn.disabled = true;
+  metaBtn.textContent = t(currentLang, 'metaWorking');
+
+  try {
+    const bytes = await metaFile.arrayBuffer();
+    const pdf = await PDFDocument.load(bytes);
+
+    // Tüm metadata'yı sıfırla
+    pdf.setAuthor('');
+    pdf.setTitle('');
+    pdf.setSubject('');
+    pdf.setKeywords([]);
+    pdf.setCreator('');
+    pdf.setProducer('');
+    pdf.setCreationDate(new Date(0));
+    pdf.setModificationDate(new Date(0));
+
+    const outBytes = await pdf.save();
+    downloadPdf(outBytes, 'metadata-temiz.pdf');
+
+    showToast(t(currentLang, 'metaSuccess'), 'success');
+
+    metaBtn.textContent = t(currentLang, 'metaDone');
+    setTimeout(() => {
+      metaBtn.textContent = t(currentLang, 'metaBtn');
+      metaBtn.disabled = false;
+    }, 1500);
+  } catch (err) {
+    console.error(err);
+    showToast(t(currentLang, 'error') + err.message, 'error');
+    metaBtn.textContent = t(currentLang, 'metaBtn');
+    metaBtn.disabled = false;
   }
 });
 

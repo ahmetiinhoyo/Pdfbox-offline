@@ -96,6 +96,13 @@ Bu, "diff parameter was empty" hatasına yol açar.
 - Yüksek çözünürlük render: devicePixelRatio hesaba katılır, CSS ile küçültülür
 - "Tümünü Önizle" butonu 2+ dosya varsa görünür (dinamik oluşturulur, HTML'de yok)
 
+## 🧹 Metadata Temizleme Sistemi
+
+- `handleMetaFile(file)` — PDF yükleyip metadata'sını (yazar, başlık, konu, oluşturan, üreten, anahtar kelimeler) okur ve `.meta-info` kutusunda gösterir
+- `metaBtn` → `pdf.setAuthor('')`, `setTitle('')`, `setSubject('')`, `setKeywords([])`, `setCreator('')`, `setProducer('')`, `setCreationDate(new Date(0))`, `setModificationDate(new Date(0))` ile tüm metadata'yı sıfırlar
+- İnen dosya adı: `metadata-temiz.pdf`
+- `renderMetaDrop()` dil değişiminde çağrılır (applyLang içinde)
+
 ## 🇹🇷 Dil Tercihi
 
 Kullanıcıyla Türkçe konuş. Samimi ama teknik ol. Kod, değişken ve fonksiyon isimleri İngilizce kalabilir.
