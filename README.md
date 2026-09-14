@@ -10,6 +10,14 @@
 
 ---
 
+## 📸 Screenshots
+
+| 📎 Merge PDFs | ✂️ Split PDF | 🧹 Clean Metadata |
+|:---:|:---:|:---:|
+| ![Merge PDFs](screenshots/merge.png) | ![Split PDF](screenshots/split.png) | ![Clean Metadata](screenshots/clean-metadata.png) |
+
+---
+
 ## ✨ Features
 
 | Feature | Status |

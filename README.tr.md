@@ -10,6 +10,14 @@
 
 ---
 
+## 📸 Ekran Görüntüleri
+
+| 📎 PDF Birleştir | ✂️ PDF Böl | 🧹 Metadata Temizle |
+|:---:|:---:|:---:|
+| ![PDF Birleştir](screenshots/merge.png) | ![PDF Böl](screenshots/split.png) | ![Metadata Temizle](screenshots/clean-metadata.png) |
+
+---
+
 ## ✨ Özellikler
 
 | Özellik | Durum |
