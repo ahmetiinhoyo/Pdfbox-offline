@@ -7,6 +7,11 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 let currentLang = detectLang();
 
+// SVG ikon yardımcısı
+function icon(id, cls = 'icon') {
+  return `<svg class="${cls}" aria-hidden="true"><use href="#${id}"/></svg>`;
+}
+
 // ============================================================
 // TEMA & RENK
 // ============================================================
@@ -30,7 +35,9 @@ function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   localStorage.setItem('pdfbox-theme', theme);
   const btn = document.getElementById('themeToggle');
-  if (btn) btn.textContent = theme === 'dark' ? '🌙' : '☀️';
+  if (btn) {
+    btn.innerHTML = icon(theme === 'dark' ? 'i-moon' : 'i-sun');
+  }
 }
 
 function applyAccent(accent) {
@@ -47,12 +54,12 @@ function showToast(message, type = 'info', duration = 3500) {
   const toast = document.createElement('div');
   toast.className = `toast ${type}`;
 
-  const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
+  const iconId = type === 'success' ? 'i-check-circle' : type === 'error' ? 'i-alert' : 'i-info';
 
   toast.innerHTML = `
-    <span class="toast-icon">${icon}</span>
+    <span class="toast-icon">${icon(iconId)}</span>
     <span class="toast-message">${message}</span>
-    <button class="toast-close" aria-label="Close">✕</button>
+    <button class="toast-close" aria-label="Close">${icon('i-x')}</button>
   `;
 
   toastContainer.appendChild(toast);
@@ -97,10 +104,10 @@ const viewerPrev = document.getElementById('viewerPrev');
 const viewerNext = document.getElementById('viewerNext');
 const viewerCounter = document.getElementById('viewerCounter');
 
-let loadedDocs = [];   // pdfjs belgeleri (her dosya için bir tane)
-let docMeta = [];      // { name, numPages }
-let flatPages = [];    // [{ docIndex, pageInDoc }] — tüm dosyaların düz sayfa haritası
-let currentPage = 0;   // düz (flat) sayfa indeksi
+let loadedDocs = [];
+let docMeta = [];
+let flatPages = [];
+let currentPage = 0;
 let isViewerMode = false;
 let renderingTask = null;
 let currentFileName = '';
@@ -146,7 +153,6 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// files: File | File[]  — showHeaders: her dosyanın başlığını göster
 async function openPreview(files, showHeaders = false) {
   if (!files) return;
 
@@ -155,7 +161,7 @@ async function openPreview(files, showHeaders = false) {
 
   currentFileName = fileArr[0].name;
 
-  previewGrid.innerHTML = `<div class="preview-loading">⏳ ${t(currentLang, 'previewLoading')}</div>`;
+  previewGrid.innerHTML = `<div class="preview-loading">${t(currentLang, 'previewLoading')}</div>`;
   previewModal.hidden = false;
   isViewerMode = false;
   previewViewer.hidden = true;
@@ -167,7 +173,6 @@ async function openPreview(files, showHeaders = false) {
     docMeta = [];
     flatPages = [];
 
-    // Tüm dosyaları sırayla yükle
     for (const f of fileArr) {
       const bytes = await f.arrayBuffer();
       const doc = await pdfjsLib.getDocument({ data: bytes }).promise;
@@ -175,13 +180,11 @@ async function openPreview(files, showHeaders = false) {
       docMeta.push({ name: f.name, numPages: doc.numPages });
     }
 
-    // Başlık
     const totalPages = docMeta.reduce((s, m) => s + m.numPages, 0);
     previewTitle.textContent = showHeaders
       ? t(currentLang, 'previewAllTitle', docMeta.length, totalPages)
       : t(currentLang, 'previewTitle', docMeta[0].name);
 
-    // Tüm dosyaların sayfalarını tek düz listede topla
     loadedDocs.forEach((doc, di) => {
       for (let p = 1; p <= doc.numPages; p++) {
         flatPages.push({ docIndex: di, pageInDoc: p });
@@ -193,7 +196,6 @@ async function openPreview(files, showHeaders = false) {
     for (let di = 0; di < loadedDocs.length; di++) {
       const doc = loadedDocs[di];
 
-      // Dosya başlığı (üstte PDF ismi)
       if (showHeaders) {
         const header = document.createElement('div');
         header.className = 'preview-file-header';
@@ -207,7 +209,6 @@ async function openPreview(files, showHeaders = false) {
         previewGrid.appendChild(header);
       }
 
-      // Altında o dosyanın sayfaları
       for (let p = 1; p <= doc.numPages; p++) {
         const page = await doc.getPage(p);
         const viewport = page.getViewport({ scale: 1.5 });
@@ -240,7 +241,7 @@ async function openPreview(files, showHeaders = false) {
     }
   } catch (err) {
     console.error(err);
-    previewGrid.innerHTML = `<div class="preview-error">❌ ${t(currentLang, 'previewError')}</div>`;
+    previewGrid.innerHTML = `<div class="preview-error">${t(currentLang, 'previewError')}</div>`;
   }
 }
 
@@ -275,7 +276,6 @@ async function goToPage(flatIndex) {
 
   const page = await doc.getPage(pageInDoc);
 
-  // Yüksek çözünürlükte render et (CSS ile küçültülecek)
   const devicePixelRatio = window.devicePixelRatio || 1;
   const targetWidth = Math.min(window.innerWidth * 0.8, 1400);
   const baseViewport = page.getViewport({ scale: 1 });
@@ -424,10 +424,10 @@ const mergeStatsEl = document.getElementById('mergeStats');
 const mergeStatsText = document.getElementById('mergeStatsText');
 const mergeCleanMeta = document.getElementById('mergeCleanMeta');
 
-// "Tümünü Önizle" butonu (dinamik oluşturulur, HTML'e dokunmadan)
+// "Tümünü Önizle" butonu (dinamik oluşturulur)
 const previewAllBtn = document.createElement('button');
 previewAllBtn.type = 'button';
-previewAllBtn.className = 'preview-all-btn';
+previewAllBtn.className = 'ghost-btn';
 previewAllBtn.hidden = true;
 previewAllBtn.addEventListener('click', () => {
   if (mergeFiles.length > 0) openPreview(mergeFiles, true);
@@ -488,31 +488,31 @@ function renderMergeList() {
   mergeStatsText.textContent = t(currentLang, 'statsLine', mergeFiles.length, totalPages);
   mergeStatsEl.hidden = false;
 
-  // 2+ dosya varsa "Tümünü Önizle" butonu görünür
   previewAllBtn.hidden = mergeFiles.length < 2;
-  previewAllBtn.textContent = `👁 ${t(currentLang, 'previewAllBtn')}`;
+  previewAllBtn.innerHTML = `${icon('i-eye')}<span>${t(currentLang, 'previewAllBtn')}</span>`;
 
   mergeFiles.forEach((file, i) => {
     const li = document.createElement('li');
     li.innerHTML = `
-      <span class="file-name">${i + 1}. ${file.name}</span>
+      <span class="file-index">${i + 1}</span>
+      <span class="file-name">${file.name}</span>
       <span class="file-size">${(file.size / 1024).toFixed(0)} KB</span>
-      <button class="preview-btn" data-i="${i}" title="${t(currentLang, 'previewBtn')}">👁</button>
-      <button class="remove" data-i="${i}" title="${t(currentLang, 'remove')}">✕</button>
+      <button class="icon-btn-sm preview-btn" data-i="${i}" title="${t(currentLang, 'previewBtn')}">${icon('i-eye')}</button>
+      <button class="icon-btn-sm remove" data-i="${i}" title="${t(currentLang, 'remove')}">${icon('i-trash')}</button>
     `;
     mergeList.appendChild(li);
   });
 
   mergeList.querySelectorAll('.preview-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      const idx = Number(e.target.dataset.i);
+      const idx = Number(e.currentTarget.dataset.i);
       openPreview(mergeFiles[idx]);
     });
   });
 
   mergeList.querySelectorAll('.remove').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      const idx = Number(e.target.dataset.i);
+      const idx = Number(e.currentTarget.dataset.i);
       mergeFiles.splice(idx, 1);
       renderMergeList();
     });
@@ -720,7 +720,6 @@ function openMetaTool() {
 
 function closeMetaTool() {
   metaToolModal.hidden = true;
-  // Reset
   metaFile = null;
   metaInput.value = '';
   metaInfo.hidden = true;
@@ -741,7 +740,7 @@ document.addEventListener('keydown', (e) => {
 
 function formatMetaLine(label, value) {
   if (!value) return '';
-  return `<div class="meta-line"><span class="meta-label">${label}:</span> <span class="meta-value">${value}</span></div>`;
+  return `<div class="meta-line"><span class="meta-label">${label}</span><span class="meta-value">${value}</span></div>`;
 }
 
 async function handleMetaFile(file) {
