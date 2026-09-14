@@ -867,15 +867,57 @@ themeToggle.addEventListener('click', () => {
   showToast(t(currentLang, next === 'dark' ? 'themeDark' : 'themeLight'), 'info', 2000);
 });
 
-accentBtn.addEventListener('click', () => {
-  const current = document.documentElement.getAttribute('data-accent') || 'blue';
-  const idx = ACCENTS.indexOf(current);
-  const next = ACCENTS[(idx + 1) % ACCENTS.length];
-  applyAccent(next);
+// Renk menüsü (dropdown)
+const accentMenu = document.getElementById('accentMenu');
 
-  const key = 'accent' + next.charAt(0).toUpperCase() + next.slice(1);
-  showToast(t(currentLang, key), 'info', 2000);
+function openAccentMenu() {
+  accentMenu.hidden = false;
+  accentBtn.classList.add('active');
+}
+
+function closeAccentMenu() {
+  accentMenu.hidden = true;
+  accentBtn.classList.remove('active');
+}
+
+accentBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (accentMenu.hidden) {
+    openAccentMenu();
+  } else {
+    closeAccentMenu();
+  }
 });
+
+accentMenu.querySelectorAll('.accent-swatch').forEach(swatch => {
+  swatch.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const accent = swatch.dataset.accent;
+    applyAccent(accent);
+
+    const key = 'accent' + accent.charAt(0).toUpperCase() + accent.slice(1);
+    showToast(t(currentLang, key), 'info', 2000);
+    closeAccentMenu();
+  });
+});
+
+// Menü dışına tıklayınca kapat
+document.addEventListener('click', () => {
+  if (!accentMenu.hidden) closeAccentMenu();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !accentMenu.hidden) closeAccentMenu();
+});
+
+// Aktif rengi menüde işaretle
+function markActiveAccent() {
+  const current = document.documentElement.getAttribute('data-accent') || 'blue';
+  accentMenu.querySelectorAll('.accent-swatch').forEach(s => {
+    s.classList.toggle('active', s.dataset.accent === current);
+  });
+}
+markActiveAccent();
 
 // ============================================================
 // DARK READER UYARISI

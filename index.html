@@ -60,9 +60,17 @@
         <button data-lang="en" title="English">EN</button>
         <button data-lang="ru" title="Русский">RU</button>
       </div>
-      <button id="accentBtn" class="icon-btn accent-btn" title="Renk">
-        <svg class="icon" aria-hidden="true"><use href="#i-sliders"/></svg>
-      </button>
+      <div class="accent-wrap">
+        <button id="accentBtn" class="icon-btn accent-btn" title="Renk">
+          <svg class="icon" aria-hidden="true"><use href="#i-sliders"/></svg>
+        </button>
+        <div id="accentMenu" class="accent-menu" hidden>
+          <button type="button" class="accent-swatch" data-accent="blue" title="Mavi"><span></span></button>
+          <button type="button" class="accent-swatch" data-accent="green" title="Yeşil"><span></span></button>
+          <button type="button" class="accent-swatch" data-accent="orange" title="Turuncu"><span></span></button>
+          <button type="button" class="accent-swatch" data-accent="pink" title="Pembe"><span></span></button>
+        </div>
+      </div>
       <button id="themeToggle" class="icon-btn" title="Tema">
         <svg class="icon" aria-hidden="true"><use href="#i-moon"/></svg>
       </button>
@@ -71,10 +79,7 @@
 
   <main>
     <header>
-      <h1>
-        <svg class="logo-icon" aria-hidden="true"><use href="#i-package"/></svg>
-        PDFBox <span>Offline</span>
-      </h1>
+      <h1>PDFBox <span>Offline</span></h1>
       <p class="tagline" data-i18n="tagline"></p>
     </header>
 
