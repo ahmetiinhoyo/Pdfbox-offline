@@ -894,6 +894,7 @@ accentMenu.querySelectorAll('.accent-swatch').forEach(swatch => {
     e.stopPropagation();
     const accent = swatch.dataset.accent;
     applyAccent(accent);
+    markActiveAccent();
 
     const key = 'accent' + accent.charAt(0).toUpperCase() + accent.slice(1);
     showToast(t(currentLang, key), 'info', 2000);
