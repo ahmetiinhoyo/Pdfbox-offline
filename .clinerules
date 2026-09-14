@@ -98,10 +98,29 @@ Bu, "diff parameter was empty" hatasına yol açar.
 
 ## 🧹 Metadata Temizleme Sistemi
 
-- `handleMetaFile(file)` — PDF yükleyip metadata'sını (yazar, başlık, konu, oluşturan, üreten, anahtar kelimeler) okur ve `.meta-info` kutusunda gösterir
-- `metaBtn` → `pdf.setAuthor('')`, `setTitle('')`, `setSubject('')`, `setKeywords([])`, `setCreator('')`, `setProducer('')` ile metadata'yı sıfırlar (tarihler silinmez)
-- İnen dosya adı: `metadata-temiz.pdf`
+3 yol var:
+1. **Sol üst 🧹 butonu** (`metaToolBtn`) → `metaToolModal` modalını açar, sadece metadata temizler → `cleanmeta.pdf`
+2. **Birleştir + checkbox** (`mergeCleanMeta`) → birleştir + temizle → `cleanmeta-birlestirilmis.pdf`
+3. **Böl + checkbox** (`splitCleanMeta`) → böl + temizle → `cleanmeta-bolunmus.pdf`
+
+- `cleanPdfMetadata(pdf)` ortak yardımcı → `setAuthor('')`, `setTitle('')`, `setSubject('')`, `setKeywords([])`, `setCreator('')`, `setProducer('')` (tarihler silinmez)
+- `handleMetaFile(file)` modalda metadata'yı okur ve `.meta-info` kutusunda gösterir
+- `openMetaTool()` / `closeMetaTool()` modal aç/kapa (Esc ile de kapanır)
 - `renderMetaDrop()` dil değişiminde çağrılır (applyLang içinde)
+- Checkbox stilleri: `.option-checkbox`, `.option-box`, `.option-label`
+- Sol buton stili: `.meta-tool-btn`; modal stili: `.meta-tool-content`, `.meta-tool-body`
+</｜｜DSML｜｜ parameter>
+<task_progress>
+- [x] index.html: 🧹 butonu + meta modal + checkbox'lar
+- [x] i18n.js: yeni anahtarlar + preview-all anahtarları korundu
+- [x] main.js: cleanPdfMetadata + checkbox + modal + çoklu preview korundu
+- [x] style.css: yeni stiller + preview-file-header/preview-all-btn korundu
+- [ ] .clinerules güncelle
+- [ ] Build + commit + push
+</task_progress>
+</replace_in_file>
+</｜｜DSML｜｜ parameter>
+</｜｜DSML｜｜ invoke>
 
 ## 🇹🇷 Dil Tercihi
 

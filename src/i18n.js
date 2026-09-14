@@ -29,8 +29,11 @@ export const translations = {
     splitInvalidRange: "Geçersiz sayfa aralığı. Örnek: 1-3, 5, 7-9",
     splitOutOfRange: (max) => `Sayfa numarası dosyada yok. En fazla ${max} sayfa var.`,
 
-    metaTitle: "🧹 Metadata Temizle",
-    metaDesc: "PDF'teki gizli bilgileri sil: yazar, oluşturan program, tarih, GPS, başlık.",
+    cleanMetaLabel: "Metadata'yı temizle (yazar, program, tarih, GPS)",
+
+    // Metadata Aracı Modal
+    metaToolTitle: "🧹 Metadata Temizle",
+    metaToolDesc: "PDF'teki gizli bilgileri sil: yazar, oluşturan program, tarih, GPS, başlık.",
     metaDropText: "PDF seçmek için tıkla",
     metaDropSelected: (name) => `📄 ${name}`,
     metaBtn: "Temizle ve İndir",
@@ -39,14 +42,14 @@ export const translations = {
     metaNeedFile: "Önce bir PDF seç 😄",
     metaWhatFound: "🔍 Bulunan metadata:",
     metaWhatClean: "Bu bilgiler silinecek ve yeni bir PDF indirilecek.",
-    metaNoInfo: "ℹ️ Bu PDF'te belirgin bir metadata yok.",
+    metaNoInfo: "ℹ️ Bu PDF'te belirgin bir metadata yok. Yine de temizleyebilirsin.",
     metaAuthor: "Yazar",
     metaTitleField: "Başlık",
     metaSubject: "Konu",
     metaCreator: "Oluşturan",
     metaProducer: "Üreten",
-    metaSuccess: "PDF metadata'sı temizlendi!",
     metaKeywords: "Anahtar kelimeler",
+    metaSuccess: "PDF metadata'sı temizlendi! 🔒",
 
     buyCoffee: "Kahve Ismarla",
     giveStar: "Yıldız Ver",
@@ -54,6 +57,8 @@ export const translations = {
 
     mergeSuccess: "PDF başarıyla birleştirildi!",
     splitSuccess: "PDF başarıyla bölündü!",
+    mergeSuccessClean: "PDF birleştirildi ve metadata temizlendi! 🔒",
+    splitSuccessClean: "PDF bölündü ve metadata temizlendi! 🔒",
 
     themeLight: "☀️ Açık tema",
     themeDark: "🌙 Koyu tema",
@@ -107,8 +112,10 @@ export const translations = {
     splitInvalidRange: "Invalid page range. Example: 1-3, 5, 7-9",
     splitOutOfRange: (max) => `Page number out of range. This PDF has ${max} pages.`,
 
-    metaTitle: "🧹 Clean Metadata",
-    metaDesc: "Remove hidden info: author, producer, dates, GPS, title.",
+    cleanMetaLabel: "Clean metadata (author, producer, dates, GPS)",
+
+    metaToolTitle: "🧹 Clean Metadata",
+    metaToolDesc: "Remove hidden info: author, producer, dates, GPS, title.",
     metaDropText: "Click to select a PDF",
     metaDropSelected: (name) => `📄 ${name}`,
     metaBtn: "Clean & Download",
@@ -117,14 +124,14 @@ export const translations = {
     metaNeedFile: "Pick a PDF first 😄",
     metaWhatFound: "🔍 Metadata found:",
     metaWhatClean: "This info will be removed and a new PDF will be downloaded.",
-    metaNoInfo: "ℹ️ This PDF has no notable metadata.",
+    metaNoInfo: "ℹ️ This PDF has no notable metadata. You can still clean it.",
     metaAuthor: "Author",
     metaTitleField: "Title",
     metaSubject: "Subject",
     metaCreator: "Creator",
     metaProducer: "Producer",
-    metaSuccess: "PDF metadata cleaned!",
     metaKeywords: "Keywords",
+    metaSuccess: "PDF metadata cleaned! 🔒",
 
     buyCoffee: "Buy me a coffee",
     giveStar: "Star on GitHub",
@@ -132,6 +139,8 @@ export const translations = {
 
     mergeSuccess: "PDFs merged successfully!",
     splitSuccess: "PDF split successfully!",
+    mergeSuccessClean: "PDFs merged and metadata cleaned! 🔒",
+    splitSuccessClean: "PDF split and metadata cleaned! 🔒",
 
     themeLight: "☀️ Light theme",
     themeDark: "🌙 Dark theme",
@@ -185,8 +194,10 @@ export const translations = {
     splitInvalidRange: "Неверный диапазон. Пример: 1-3, 5, 7-9",
     splitOutOfRange: (max) => `Номер страницы вне диапазона. В PDF ${max} страниц.`,
 
-    metaTitle: "🧹 Очистить метаданные",
-    metaDesc: "Удалите скрытую информацию: автора, программу, даты, GPS, заголовок.",
+    cleanMetaLabel: "Очистить метаданные (автор, программа, даты, GPS)",
+
+    metaToolTitle: "🧹 Очистить метаданные",
+    metaToolDesc: "Удалите скрытую информацию: автора, программу, даты, GPS, заголовок.",
     metaDropText: "Нажмите, чтобы выбрать PDF",
     metaDropSelected: (name) => `📄 ${name}`,
     metaBtn: "Очистить и скачать",
@@ -195,14 +206,14 @@ export const translations = {
     metaNeedFile: "Сначала выберите PDF 😄",
     metaWhatFound: "🔍 Найденные метаданные:",
     metaWhatClean: "Эта информация будет удалена, и скачается новый PDF.",
-    metaNoInfo: "ℹ️ В этом PDF нет заметных метаданных.",
+    metaNoInfo: "ℹ️ В этом PDF нет заметных метаданных. Всё равно можно очистить.",
     metaAuthor: "Автор",
     metaTitleField: "Заголовок",
     metaSubject: "Тема",
     metaCreator: "Создатель",
     metaProducer: "Производитель",
-    metaSuccess: "Метаданные PDF очищены!",
     metaKeywords: "Ключевые слова",
+    metaSuccess: "Метаданные PDF очищены! 🔒",
 
     buyCoffee: "Угостить кофе",
     giveStar: "Звезда на GitHub",
@@ -210,6 +221,8 @@ export const translations = {
 
     mergeSuccess: "PDF успешно объединён!",
     splitSuccess: "PDF успешно разделён!",
+    mergeSuccessClean: "PDF объединён, метаданные очищены! 🔒",
+    splitSuccessClean: "PDF разделён, метаданные очищены! 🔒",
 
     themeLight: "☀️ Светлая тема",
     themeDark: "🌙 Тёмная тема",

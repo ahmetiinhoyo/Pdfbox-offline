@@ -24,6 +24,10 @@
 </head>
 <body>
   <main>
+    <!-- SOL ÜST: Minimal metadata temizle butonu -->
+    <button id="metaToolBtn" class="meta-tool-btn" title="Metadata Temizle" aria-label="Metadata Temizle">🧹</button>
+
+    <!-- SAĞ ÜST: Dil, renk, tema -->
     <div class="top-bar">
       <div class="lang-switch">
         <button data-lang="tr" title="Türkçe">TR</button>
@@ -55,6 +59,12 @@
       <div id="mergeStats" class="merge-stats" hidden>
         <span id="mergeStatsText"></span>
       </div>
+
+      <label class="option-checkbox">
+        <input type="checkbox" id="mergeCleanMeta" />
+        <span class="option-box" aria-hidden="true"></span>
+        <span class="option-label" data-i18n="cleanMetaLabel"></span>
+      </label>
 
       <button id="merge" disabled data-i18n="mergeBtn"></button>
     </section>
@@ -88,29 +98,13 @@
         <p class="range-hint" data-i18n="splitRangeHint"></p>
       </div>
 
-      <button id="split" disabled data-i18n="splitBtn"></button>
-    </section>
-
-    <!-- ========== METADATA TEMİZLE ========== -->
-    <section class="card">
-      <h2 data-i18n="metaTitle"></h2>
-      <p class="desc" data-i18n="metaDesc"></p>
-
-      <label class="file-drop" for="metaFile">
-        <input type="file" id="metaFile" accept="application/pdf" hidden />
-        <span class="drop-icon">🧹</span>
-        <span class="drop-text" id="metaDropText" data-i18n="metaDropText"></span>
+      <label class="option-checkbox">
+        <input type="checkbox" id="splitCleanMeta" />
+        <span class="option-box" aria-hidden="true"></span>
+        <span class="option-label" data-i18n="cleanMetaLabel"></span>
       </label>
 
-      <div id="metaActions" class="split-actions" hidden>
-        <button id="metaPreviewBtn" class="preview-trigger">
-          👁 <span data-i18n="previewBtn"></span>
-        </button>
-      </div>
-
-      <div id="metaInfo" class="meta-info" hidden></div>
-
-      <button id="metaBtn" disabled data-i18n="metaBtn"></button>
+      <button id="split" disabled data-i18n="splitBtn"></button>
     </section>
 
     <!-- ========== FOOTER ========== -->
@@ -144,10 +138,8 @@
         <button id="previewClose" class="preview-close" aria-label="Close">✕</button>
       </div>
 
-      <!-- Thumbnail grid görünümü -->
       <div id="previewGrid" class="preview-pages"></div>
 
-      <!-- Tek sayfa tam ekran görünümü -->
       <div id="previewViewer" class="preview-viewer" hidden>
         <button id="viewerPrev" class="viewer-nav viewer-prev" aria-label="Previous">‹</button>
         <div class="viewer-canvas-wrap">
@@ -157,6 +149,37 @@
         <div class="viewer-counter">
           <span id="viewerCounter">1 / 1</span>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== METADATA TEMİZLEME MODAL ========== -->
+  <div id="metaToolModal" class="preview-modal" hidden>
+    <div class="preview-backdrop" id="metaToolBackdrop"></div>
+    <div class="preview-content meta-tool-content">
+      <div class="preview-header">
+        <span class="preview-title" data-i18n="metaToolTitle"></span>
+        <button id="metaToolClose" class="preview-close" aria-label="Close">✕</button>
+      </div>
+
+      <div class="meta-tool-body">
+        <p class="meta-tool-desc" data-i18n="metaToolDesc"></p>
+
+        <label class="file-drop" for="metaFile">
+          <input type="file" id="metaFile" accept="application/pdf" hidden />
+          <span class="drop-icon">🧹</span>
+          <span class="drop-text" id="metaDropText" data-i18n="metaDropText"></span>
+        </label>
+
+        <div id="metaActions" class="split-actions" hidden>
+          <button id="metaPreviewBtn" class="preview-trigger">
+            👁 <span data-i18n="previewBtn"></span>
+          </button>
+        </div>
+
+        <div id="metaInfo" class="meta-info" hidden></div>
+
+        <button id="metaBtn" disabled data-i18n="metaBtn"></button>
       </div>
     </div>
   </div>

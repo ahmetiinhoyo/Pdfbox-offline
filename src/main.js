@@ -70,6 +70,19 @@ function showToast(message, type = 'info', duration = 3500) {
 }
 
 // ============================================================
+// YARDIMCI: PDF metadata temizle
+// Not: Tarihler korunur (setCreationDate/setModificationDate çağrılmaz)
+// ============================================================
+function cleanPdfMetadata(pdf) {
+  pdf.setAuthor('');
+  pdf.setTitle('');
+  pdf.setSubject('');
+  pdf.setKeywords([]);
+  pdf.setCreator('');
+  pdf.setProducer('');
+}
+
+// ============================================================
 // ÖNİZLEME MODAL + GÖRÜNTÜLEYİCİ
 // ============================================================
 const previewModal = document.getElementById('previewModal');
@@ -263,7 +276,6 @@ async function goToPage(flatIndex) {
   const page = await doc.getPage(pageInDoc);
 
   // Yüksek çözünürlükte render et (CSS ile küçültülecek)
-  // Ekran boyutuna göre dinamik scale
   const devicePixelRatio = window.devicePixelRatio || 1;
   const targetWidth = Math.min(window.innerWidth * 0.8, 1400);
   const baseViewport = page.getViewport({ scale: 1 });
@@ -406,10 +418,11 @@ function setupDropZone(dropElement, onFiles) {
 const mergeInput = document.getElementById('files');
 const mergeList = document.getElementById('list');
 const mergeBtn = document.getElementById('merge');
-const mergeDropText = document.querySelector('.file-drop .drop-text');
-const mergeDrop = document.querySelector('.file-drop[for="files"]');
+const mergeDropText = document.querySelector('.card .file-drop[for="files"] .drop-text');
+const mergeDrop = document.querySelector('.card .file-drop[for="files"]');
 const mergeStatsEl = document.getElementById('mergeStats');
 const mergeStatsText = document.getElementById('mergeStatsText');
+const mergeCleanMeta = document.getElementById('mergeCleanMeta');
 
 // "Tümünü Önizle" butonu (dinamik oluşturulur, HTML'e dokunmadan)
 const previewAllBtn = document.createElement('button');
@@ -514,6 +527,8 @@ mergeBtn.addEventListener('click', async () => {
     return;
   }
 
+  const shouldCleanMeta = mergeCleanMeta.checked;
+
   mergeBtn.disabled = true;
   mergeBtn.textContent = t(currentLang, 'merging');
 
@@ -527,10 +542,18 @@ mergeBtn.addEventListener('click', async () => {
       pages.forEach(p => merged.addPage(p));
     }
 
-    const outBytes = await merged.save();
-    downloadPdf(outBytes, 'birlestirilmis.pdf');
+    if (shouldCleanMeta) {
+      cleanPdfMetadata(merged);
+    }
 
-    showToast(t(currentLang, 'mergeSuccess'), 'success');
+    const outBytes = await merged.save();
+    const fileName = shouldCleanMeta ? 'cleanmeta-birlestirilmis.pdf' : 'birlestirilmis.pdf';
+    downloadPdf(outBytes, fileName);
+
+    showToast(
+      t(currentLang, shouldCleanMeta ? 'mergeSuccessClean' : 'mergeSuccess'),
+      'success'
+    );
 
     mergeBtn.textContent = t(currentLang, 'done');
     setTimeout(() => {
@@ -555,6 +578,7 @@ const rangeInput = document.getElementById('pageRange');
 const splitDrop = document.querySelector('.file-drop[for="splitFile"]');
 const splitActions = document.getElementById('splitActions');
 const splitPreviewBtn = document.getElementById('splitPreviewBtn');
+const splitCleanMeta = document.getElementById('splitCleanMeta');
 
 let splitFile = null;
 let splitPageCount = 0;
@@ -634,6 +658,8 @@ splitBtn.addEventListener('click', async () => {
     return;
   }
 
+  const shouldCleanMeta = splitCleanMeta.checked;
+
   splitBtn.disabled = true;
   splitBtn.textContent = t(currentLang, 'splitting');
 
@@ -644,10 +670,18 @@ splitBtn.addEventListener('click', async () => {
     const copied = await output.copyPages(source, parsed);
     copied.forEach(p => output.addPage(p));
 
-    const outBytes = await output.save();
-    downloadPdf(outBytes, 'bolunmus.pdf');
+    if (shouldCleanMeta) {
+      cleanPdfMetadata(output);
+    }
 
-    showToast(t(currentLang, 'splitSuccess'), 'success');
+    const outBytes = await output.save();
+    const fileName = shouldCleanMeta ? 'cleanmeta-bolunmus.pdf' : 'bolunmus.pdf';
+    downloadPdf(outBytes, fileName);
+
+    showToast(
+      t(currentLang, shouldCleanMeta ? 'splitSuccessClean' : 'splitSuccess'),
+      'success'
+    );
 
     splitBtn.textContent = t(currentLang, 'splitDone');
     setTimeout(() => {
@@ -663,17 +697,47 @@ splitBtn.addEventListener('click', async () => {
 });
 
 // ============================================================
-// METADATA TEMİZLE
+// METADATA TEMİZLEME ARACI (MODAL)
 // ============================================================
+const metaToolBtn = document.getElementById('metaToolBtn');
+const metaToolModal = document.getElementById('metaToolModal');
+const metaToolBackdrop = document.getElementById('metaToolBackdrop');
+const metaToolClose = document.getElementById('metaToolClose');
+
 const metaInput = document.getElementById('metaFile');
 const metaBtn = document.getElementById('metaBtn');
 const metaDropText = document.getElementById('metaDropText');
-const metaDrop = document.querySelector('.file-drop[for="metaFile"]');
+const metaDrop = document.querySelector('.meta-tool-body .file-drop[for="metaFile"]');
 const metaActions = document.getElementById('metaActions');
 const metaPreviewBtn = document.getElementById('metaPreviewBtn');
 const metaInfo = document.getElementById('metaInfo');
 
 let metaFile = null;
+
+function openMetaTool() {
+  metaToolModal.hidden = false;
+}
+
+function closeMetaTool() {
+  metaToolModal.hidden = true;
+  // Reset
+  metaFile = null;
+  metaInput.value = '';
+  metaInfo.hidden = true;
+  metaInfo.innerHTML = '';
+  metaActions.hidden = true;
+  renderMetaDrop();
+}
+
+metaToolBtn.addEventListener('click', openMetaTool);
+metaToolClose.addEventListener('click', closeMetaTool);
+metaToolBackdrop.addEventListener('click', closeMetaTool);
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !metaToolModal.hidden) {
+    closeMetaTool();
+  }
+});
 
 function formatMetaLine(label, value) {
   if (!value) return '';
@@ -700,7 +764,6 @@ async function handleMetaFile(file) {
     const producer = pdf.getProducer() || '';
     const keywords = (pdf.getKeywords() || []).join(', ');
 
-    // Info kutusu
     const foundItems = [];
     if (author) foundItems.push(formatMetaLine(t(currentLang, 'metaAuthor'), author));
     if (title) foundItems.push(formatMetaLine(t(currentLang, 'metaTitleField'), title));
@@ -751,7 +814,6 @@ function renderMetaDrop() {
     metaDropText.textContent = t(currentLang, 'metaDropText');
     metaBtn.disabled = true;
     metaActions.hidden = true;
-    metaInfo.hidden = true;
     return;
   }
 
@@ -773,16 +835,10 @@ metaBtn.addEventListener('click', async () => {
     const bytes = await metaFile.arrayBuffer();
     const pdf = await PDFDocument.load(bytes);
 
-    // Tüm metadata'yı sıfırla
-    pdf.setAuthor('');
-    pdf.setTitle('');
-    pdf.setSubject('');
-    pdf.setKeywords([]);
-    pdf.setCreator('');
-    pdf.setProducer('');
+    cleanPdfMetadata(pdf);
 
     const outBytes = await pdf.save();
-    downloadPdf(outBytes, 'metadata-temiz.pdf');
+    downloadPdf(outBytes, 'cleanmeta.pdf');
 
     showToast(t(currentLang, 'metaSuccess'), 'success');
 
