@@ -464,6 +464,7 @@ function renderMergeList() {
     mergeDropText.textContent = t(currentLang, 'dropText');
     mergeBtn.disabled = true;
     mergeStatsEl.hidden = true;
+    previewAllBtn.hidden = true;
     return;
   }
 
