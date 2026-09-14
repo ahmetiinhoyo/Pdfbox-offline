@@ -54,6 +54,9 @@ export const translations = {
     previewLoading: "Sayfalar yükleniyor...",
     previewError: "Önizleme yüklenemedi",
     previewPage: (n) => `Sayfa ${n}`,
+    previewAllBtn: "Tümünü Önizle",
+    previewAllTitle: (files, pages) => `👁 Tüm Dosyalar (${files} dosya, ${pages} sayfa)`,
+    previewFileHeader: (n, name, pages) => `📄 ${n}. ${name} · ${pages} sayfa`,
   },
   en: {
     tagline: "Your file never leaves your device. No ads. No tracking.",
@@ -110,6 +113,9 @@ export const translations = {
     previewLoading: "Loading pages...",
     previewError: "Preview failed to load",
     previewPage: (n) => `Page ${n}`,
+    previewAllBtn: "Preview All",
+    previewAllTitle: (files, pages) => `👁 All Files (${files} files, ${pages} pages)`,
+    previewFileHeader: (n, name, pages) => `📄 ${n}. ${name} · ${pages} pages`,
   },
   ru: {
     tagline: "Ваш файл не покидает устройство. Без рекламы. Без слежки.",
@@ -166,6 +172,9 @@ export const translations = {
     previewLoading: "Загрузка страниц...",
     previewError: "Не удалось загрузить просмотр",
     previewPage: (n) => `Страница ${n}`,
+    previewAllBtn: "Просмотр всех",
+    previewAllTitle: (files, pages) => `👁 Все файлы (${files} файлов, ${pages} страниц)`,
+    previewFileHeader: (n, name, pages) => `📄 ${n}. ${name} · ${pages} стр.`,
   },
 };
 

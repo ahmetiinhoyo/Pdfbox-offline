@@ -84,8 +84,10 @@ const viewerPrev = document.getElementById('viewerPrev');
 const viewerNext = document.getElementById('viewerNext');
 const viewerCounter = document.getElementById('viewerCounter');
 
-let loadedPdf = null;
-let currentPage = 1;
+let loadedDocs = [];   // pdfjs belgeleri (her dosya için bir tane)
+let docMeta = [];      // { name, numPages }
+let flatPages = [];    // [{ docIndex, pageInDoc }] — tüm dosyaların düz sayfa haritası
+let currentPage = 0;   // düz (flat) sayfa indeksi
 let isViewerMode = false;
 let renderingTask = null;
 let currentFileName = '';
@@ -96,8 +98,10 @@ function closePreview() {
   previewViewer.hidden = true;
   previewBack.hidden = true;
   isViewerMode = false;
-  loadedPdf = null;
-  currentPage = 1;
+  loadedDocs = [];
+  docMeta = [];
+  flatPages = [];
+  currentPage = 0;
   renderingTask = null;
 }
 
@@ -109,7 +113,9 @@ previewBack.addEventListener('click', () => {
   previewViewer.hidden = true;
   previewGrid.hidden = false;
   previewBack.hidden = true;
-  previewTitle.textContent = t(currentLang, 'previewTitle', currentFileName);
+  previewTitle.textContent = loadedDocs.length > 1
+    ? t(currentLang, 'previewAllTitle', loadedDocs.length, flatPages.length)
+    : t(currentLang, 'previewTitle', currentFileName);
 });
 
 document.addEventListener('keydown', (e) => {
@@ -127,11 +133,15 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-async function openPreview(file) {
-  if (!file) return;
+// files: File | File[]  — showHeaders: her dosyanın başlığını göster
+async function openPreview(files, showHeaders = false) {
+  if (!files) return;
 
-  currentFileName = file.name;
-  previewTitle.textContent = t(currentLang, 'previewTitle', file.name);
+  const fileArr = Array.isArray(files) ? files : [files];
+  if (fileArr.length === 0) return;
+
+  currentFileName = fileArr[0].name;
+
   previewGrid.innerHTML = `<div class="preview-loading">⏳ ${t(currentLang, 'previewLoading')}</div>`;
   previewModal.hidden = false;
   isViewerMode = false;
@@ -140,35 +150,80 @@ async function openPreview(file) {
   previewBack.hidden = true;
 
   try {
-    const bytes = await file.arrayBuffer();
-    loadedPdf = await pdfjsLib.getDocument({ data: bytes }).promise;
+    loadedDocs = [];
+    docMeta = [];
+    flatPages = [];
+
+    // Tüm dosyaları sırayla yükle
+    for (const f of fileArr) {
+      const bytes = await f.arrayBuffer();
+      const doc = await pdfjsLib.getDocument({ data: bytes }).promise;
+      loadedDocs.push(doc);
+      docMeta.push({ name: f.name, numPages: doc.numPages });
+    }
+
+    // Başlık
+    const totalPages = docMeta.reduce((s, m) => s + m.numPages, 0);
+    previewTitle.textContent = showHeaders
+      ? t(currentLang, 'previewAllTitle', docMeta.length, totalPages)
+      : t(currentLang, 'previewTitle', docMeta[0].name);
+
+    // Tüm dosyaların sayfalarını tek düz listede topla
+    loadedDocs.forEach((doc, di) => {
+      for (let p = 1; p <= doc.numPages; p++) {
+        flatPages.push({ docIndex: di, pageInDoc: p });
+      }
+    });
+
     previewGrid.innerHTML = '';
 
-    for (let i = 1; i <= loadedPdf.numPages; i++) {
-      const page = await loadedPdf.getPage(i);
-      const viewport = page.getViewport({ scale: 1.5 });
+    for (let di = 0; di < loadedDocs.length; di++) {
+      const doc = loadedDocs[di];
 
-      const pageWrap = document.createElement('div');
-      pageWrap.className = 'preview-page';
-      pageWrap.dataset.page = i;
+      // Dosya başlığı (üstte PDF ismi)
+      if (showHeaders) {
+        const header = document.createElement('div');
+        header.className = 'preview-file-header';
+        header.textContent = t(
+          currentLang,
+          'previewFileHeader',
+          di + 1,
+          docMeta[di].name,
+          doc.numPages
+        );
+        previewGrid.appendChild(header);
+      }
 
-      const canvas = document.createElement('canvas');
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      const ctx = canvas.getContext('2d');
+      // Altında o dosyanın sayfaları
+      for (let p = 1; p <= doc.numPages; p++) {
+        const page = await doc.getPage(p);
+        const viewport = page.getViewport({ scale: 1.5 });
 
-      await page.render({ canvasContext: ctx, viewport }).promise;
+        const pageWrap = document.createElement('div');
+        pageWrap.className = 'preview-page';
+        pageWrap.dataset.page = p;
 
-      const label = document.createElement('span');
-      label.className = 'preview-page-label';
-      label.textContent = t(currentLang, 'previewPage', i);
+        const canvas = document.createElement('canvas');
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        const ctx = canvas.getContext('2d');
 
-      pageWrap.appendChild(canvas);
-      pageWrap.appendChild(label);
+        await page.render({ canvasContext: ctx, viewport }).promise;
 
-      pageWrap.addEventListener('click', () => openViewer(i));
+        const label = document.createElement('span');
+        label.className = 'preview-page-label';
+        label.textContent = t(currentLang, 'previewPage', p);
 
-      previewGrid.appendChild(pageWrap);
+        pageWrap.appendChild(canvas);
+        pageWrap.appendChild(label);
+
+        const flatIndex = flatPages.findIndex(
+          fp => fp.docIndex === di && fp.pageInDoc === p
+        );
+        pageWrap.addEventListener('click', () => openViewer(flatIndex));
+
+        previewGrid.appendChild(pageWrap);
+      }
     }
   } catch (err) {
     console.error(err);
@@ -176,33 +231,36 @@ async function openPreview(file) {
   }
 }
 
-async function openViewer(pageNum) {
-  if (!loadedPdf) return;
+async function openViewer(flatIndex) {
+  if (flatPages.length === 0) return;
 
   isViewerMode = true;
   previewGrid.hidden = true;
   previewViewer.hidden = false;
   previewBack.hidden = false;
 
-  await goToPage(pageNum);
+  await goToPage(flatIndex);
 }
 
-async function goToPage(pageNum) {
-  if (!loadedPdf) return;
-  if (pageNum < 1 || pageNum > loadedPdf.numPages) return;
+async function goToPage(flatIndex) {
+  if (flatPages.length === 0) return;
+  if (flatIndex < 0 || flatIndex >= flatPages.length) return;
 
-  currentPage = pageNum;
+  currentPage = flatIndex;
 
-  viewerCounter.textContent = `${currentPage} / ${loadedPdf.numPages}`;
-  viewerPrev.disabled = currentPage === 1;
-  viewerNext.disabled = currentPage === loadedPdf.numPages;
+  const { docIndex, pageInDoc } = flatPages[flatIndex];
+  const doc = loadedDocs[docIndex];
+
+  viewerCounter.textContent = `${flatIndex + 1} / ${flatPages.length}`;
+  viewerPrev.disabled = flatIndex === 0;
+  viewerNext.disabled = flatIndex === flatPages.length - 1;
 
   if (renderingTask) {
     try { renderingTask.cancel(); } catch {}
     renderingTask = null;
   }
 
-  const page = await loadedPdf.getPage(pageNum);
+  const page = await doc.getPage(pageInDoc);
 
   // Yüksek çözünürlükte render et (CSS ile küçültülecek)
   // Ekran boyutuna göre dinamik scale
@@ -352,6 +410,16 @@ const mergeDrop = document.querySelector('.file-drop[for="files"]');
 const mergeStatsEl = document.getElementById('mergeStats');
 const mergeStatsText = document.getElementById('mergeStatsText');
 
+// "Tümünü Önizle" butonu (dinamik oluşturulur, HTML'e dokunmadan)
+const previewAllBtn = document.createElement('button');
+previewAllBtn.type = 'button';
+previewAllBtn.className = 'preview-all-btn';
+previewAllBtn.hidden = true;
+previewAllBtn.addEventListener('click', () => {
+  if (mergeFiles.length > 0) openPreview(mergeFiles, true);
+});
+mergeStatsEl.insertAdjacentElement('afterend', previewAllBtn);
+
 let mergeFiles = [];
 
 async function addMergeFiles(newFiles) {
@@ -404,6 +472,10 @@ function renderMergeList() {
   const totalPages = mergeFiles.reduce((sum, f) => sum + (f._pageCount || 0), 0);
   mergeStatsText.textContent = t(currentLang, 'statsLine', mergeFiles.length, totalPages);
   mergeStatsEl.hidden = false;
+
+  // 2+ dosya varsa "Tümünü Önizle" butonu görünür
+  previewAllBtn.hidden = mergeFiles.length < 2;
+  previewAllBtn.textContent = `👁 ${t(currentLang, 'previewAllBtn')}`;
 
   mergeFiles.forEach((file, i) => {
     const li = document.createElement('li');

@@ -391,6 +391,37 @@ h2 {
   transform: translateY(-1px);
 }
 
+/* "Tümünü Önizle" butonu */
+.preview-all-btn {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.7rem;
+  background: var(--drop-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.preview-all-btn:hover {
+  background: var(--hover-bg);
+  color: var(--text);
+  border-color: var(--accent-1);
+  transform: translateY(-1px);
+}
+
+.preview-all-btn[hidden] {
+  display: none;
+}
+
 /* ==========================================================
    BUTONLAR
    ========================================================== */
@@ -715,6 +746,26 @@ footer {
 
 .preview-pages[hidden] {
   display: none;
+}
+
+/* Dosya başlığı — grid içinde tüm satırı kaplar */
+.preview-file-header {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+  border: 1px solid var(--card-border);
+  border-left: 4px solid var(--accent-1);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  animation: slideIn 0.25s ease-out;
 }
 
 .preview-page {
