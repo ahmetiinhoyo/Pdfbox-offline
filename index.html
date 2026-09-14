@@ -3,8 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PDFBox Offline — PDF Tools</title>
+  <title>PDFBox Offline — Merge & Split PDFs Without Uploading</title>
   <meta name="color-scheme" content="dark light" />
+
+  <meta name="description" content="Merge and split PDF files 100% offline in your browser. No uploads, no ads, no tracking. Free and open source PDF toolbox." />
+  <meta name="keywords" content="pdf merge, pdf split, offline pdf, private pdf tool, pdf merger, pdf splitter, no upload pdf, free pdf tool" />
+  <meta name="author" content="Ahmet (Thorix)" />
+  <meta name="robots" content="index, follow" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="PDFBox Offline — Merge & Split PDFs Without Uploading" />
+  <meta property="og:description" content="100% offline PDF toolbox. Your files never leave your device. No ads, no tracking, no sign-up." />
+  <meta property="og:url" content="https://ahmetiinhoyo.github.io/Pdfbox-offline/" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PDFBox Offline — Merge & Split PDFs Without Uploading" />
+  <meta name="twitter:description" content="100% offline PDF toolbox. No ads, no tracking, no sign-up." />
+
   <link rel="stylesheet" href="/src/style.css" />
 </head>
 <body>
@@ -55,6 +70,12 @@
         <span class="drop-text" id="splitDropText" data-i18n="splitDropText"></span>
       </label>
 
+      <div id="splitActions" class="split-actions" hidden>
+        <button id="splitPreviewBtn" class="preview-trigger">
+          👁 <span data-i18n="previewBtn"></span>
+        </button>
+      </div>
+
       <div class="range-block">
         <label for="pageRange" class="range-label" data-i18n="splitRangeLabel"></label>
         <input
@@ -90,6 +111,33 @@
   </main>
 
   <div id="toast-container" class="toast-container"></div>
+
+  <!-- ========== ÖNİZLEME MODAL ========== -->
+  <div id="previewModal" class="preview-modal" hidden>
+    <div class="preview-backdrop" id="previewBackdrop"></div>
+    <div class="preview-content">
+      <div class="preview-header">
+        <button id="previewBack" class="preview-back" hidden aria-label="Back">←</button>
+        <span id="previewTitle" class="preview-title"></span>
+        <button id="previewClose" class="preview-close" aria-label="Close">✕</button>
+      </div>
+
+      <!-- Thumbnail grid görünümü -->
+      <div id="previewGrid" class="preview-pages"></div>
+
+      <!-- Tek sayfa tam ekran görünümü -->
+      <div id="previewViewer" class="preview-viewer" hidden>
+        <button id="viewerPrev" class="viewer-nav viewer-prev" aria-label="Previous">‹</button>
+        <div class="viewer-canvas-wrap">
+          <canvas id="viewerCanvas"></canvas>
+        </div>
+        <button id="viewerNext" class="viewer-nav viewer-next" aria-label="Next">›</button>
+        <div class="viewer-counter">
+          <span id="viewerCounter">1 / 1</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="/src/main.js"></script>
 </body>

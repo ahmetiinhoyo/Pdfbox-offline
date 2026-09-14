@@ -1,5 +1,9 @@
 import { PDFDocument } from 'pdf-lib';
+import * as pdfjsLib from 'pdfjs-dist';
+import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 import { detectLang, t } from './i18n.js';
+
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 let currentLang = detectLang();
 
@@ -64,6 +68,170 @@ function showToast(message, type = 'info', duration = 3500) {
 
   return toast;
 }
+
+// ============================================================
+// ÖNİZLEME MODAL + GÖRÜNTÜLEYİCİ
+// ============================================================
+const previewModal = document.getElementById('previewModal');
+const previewBackdrop = document.getElementById('previewBackdrop');
+const previewClose = document.getElementById('previewClose');
+const previewBack = document.getElementById('previewBack');
+const previewTitle = document.getElementById('previewTitle');
+const previewGrid = document.getElementById('previewGrid');
+const previewViewer = document.getElementById('previewViewer');
+const viewerCanvas = document.getElementById('viewerCanvas');
+const viewerPrev = document.getElementById('viewerPrev');
+const viewerNext = document.getElementById('viewerNext');
+const viewerCounter = document.getElementById('viewerCounter');
+
+let loadedPdf = null;
+let currentPage = 1;
+let isViewerMode = false;
+let renderingTask = null;
+let currentFileName = '';
+
+function closePreview() {
+  previewModal.hidden = true;
+  previewGrid.innerHTML = '';
+  previewViewer.hidden = true;
+  previewBack.hidden = true;
+  isViewerMode = false;
+  loadedPdf = null;
+  currentPage = 1;
+  renderingTask = null;
+}
+
+previewClose.addEventListener('click', closePreview);
+previewBackdrop.addEventListener('click', closePreview);
+
+previewBack.addEventListener('click', () => {
+  isViewerMode = false;
+  previewViewer.hidden = true;
+  previewGrid.hidden = false;
+  previewBack.hidden = true;
+  previewTitle.textContent = t(currentLang, 'previewTitle', currentFileName);
+});
+
+document.addEventListener('keydown', (e) => {
+  if (previewModal.hidden) return;
+
+  if (e.key === 'Escape') {
+    if (isViewerMode) {
+      previewBack.click();
+    } else {
+      closePreview();
+    }
+  } else if (isViewerMode) {
+    if (e.key === 'ArrowLeft') goToPage(currentPage - 1);
+    if (e.key === 'ArrowRight') goToPage(currentPage + 1);
+  }
+});
+
+async function openPreview(file) {
+  if (!file) return;
+
+  currentFileName = file.name;
+  previewTitle.textContent = t(currentLang, 'previewTitle', file.name);
+  previewGrid.innerHTML = `<div class="preview-loading">⏳ ${t(currentLang, 'previewLoading')}</div>`;
+  previewModal.hidden = false;
+  isViewerMode = false;
+  previewViewer.hidden = true;
+  previewGrid.hidden = false;
+  previewBack.hidden = true;
+
+  try {
+    const bytes = await file.arrayBuffer();
+    loadedPdf = await pdfjsLib.getDocument({ data: bytes }).promise;
+    previewGrid.innerHTML = '';
+
+    for (let i = 1; i <= loadedPdf.numPages; i++) {
+      const page = await loadedPdf.getPage(i);
+      const viewport = page.getViewport({ scale: 1.5 });
+
+      const pageWrap = document.createElement('div');
+      pageWrap.className = 'preview-page';
+      pageWrap.dataset.page = i;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      const ctx = canvas.getContext('2d');
+
+      await page.render({ canvasContext: ctx, viewport }).promise;
+
+      const label = document.createElement('span');
+      label.className = 'preview-page-label';
+      label.textContent = t(currentLang, 'previewPage', i);
+
+      pageWrap.appendChild(canvas);
+      pageWrap.appendChild(label);
+
+      pageWrap.addEventListener('click', () => openViewer(i));
+
+      previewGrid.appendChild(pageWrap);
+    }
+  } catch (err) {
+    console.error(err);
+    previewGrid.innerHTML = `<div class="preview-error">❌ ${t(currentLang, 'previewError')}</div>`;
+  }
+}
+
+async function openViewer(pageNum) {
+  if (!loadedPdf) return;
+
+  isViewerMode = true;
+  previewGrid.hidden = true;
+  previewViewer.hidden = false;
+  previewBack.hidden = false;
+
+  await goToPage(pageNum);
+}
+
+async function goToPage(pageNum) {
+  if (!loadedPdf) return;
+  if (pageNum < 1 || pageNum > loadedPdf.numPages) return;
+
+  currentPage = pageNum;
+
+  viewerCounter.textContent = `${currentPage} / ${loadedPdf.numPages}`;
+  viewerPrev.disabled = currentPage === 1;
+  viewerNext.disabled = currentPage === loadedPdf.numPages;
+
+  if (renderingTask) {
+    try { renderingTask.cancel(); } catch {}
+    renderingTask = null;
+  }
+
+  const page = await loadedPdf.getPage(pageNum);
+
+  // Yüksek çözünürlükte render et (CSS ile küçültülecek)
+  // Ekran boyutuna göre dinamik scale
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  const targetWidth = Math.min(window.innerWidth * 0.8, 1400);
+  const baseViewport = page.getViewport({ scale: 1 });
+  const scale = Math.max(2, (targetWidth / baseViewport.width) * devicePixelRatio * 0.6);
+
+  const viewport = page.getViewport({ scale });
+
+  viewerCanvas.width = viewport.width;
+  viewerCanvas.height = viewport.height;
+
+  const ctx = viewerCanvas.getContext('2d');
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+
+  renderingTask = page.render({ canvasContext: ctx, viewport });
+  try {
+    await renderingTask.promise;
+  } catch (err) {
+    // İptal edildiyse
+  } finally {
+    renderingTask = null;
+  }
+}
+
+viewerPrev.addEventListener('click', () => goToPage(currentPage - 1));
+viewerNext.addEventListener('click', () => goToPage(currentPage + 1));
 
 // ============================================================
 // DİL
@@ -242,9 +410,17 @@ function renderMergeList() {
     li.innerHTML = `
       <span class="file-name">${i + 1}. ${file.name}</span>
       <span class="file-size">${(file.size / 1024).toFixed(0)} KB</span>
+      <button class="preview-btn" data-i="${i}" title="${t(currentLang, 'previewBtn')}">👁</button>
       <button class="remove" data-i="${i}" title="${t(currentLang, 'remove')}">✕</button>
     `;
     mergeList.appendChild(li);
+  });
+
+  mergeList.querySelectorAll('.preview-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const idx = Number(e.target.dataset.i);
+      openPreview(mergeFiles[idx]);
+    });
   });
 
   mergeList.querySelectorAll('.remove').forEach(btn => {
@@ -303,6 +479,8 @@ const splitBtn = document.getElementById('split');
 const splitDropText = document.getElementById('splitDropText');
 const rangeInput = document.getElementById('pageRange');
 const splitDrop = document.querySelector('.file-drop[for="splitFile"]');
+const splitActions = document.getElementById('splitActions');
+const splitPreviewBtn = document.getElementById('splitPreviewBtn');
 
 let splitFile = null;
 let splitPageCount = 0;
@@ -342,10 +520,15 @@ setupDropZone(splitDrop, (files) => {
   handleSplitFile(files[0]);
 });
 
+splitPreviewBtn.addEventListener('click', () => {
+  if (splitFile) openPreview(splitFile);
+});
+
 function renderSplitDrop() {
   if (!splitFile) {
     splitDropText.textContent = t(currentLang, 'splitDropText');
     splitBtn.disabled = true;
+    splitActions.hidden = true;
     return;
   }
 
@@ -356,6 +539,7 @@ function renderSplitDrop() {
     splitPageCount
   );
   splitBtn.disabled = false;
+  splitActions.hidden = false;
 }
 
 splitBtn.addEventListener('click', async () => {

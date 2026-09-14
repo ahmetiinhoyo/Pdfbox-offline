@@ -48,6 +48,12 @@ export const translations = {
     statsLine: (files, pages) => `📄 ${files} dosya · ${pages} sayfa toplam`,
 
     darkReaderWarning: "💡 Dark Reader eklentisi açık. Daha iyi görünüm için kapatabilirsin.",
+
+    previewBtn: "Önizle",
+    previewTitle: (name) => `👁 ${name}`,
+    previewLoading: "Sayfalar yükleniyor...",
+    previewError: "Önizleme yüklenemedi",
+    previewPage: (n) => `Sayfa ${n}`,
   },
   en: {
     tagline: "Your file never leaves your device. No ads. No tracking.",
@@ -98,6 +104,12 @@ export const translations = {
     statsLine: (files, pages) => `📄 ${files} files · ${pages} pages total`,
 
     darkReaderWarning: "💡 Dark Reader extension detected. Turn it off for best experience.",
+
+    previewBtn: "Preview",
+    previewTitle: (name) => `👁 ${name}`,
+    previewLoading: "Loading pages...",
+    previewError: "Preview failed to load",
+    previewPage: (n) => `Page ${n}`,
   },
   ru: {
     tagline: "Ваш файл не покидает устройство. Без рекламы. Без слежки.",
@@ -148,6 +160,12 @@ export const translations = {
     statsLine: (files, pages) => `📄 ${files} файлов · ${pages} страниц всего`,
 
     darkReaderWarning: "💡 Обнаружено расширение Dark Reader. Отключите для лучшего вида.",
+
+    previewBtn: "Просмотр",
+    previewTitle: (name) => `👁 ${name}`,
+    previewLoading: "Загрузка страниц...",
+    previewError: "Не удалось загрузить просмотр",
+    previewPage: (n) => `Страница ${n}`,
   },
 };
 
