@@ -1,0 +1,37 @@
+<section class="card tool-panel" id="pagesPanel" data-tool="pages" hidden>
+  <div class="card-head">
+    <span class="card-head-icon"><svg class="icon" aria-hidden="true"><use href="#i-pages"/></svg></span>
+    <div>
+      <h2 data-i18n="pagesTitle"></h2>
+      <p class="desc" data-i18n="pagesDesc"></p>
+    </div>
+  </div>
+
+  <label class="file-drop" for="pagesFile">
+    <input type="file" id="pagesFile" accept="application/pdf" hidden />
+    <svg class="drop-icon" aria-hidden="true"><use href="#i-upload"/></svg>
+    <span class="drop-text" id="pagesDropText" data-i18n="pagesDropText"></span>
+  </label>
+
+  <div id="pagesStats" class="pages-stats" hidden>
+    <span id="pagesStatsText" class="pages-stats-text"></span>
+    <button id="pagesResetBtn" type="button" class="pages-reset-btn" data-i18n="pagesReset"></button>
+  </div>
+
+  <div id="pagesGrid" class="pages-grid"></div>
+
+  <label class="option-checkbox">
+    <input type="checkbox" id="pagesCleanMeta" />
+    <span class="option-box" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>
+    <span class="option-label" data-i18n="cleanMetaLabel"></span>
+  </label>
+
+  <div class="split-actions">
+    <button id="pagesPreviewBtn" class="ghost-btn" type="button" disabled>
+      <svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg>
+      <span data-i18n="previewBtn"></span>
+    </button>
+  </div>
+
+  <button id="pagesApplyBtn" class="primary-btn" type="button" disabled data-i18n="imgBtn"></button>
+</section>

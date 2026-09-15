@@ -15,6 +15,7 @@ import './features/merge.js';
 import './features/split.js';
 import './features/meta-tool.js';
 import './features/images/index.js';
+import './features/pages/index.js';
 
 initTheme();
 initToolNav();

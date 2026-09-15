@@ -31,12 +31,12 @@ Everything below runs **locally on your device**: no uploads, no cloud processin
 | 📎 Merge PDFs | ✅ Ready |
 | ✂️ Split PDF | ✅ Ready |
 | 🖼️ Images to PDF (JPG/PNG/WEBP/GIF/BMP/AVIF) | ✅ Ready |
+| 🔄 Edit Pages (delete / reorder) | ✅ Ready |
 | 🖼️ Preview All (multi-file gallery) | ✅ Ready |
 | 🔍 Fullscreen page viewer | ✅ Ready |
 | 🧹 Clean Metadata (4 ways) | ✅ Ready |
 | 🌙 Dark / Light theme + 4 accent colors | ✅ Ready |
 | 🌍 Multilingual (EN/TR/RU) | ✅ Ready |
-| 🔄 Delete / Reorder pages | 🚧 Soon |
 | 🗜️ Compress | 🚧 Soon |
 
 ---
@@ -100,6 +100,13 @@ Most "free" online PDF tools (mergers, splitters, compressors):
 4. Hit **"Create & Download PDF"** → `gorselden-pdf.pdf` (or `cleanmeta-gorselden.pdf`) downloads · use **Preview** to check the result fullscreen first
 
 > Note: Each image fills one page — scaled to fit and centered; page count = image count.
+
+### 🔄 Edit Pages (Delete / Reorder)
+1. Switch to the **Edit Pages** tab, pick a PDF — all pages appear as a thumbnail grid
+2. Use the **◀ / ▶** buttons on each page to reorder (edge buttons are locked on first/last page), **✕** to delete
+3. The counter shows how many pages remain; **"Reset"** restores the original order
+4. *(Optional)* Check **"Clean metadata"**
+5. Hit **"Create & Download PDF"** → `duzenlenmis.pdf` (or `cleanmeta-duzenlenmis.pdf`) · **Preview** shows the result fullscreen first
 
 ### 🖼️ Preview Every Page Before Merging
 1. Add 2+ files to the merge list
@@ -173,10 +180,10 @@ to audit as an open-source project. The rule is enforced by `npm run check:lines
 | `index.html` | HTML shell: top bar, cards, modals, inline SVG icon sprite |
 | `src/main.js` | Bootstrap file |
 | `src/core/` | Infrastructure: state, DOM helpers, toast, theme, language, download/metadata helpers |
-| `src/features/` | Features: `merge.js`, `split.js`, `meta-tool.js`, `images/` (5 modules), `preview/` (grid + viewer) |
+| `src/features/` | Features: `merge.js`, `split.js`, `meta-tool.js`, `images/` (5 modules), `pages/` (4 modules), `preview/` (grid + viewer) |
 | `src/ui/` | Per-card HTML fragments (e.g. `images-card.html`) — injected without touching `index.html` |
 | `src/locales/` | `tr.js`, `en.js`, `ru.js` translations |
-| `src/styles/` | 18 style modules (theme, card, button, modal, preview, images card, tool nav, mobile) |
+| `src/styles/` | 19 style modules (theme, card, button, modal, preview, images card, tool nav, page editor, mobile) |
 | `src/style.css` | Style entry point — only an `@import` list |
 | `scripts/check-lines.mjs` | The 200-line rule checker |
 

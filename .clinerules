@@ -33,10 +33,10 @@
 | `index.html` | HTML iskeleti: head, top-bar, kartlar, modallar, SVG sprite (kural dışı, tek dosya) |
 | `src/main.js` | Sadece bootstrap: import + `applyTheme`/`applyAccent`/`applyLang` + dark reader uyarısı |
 | `src/core/**` | Altyapı: `state.js`, `dom.js`, `toast.js`, `theme.js`, `lang.js`, `helpers.js`, `pdf.js`, `dark-reader.js` |
-| `src/features/**` | Özellikler: `merge.js`, `split.js`, `meta-tool.js`, `preview/{state,modal,grid,viewer,index}.js` |
+| `src/features/**` | Özellikler: `merge.js`, `split.js`, `meta-tool.js`, `images/{card,list,normalize,build,index}.js`, `pages/{card,grid,build,index}.js`, `preview/{state,modal,grid,viewer,index}.js` |
 | `src/locales/**` | `tr.js`, `en.js`, `ru.js` — her yeni metin ÜÇ dosyaya da eklenir |
 | `src/i18n.js` | `translations` birleştirme + `detectLang()` + `t(lang, key, ...args)` |
-| `src/styles/**` | `theme, base, topbar, accent-menu, layout, toolnav, file-drop, file-list, controls, range, footer, toast, modal, preview, viewer, images, images-options, mobile` |
+| `src/styles/**` | `theme, base, topbar, accent-menu, layout, toolnav, file-drop, file-list, controls, range, footer, toast, modal, preview, viewer, images, images-options, pages, mobile` |
 | `src/style.css` | Sadece `@import` listesi — sıra orijinal cascade sırasıyla birebir aynıdır |
 | `scripts/check-lines.mjs` | 200 satır kuralını denetleyen script |
 

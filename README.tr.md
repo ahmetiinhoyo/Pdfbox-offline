@@ -31,12 +31,12 @@ Aşağıdaki her şey **cihazınızda yerel olarak** çalışır: yükleme yok, 
 | 📎 PDF Birleştir | ✅ Hazır |
 | ✂️ PDF Böl | ✅ Hazır |
 | 🖼️ Görselden PDF (JPG/PNG/WEBP/GIF/BMP/AVIF) | ✅ Hazır |
+| 🔄 Sayfa Sil / Sırala (Sayfa Düzenle) | ✅ Hazır |
 | 🖼️ Tümünü Önizle (çoklu dosya galerisi) | ✅ Hazır |
 | 🔍 Tam ekran sayfa görüntüleyici | ✅ Hazır |
 | 🧹 Metadata Temizle (4 yol) | ✅ Hazır |
 | 🌙 Koyu / Açık tema + 4 vurgu rengi | ✅ Hazır |
 | 🌍 Çoklu Dil (TR/EN/RU) | ✅ Hazır |
-| 🔄 Sayfa Sil / Sırala | 🚧 Yakında |
 | 🗜️ Sıkıştır | 🚧 Yakında |
 
 ---
@@ -100,6 +100,13 @@ Tamamen tarayıcınızda çalışır. Kurulum yok, hesap yok, sınır yok — be
 4. **"PDF Oluştur ve İndir"** → `gorselden-pdf.pdf` (veya `cleanmeta-gorselden.pdf`) iner · **Önizle** ile sonucu önce tam ekranda gör
 
 > Not: Her görsel bir sayfaya gelir — sayfa ölçüsüne sığdırılıp ortalanır, sayfa sayısı = görsel sayısı.
+
+### 🔄 Sayfa Düzenle (Sil / Sırala)
+1. **Sayfa Düzenle** sekmesine geç, bir PDF seç — tüm sayfalar thumbnail ızgarasında listelenir
+2. Her sayfanın üstündeki **◀ / ▶** butonlarıyla sırayı değiştir (ilk/son sayfada kenar butonu kilitli), **✕** ile sil
+3. Üstteki sayaç kaç sayfa kaldığını gösterir; **"Sıfırla"** orijinal sıraya döndürür
+4. *(İsteğe bağlı)* **"Metadata'yı temizle"** kutusunu işaretle
+5. **"PDF Oluştur ve İndir"** → `duzenlenmis.pdf` (veya `cleanmeta-duzenlenmis.pdf`) iner · **"Önizle"** ile sonucu önce tam ekranda gör
 
 ### 🖼️ Birleştirmeden Önce Her Sayfayı Önizle
 1. Birleştirme listesine 2+ dosya ekle
@@ -173,10 +180,10 @@ olarak denetlenmesi kolay olsun diye. Kural, `npm run check:lines` komutuyla oto
 | `index.html` | HTML iskeleti: top-bar, kartlar, modallar, SVG ikon sprite |
 | `src/main.js` | Başlangıç dosyası (bootstrap) |
 | `src/core/` | Altyapı: durum, DOM yardımcıları, toast, tema, dil, indirme/metadata yardımcıları |
-| `src/features/` | Özellikler: `merge.js`, `split.js`, `meta-tool.js`, `images/` (5 modül), `preview/` (grid + viewer) |
+| `src/features/` | Özellikler: `merge.js`, `split.js`, `meta-tool.js`, `images/` (5 modül), `pages/` (4 modül), `preview/` (grid + viewer) |
 | `src/ui/` | Karta özel HTML parçaları (ör. `images-card.html`) — `index.html`'e dokunmadan enjekte edilir |
 | `src/locales/` | `tr.js`, `en.js`, `ru.js` çevirileri |
-| `src/styles/` | 18 stil modülü (tema, kart, buton, modal, önizleme, görsel kartı, araç sekmeleri, mobil) |
+| `src/styles/` | 19 stil modülü (tema, kart, buton, modal, önizleme, görsel kartı, araç sekmeleri, sayfa düzenleyici, mobil) |
 | `src/style.css` | Stil giriş noktası — sadece `@import` listesi |
 | `scripts/check-lines.mjs` | 200 satır kuralının denetleyicisi |
 
