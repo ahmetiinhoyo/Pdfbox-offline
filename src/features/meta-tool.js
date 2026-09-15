@@ -145,7 +145,7 @@ metaBtn.addEventListener('click', async () => {
     cleanPdfMetadata(pdf);
 
     const outBytes = await pdf.save();
-    downloadPdf(outBytes, 'cleanmeta.pdf');
+    downloadPdf(outBytes, 'cleaned.pdf');
 
     showToast(t('metaSuccess'), 'success');
 

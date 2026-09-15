@@ -107,7 +107,7 @@ splitBtn.addEventListener('click', async () => {
     }
 
     const outBytes = await output.save();
-    const fileName = shouldCleanMeta ? 'cleanmeta-bolunmus.pdf' : 'bolunmus.pdf';
+    const fileName = shouldCleanMeta ? 'split-clean.pdf' : 'split.pdf';
     downloadPdf(outBytes, fileName);
 
     showToast(t(shouldCleanMeta ? 'splitSuccessClean' : 'splitSuccess'), 'success');

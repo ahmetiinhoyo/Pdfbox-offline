@@ -139,7 +139,7 @@ mergeBtn.addEventListener('click', async () => {
     }
 
     const outBytes = await merged.save();
-    const fileName = shouldCleanMeta ? 'cleanmeta-birlestirilmis.pdf' : 'birlestirilmis.pdf';
+    const fileName = shouldCleanMeta ? 'merged-clean.pdf' : 'merged.pdf';
     downloadPdf(outBytes, fileName);
 
     showToast(t(shouldCleanMeta ? 'mergeSuccessClean' : 'mergeSuccess'), 'success');

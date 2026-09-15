@@ -54,7 +54,7 @@ async function createPdf(withDownload) {
 
   try {
     const bytes = await buildPagesPdf(ps.file, ps.order, getCleanMeta());
-    const name = getCleanMeta() ? 'cleanmeta-duzenlenmis.pdf' : 'duzenlenmis.pdf';
+    const name = getCleanMeta() ? 'edited-clean.pdf' : 'edited.pdf';
 
     if (withDownload) {
       downloadPdf(bytes, name);

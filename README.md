@@ -75,7 +75,7 @@ Most "free" online PDF tools (mergers, splitters, compressors):
 2. Select multiple PDFs — they pile up with page counts
 3. Remove unwanted ones with the trash button
 4. *(Optional)* Check **"Clean metadata"** to strip author, producer, title, keywords etc. from the output
-5. Hit **"Merge & Download"** → `birlestirilmis.pdf` (or `cleanmeta-birlestirilmis.pdf`) gets downloaded
+5. Hit **"Merge & Download"** → `merged.pdf` (or `merged-clean.pdf`) gets downloaded
 
 ### ✂️ Split a PDF Offline
 1. Click the **Split PDF** area, pick a PDF
@@ -85,7 +85,7 @@ Most "free" online PDF tools (mergers, splitters, compressors):
    - `1-2, 5, 7-9` → mixed ranges
    - Empty → all pages
 3. *(Optional)* Check **"Clean metadata"**
-4. Hit **"Split & Download"** → `bolunmus.pdf` (or `cleanmeta-bolunmus.pdf`) gets downloaded
+4. Hit **"Split & Download"** → `split.pdf` (or `split-clean.pdf`) gets downloaded
 
 ### 🖼️ Convert JPG/PNG/WEBP Images to PDF
 1. Click the **Images to PDF** area or drag & drop your images
@@ -97,7 +97,7 @@ Most "free" online PDF tools (mergers, splitters, compressors):
    - **Margin:** None / Small / Medium
    - **Quality:** Screen (smallest file) / High (balanced) / Original (best quality)
 3. *(Optional)* Check **"Clean metadata"**
-4. Hit **"Create & Download PDF"** → `gorselden-pdf.pdf` (or `cleanmeta-gorselden.pdf`) downloads · use **Preview** to check the result fullscreen first
+4. Hit **"Create & Download PDF"** → `images-to-pdf.pdf` (or `images-to-pdf-clean.pdf`) downloads · use **Preview** to check the result fullscreen first
 
 > Note: Each image fills one page — scaled to fit and centered; page count = image count.
 
@@ -106,7 +106,7 @@ Most "free" online PDF tools (mergers, splitters, compressors):
 2. Use the **◀ / ▶** buttons on each page to reorder (edge buttons are locked on first/last page), **✕** to delete
 3. The counter shows how many pages remain; **"Reset"** restores the original order
 4. *(Optional)* Check **"Clean metadata"**
-5. Hit **"Create & Download PDF"** → `duzenlenmis.pdf` (or `cleanmeta-duzenlenmis.pdf`) · **Preview** shows the result fullscreen first
+5. Hit **"Create & Download PDF"** → `edited.pdf` (or `edited-clean.pdf`) · **Preview** shows the result fullscreen first
 
 ### 🖼️ Preview Every Page Before Merging
 1. Add 2+ files to the merge list
@@ -121,10 +121,10 @@ PDFs carry hidden info: author name, creating program, dates, title, keywords. R
 
 1. **Top-left "Clean Metadata" button** → opens a dedicated tool:
    - Pick a PDF → see exactly **what metadata was found** (author, title, subject, creator, producer, keywords)
-   - Preview it, then hit **"Clean & Download"** → `cleanmeta.pdf`
+   - Preview it, then hit **"Clean & Download"** → `cleaned.pdf`
 2. **Merge + checkbox** → merge and clean in one go
 3. **Split + checkbox** → split and clean in one go
-4. **Images to PDF + checkbox** → convert images with a cleaned output → `cleanmeta-gorselden.pdf`
+4. **Images to PDF + checkbox** → convert images with a cleaned output → `images-to-pdf-clean.pdf`
 
 > Note: Document creation/modification **dates are preserved** — only identity fields are wiped.
 

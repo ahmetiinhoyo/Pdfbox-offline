@@ -75,7 +75,7 @@ Tamamen tarayıcınızda çalışır. Kurulum yok, hesap yok, sınır yok — be
 2. Birden fazla PDF seç — sayfa sayılarıyla listeye eklenir
 3. İstemediğini çöp kutusu butonuyla kaldır
 4. *(İsteğe bağlı)* **"Metadata'yı temizle"** kutusunu işaretle — çıktıdan yazar, üreten program, başlık, anahtar kelimeler vb. silinir
-5. **"Birleştir ve İndir"** butonuna bas → `birlestirilmis.pdf` (veya `cleanmeta-birlestirilmis.pdf`) iner
+5. **"Birleştir ve İndir"** butonuna bas → `merged.pdf` (veya `merged-clean.pdf`) iner
 
 ### ✂️ PDF'i Çevrimdışı Böl
 1. **PDF Böl** alanına tıkla, bir PDF seç
@@ -85,7 +85,7 @@ Tamamen tarayıcınızda çalışır. Kurulum yok, hesap yok, sınır yok — be
    - `1-2, 5, 7-9` → karışık aralıklar
    - Boş bırak → tüm sayfalar
 3. *(İsteğe bağlı)* **"Metadata'yı temizle"** kutusunu işaretle
-4. **"Böl ve İndir"** butonuna bas → `bolunmus.pdf` (veya `cleanmeta-bolunmus.pdf`) iner
+4. **"Böl ve İndir"** butonuna bas → `split.pdf` (veya `split-clean.pdf`) iner
 
 ### 🖼️ JPG/PNG/WEBP Görsellerini PDF'e Çevir
 1. **Görselden PDF** alanına tıkla veya görsellerini sürükle-bırak yap
@@ -97,7 +97,7 @@ Tamamen tarayıcınızda çalışır. Kurulum yok, hesap yok, sınır yok — be
    - **Kenar boşluğu:** Yok / Küçük / Orta
    - **Kalite:** Ekran (en küçük dosya) / Yüksek (dengeli) / Orijinal (en kaliteli)
 3. *(İsteğe bağlı)* **"Metadata'yı temizle"** kutusunu işaretle
-4. **"PDF Oluştur ve İndir"** → `gorselden-pdf.pdf` (veya `cleanmeta-gorselden.pdf`) iner · **Önizle** ile sonucu önce tam ekranda gör
+4. **"PDF Oluştur ve İndir"** → `images-to-pdf.pdf` (veya `images-to-pdf-clean.pdf`) iner · **Önizle** ile sonucu önce tam ekranda gör
 
 > Not: Her görsel bir sayfaya gelir — sayfa ölçüsüne sığdırılıp ortalanır, sayfa sayısı = görsel sayısı.
 
@@ -106,7 +106,7 @@ Tamamen tarayıcınızda çalışır. Kurulum yok, hesap yok, sınır yok — be
 2. Her sayfanın üstündeki **◀ / ▶** butonlarıyla sırayı değiştir (ilk/son sayfada kenar butonu kilitli), **✕** ile sil
 3. Üstteki sayaç kaç sayfa kaldığını gösterir; **"Sıfırla"** orijinal sıraya döndürür
 4. *(İsteğe bağlı)* **"Metadata'yı temizle"** kutusunu işaretle
-5. **"PDF Oluştur ve İndir"** → `duzenlenmis.pdf` (veya `cleanmeta-duzenlenmis.pdf`) iner · **"Önizle"** ile sonucu önce tam ekranda gör
+5. **"PDF Oluştur ve İndir"** → `edited.pdf` (veya `edited-clean.pdf`) iner · **"Önizle"** ile sonucu önce tam ekranda gör
 
 ### 🖼️ Birleştirmeden Önce Her Sayfayı Önizle
 1. Birleştirme listesine 2+ dosya ekle
@@ -121,10 +121,10 @@ PDF'lerin içinde gizli bilgi vardır: yazar adı, oluşturan program, tarih, ba
 
 1. **Sol üstteki "Metadata Temizle" butonu** → özel araç açılır:
    - PDF seç → tam olarak **hangi metadata bulunduğunu gör** (yazar, başlık, konu, oluşturan, üreten, anahtar kelimeler)
-   - Önizle, sonra **"Temizle ve İndir"** bas → `cleanmeta.pdf` iner
+   - Önizle, sonra **"Temizle ve İndir"** bas → `cleaned.pdf` iner
 2. **Birleştir + checkbox** → birleştir ve tek seferde temizle
 3. **Böl + checkbox** → böl ve tek seferde temizle
-4. **Görselden PDF + checkbox** → görselleri çevirirken temizle → `cleanmeta-gorselden.pdf`
+4. **Görselden PDF + checkbox** → görselleri çevirirken temizle → `images-to-pdf-clean.pdf`
 
 > Not: Belgenin oluşturma/değiştirme **tarihleri korunur** — sadece kimlik bilgileri silinir.
 

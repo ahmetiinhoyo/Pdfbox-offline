@@ -33,7 +33,7 @@ async function createPdf(withDownload) {
 
   try {
     const bytes = await buildImagesPdf(files, opts, showProgress);
-    const name = opts.cleanMeta ? 'cleanmeta-gorselden.pdf' : 'gorselden-pdf.pdf';
+    const name = opts.cleanMeta ? 'images-to-pdf-clean.pdf' : 'images-to-pdf.pdf';
 
     if (withDownload) {
       downloadPdf(bytes, name);
