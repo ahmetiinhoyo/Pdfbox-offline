@@ -1,0 +1,121 @@
+/* ==========================================================
+   MODAL (ortak)
+   ========================================================== */
+.preview-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.preview-modal[hidden] {
+  display: none;
+}
+
+.preview-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.preview-content {
+  position: relative;
+  background: var(--modal-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 1100px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+  animation: modalIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.meta-tool-content {
+  max-width: 540px;
+  height: auto;
+  max-height: 90vh;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--card-border);
+  background: var(--card-bg);
+  flex-shrink: 0;
+}
+
+.preview-back,
+.preview-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: 1px solid var(--card-border);
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  padding: 0;
+  font-family: inherit;
+}
+
+.preview-back .icon,
+.preview-close .icon {
+  width: 17px;
+  height: 17px;
+}
+
+.preview-back:hover,
+.preview-close:hover {
+  background: var(--hover-bg);
+  color: var(--text);
+  border-color: var(--accent-1);
+}
+
+.preview-title {
+  flex: 1;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Metadata tool gövdesi */
+.meta-tool-body {
+  padding: 1.25rem;
+  overflow-y: auto;
+}
+
+.meta-tool-desc {
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  margin-bottom: 1.1rem;
+  line-height: 1.5;
+}
+

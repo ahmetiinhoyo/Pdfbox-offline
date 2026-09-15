@@ -1,0 +1,103 @@
+/* ==========================================================
+   FILE LIST
+   ========================================================== */
+.file-list {
+  list-style: none;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.file-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--drop-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.file-index {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--hover-bg);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.file-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+.file-size {
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  flex-shrink: 0;
+}
+
+.icon-btn-sm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-radius: 7px;
+  transition: all 0.15s;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.icon-btn-sm .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-btn-sm.preview-btn:hover {
+  background: var(--hover-bg);
+  color: var(--accent-1);
+}
+
+.icon-btn-sm.remove:hover {
+  background: var(--danger-bg);
+  color: var(--danger-text);
+}
+
+/* ==========================================================
+   SAYFA SAYACI
+   ========================================================== */
+.merge-stats {
+  margin-top: 1rem;
+  padding: 0.6rem 0.9rem;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-1) 8%, transparent), color-mix(in srgb, var(--accent-2) 8%, transparent));
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  text-align: center;
+  font-weight: 550;
+  animation: slideIn 0.25s ease-out;
+}
+

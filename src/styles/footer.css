@@ -1,0 +1,55 @@
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--text-dim);
+  font-size: 0.82rem;
+}
+
+.footer-line {
+  margin-bottom: 0.9rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.footer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 9px;
+  color: var(--text-soft);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 550;
+  transition: all 0.2s;
+}
+
+.footer-btn:hover {
+  background: var(--hover-bg);
+  color: var(--text);
+  border-color: var(--accent-1);
+  transform: translateY(-1px);
+}
+
+.footer-btn.coffee {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  border-color: transparent;
+  color: #1a1d24;
+  font-weight: 650;
+}
+
+.footer-btn.coffee:hover {
+  filter: brightness(1.06);
+  border-color: transparent;
+}
+

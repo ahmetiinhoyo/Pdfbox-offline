@@ -1,0 +1,101 @@
+/* ==========================================================
+   TEK SAYFA GÖRÜNTÜLEYİCİ
+   ========================================================== */
+.preview-viewer {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 1rem 4.5rem 3.25rem 4.5rem;
+  background: var(--modal-bg);
+}
+
+.preview-viewer[hidden] {
+  display: none;
+}
+
+.viewer-canvas-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.viewer-canvas-wrap canvas {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 12px 44px rgba(0, 0, 0, 0.5);
+  background: white;
+  display: block;
+  object-fit: contain;
+}
+
+.viewer-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-family: inherit;
+  z-index: 2;
+}
+
+.viewer-nav .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.viewer-nav:hover:not(:disabled) {
+  background: var(--accent-1);
+  border-color: var(--accent-1);
+  color: white;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.viewer-nav:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.viewer-prev {
+  left: 1rem;
+}
+
+.viewer-next {
+  right: 1rem;
+}
+
+.viewer-counter {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  box-shadow: 0 4px 12px var(--shadow);
+  z-index: 2;
+  pointer-events: none;
+}
+

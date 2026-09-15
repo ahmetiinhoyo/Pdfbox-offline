@@ -1,0 +1,62 @@
+/* Dark Reader gibi eklentilere "bize dokunma" der */
+:root { color-scheme: dark; }
+[data-theme="light"] { color-scheme: light; }
+[data-theme="dark"] { color-scheme: dark; }
+
+/* ==========================================================
+   TEMA DEĞİŞKENLERİ
+   ========================================================== */
+:root,
+[data-theme="dark"] {
+  --bg-1: #16181f;
+  --bg-2: #0a0b0e;
+  --text: #f1f2f4;
+  --text-muted: #9096a3;
+  --text-dim: #626875;
+  --text-soft: #b4b9c4;
+  --card-bg: #14161d;
+  --card-border: #232732;
+  --input-bg: #0e1015;
+  --input-border: #262b37;
+  --input-placeholder: #565c69;
+  --btn-disabled-bg: #22262f;
+  --hover-bg: #1c2029;
+  --drop-bg: #0e1015;
+  --drop-border: #2b303c;
+  --drop-hover-bg: #12151c;
+  --shadow: rgba(0, 0, 0, 0.35);
+  --shadow-lg: rgba(0, 0, 0, 0.5);
+  --danger-bg: #3a1519;
+  --danger-text: #f0736f;
+  --modal-bg: #0e1015;
+}
+
+[data-theme="light"] {
+  --bg-1: #f6f7f9;
+  --bg-2: #e9ebef;
+  --text: #131722;
+  --text-muted: #646b7a;
+  --text-dim: #9099a8;
+  --text-soft: #4a5162;
+  --card-bg: #ffffff;
+  --card-border: #e5e8ee;
+  --input-bg: #f7f8fa;
+  --input-border: #e2e5ec;
+  --input-placeholder: #9aa1b0;
+  --btn-disabled-bg: #e8ebf0;
+  --hover-bg: #f1f3f7;
+  --drop-bg: #f9fafb;
+  --drop-border: #d3d8e2;
+  --drop-hover-bg: #f1f3f7;
+  --shadow: rgba(15, 23, 42, 0.05);
+  --shadow-lg: rgba(15, 23, 42, 0.1);
+  --danger-bg: #fee2e2;
+  --danger-text: #dc2626;
+  --modal-bg: #ffffff;
+}
+
+[data-accent="blue"] { --accent-1: #3b82f6; --accent-2: #6366f1; }
+[data-accent="green"] { --accent-1: #10b981; --accent-2: #0891b2; }
+[data-accent="orange"] { --accent-1: #f97316; --accent-2: #eab308; }
+[data-accent="pink"] { --accent-1: #ec4899; --accent-2: #8b5cf6; }
+

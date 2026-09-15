@@ -120,6 +120,26 @@ Click **TR / EN / RU** in the top right. Your choice is remembered.
 
 ---
 
+## Project Structure (modular — every file ≤ 200 lines)
+
+The code is split into modules with a hard limit of **200 lines per file** — so it stays easy to
+audit as an open-source project. The rule is enforced by `npm run check:lines`.
+
+| Path | Contents |
+|---|---|
+| `index.html` | HTML shell: top bar, cards, modals, inline SVG icon sprite |
+| `src/main.js` | Bootstrap file |
+| `src/core/` | Infrastructure: state, DOM helpers, toast, theme, language, download/metadata helpers |
+| `src/features/` | Features: `merge.js`, `split.js`, `meta-tool.js`, `preview/` (grid + viewer) |
+| `src/locales/` | `tr.js`, `en.js`, `ru.js` translations |
+| `src/styles/` | 15 style modules (theme, card, button, modal, preview, mobile) |
+| `src/style.css` | Style entry point — only an `@import` list |
+| `scripts/check-lines.mjs` | The 200-line rule checker |
+
+Adding a feature = one module in `src/features/` + keys in all three `src/locales/` files.
+
+---
+
 ## 💻 Local Development
 
 ```bash

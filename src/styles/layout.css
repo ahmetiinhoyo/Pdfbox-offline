@@ -1,0 +1,86 @@
+/* ==========================================================
+   HEADER
+   ========================================================== */
+header {
+  text-align: center;
+  margin-bottom: 2.25rem;
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+}
+
+h1 span {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background 0.3s ease;
+}
+
+.tagline {
+  color: var(--text-muted);
+  margin-top: 0.55rem;
+  font-size: 0.92rem;
+}
+
+/* ==========================================================
+   CARD
+   ========================================================== */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: 0 8px 30px var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.card + .card {
+  margin-top: 1.25rem;
+}
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin-bottom: 1.4rem;
+}
+
+.card-head-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-1) 16%, transparent), color-mix(in srgb, var(--accent-2) 16%, transparent));
+  border: 1px solid color-mix(in srgb, var(--accent-1) 22%, transparent);
+  color: var(--accent-1);
+  flex-shrink: 0;
+}
+
+.card-head-icon .icon {
+  width: 20px;
+  height: 20px;
+}
+
+h2 {
+  font-size: 1.15rem;
+  font-weight: 650;
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.01em;
+}
+
+.desc {
+  color: var(--text-muted);
+  font-size: 0.87rem;
+  line-height: 1.45;
+}
+

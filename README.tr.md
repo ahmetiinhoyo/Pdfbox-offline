@@ -120,6 +120,26 @@ Sağ üstteki **TR / EN / RU** butonlarına bas. Seçim hatırlanır.
 
 ---
 
+## Proje Yapısı (modüler — her dosya ≤ 200 satır)
+
+Kod, dosya başına **en fazla 200 satır** kuralına göre modüllere bölünmüştür — açık kaynak olarak
+denetlenmesi kolay olsun diye. Kural, `npm run check:lines` komutuyla otomatik denetlenir.
+
+| Yol | İçerik |
+|---|---|
+| `index.html` | HTML iskeleti: top-bar, kartlar, modallar, SVG ikon sprite |
+| `src/main.js` | Başlangıç dosyası (bootstrap) |
+| `src/core/` | Altyapı: durum, DOM yardımcıları, toast, tema, dil, indirme/metadata yardımcıları |
+| `src/features/` | Özellikler: `merge.js`, `split.js`, `meta-tool.js`, `preview/` (grid + viewer) |
+| `src/locales/` | `tr.js`, `en.js`, `ru.js` çevirileri |
+| `src/styles/` | 15 stil modülü (tema, kart, buton, modal, önizleme, mobil) |
+| `src/style.css` | Stil giriş noktası — sadece `@import` listesi |
+| `scripts/check-lines.mjs` | 200 satır kuralının denetleyicisi |
+
+Yeni özellik eklemek = `src/features/` altına bir modül + `src/locales/` altına üç dilde anahtarlar.
+
+---
+
 ## 💻 Yerel Geliştirme
 
 ```bash

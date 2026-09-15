@@ -13,6 +13,7 @@ PDFBox Offline is an open-source PDF utility that runs locally on your device. I
 - Split PDF files
 - Reorder, rotate, and manage PDF pages
 - Open source and auditable
+- Modular codebase: every source file is under 200 lines (`npm run check:lines`)
 
 ## Why it matters
 Most online PDF tools require uploading documents to third-party servers. PDFBox Offline keeps files on the user's device, making it suitable for contracts, IDs, financial documents, medical records, and other private data.

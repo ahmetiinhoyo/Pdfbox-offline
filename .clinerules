@@ -1,126 +1,112 @@
 # Cline Kalıcı Kurallar — PDFBox Offline
 
-## 🚨 KRİTİK: Tool Parametre Formatı (Parametre Hatası Önleme)
+## 📏 DOSYA BOYUTU KURALI (MUTLAK — 200 SATIR)
 
-Bu sohbette replace_in_file ve write_to_file tool'larında **path parametresi birden fazla kez bozuldu** ve "diff parameter was empty" hatası alındı. Bunu bir daha YAPMA.
+**Hiçbir kaynak dosya 200 satırı geçmez. İstisnasız.**
 
-### DOĞRU format
-
-Her replace_in_file çağrısında parametreler AYRI etiketler olmalı:
-
-- Birinci parametre etiketi: `path` → içeriği sadece dosya yolu (örn. src/main.js)
-- İkinci parametre etiketi: `diff` → içeriği SEARCH/REPLACE blokları
-- Üçüncü parametre etiketi: `task_progress` → içeriği todo listesi
-
-Yani XML yapısı şöyle olmalı:
-<replace_in_file>
-<path>src/main.js</path>
-<diff>
-------- SEARCH
-aranacak satırlar
-=======
-yeni satırlar
-+++++++ REPLACE
-</diff>
-</replace_in_file>
-
-### YANLIŞ format (ASLA yapma)
-
-path etiketinin İÇİNE `parameter name="diff"` gibi ikinci bir etiket GÖMME. Örnek YANLIŞ kullanım:
-<path>src/main.js</parameter name="diff"> ... </path>
-
-Bu, "diff parameter was empty" hatasına yol açar.
-
-### Kesin kurallar
-
-1. **path etiketi TEK kelimedir**, içine `parameter name=` YAZMA. Sadece `<path>dosya/yolu.js</path>` şeklinde.
-2. **diff etiketi ayrı bir etikettir**, path içine gömme. Sıra: önce path, sonra diff, sonra task_progress.
-3. **diff içeriğini ASLA boş bırakma.** En az bir SEARCH/REPLACE bloğu olmalı.
-4. **SEARCH/REPLACE marker'ları tam olarak şöyle olmalı:**
-   - Başlangıç: 7 tire + boşluk + SEARCH → `------- SEARCH`
-   - Orta: 7 eşittir → `=======`
-   - Bitiş: 7 artı + boşluk + REPLACE → `+++++++ REPLACE`
-   - Marker'lara fazladan karakter EKLEME.
-5. **SEARCH bloğu dosyadaki içerikle BİREBİR eşleşmeli** — whitespace, girinti, satır sonları dahil.
-6. **Bir dosyada birden fazla değişiklik varsa**, hepsini TEK replace_in_file çağrısında birden fazla SEARCH/REPLACE bloğuyla yap. Dosyadaki sırayla listele.
-7. **Büyük dosyalarda** tek seferde 5'ten fazla blok kullanma; sonucu bekle, sonra devam et.
-8. **2-3 kez üst üste hata alırsan** write_to_file ile dosyanın tamamını yaz (fallback).
-9. **write_to_file içeriğinde XML benzeri örnek kod varsa**, `<` ve `>` HTML entity kullan — düz `<` `>` karakterleri parser'ı bozar.
+- **Kapsam:** `src/**` (js + css), `scripts/**`, `vite.config.js`, `.github/**`, `llms.txt`,
+  `README*.md`, `.clinerules` → hepsi ≤ 200 satır.
+- **Tek muaf dosya:** `index.html` — kullanıcı kararı: HTML iskeleti tek dosyada kalır.
+- **Muaf olanlar:** ikili dosyalar (`*.png`, `*.jpg`, `*.ico`), `screenshots/`,
+  `package-lock.json`, `dist/`, `node_modules/`.
+- Bir dosya **180 satıra** ulaştıysa: işi bitmeden ÖNCE böl, sonra devam et.
+- **Doğrulama komutu:** `npm run check:lines` → kırmızıysa commit YAPMA.
+- **YASAK:** Sınırı aşmamak için kodu sıkıştırmak — tek satıra yazmak, girintiyi silmek,
+  ifadeleri noktalı virgülle birleştirmek. Tek doğru çözüm: dosyayı sorumluluğa göre **bölmek**.
+- Bu kuralın görünmez kazananı Cline'dır: küçük dosya = dosyanın tamamı bağlama sığar =
+  hatasız ve hızlı düzenleme. Kural hem kullanıcıya hem aracıya yarar.
 
 ---
 
 ## 📁 Proje Bilgileri
 
-- **Proje:** PDFBox Offline — 100% offline PDF birleştirme/bölme aracı
-- **Teknoloji:** Vite + Vanilla JS + pdf-lib + pdfjs-dist
+- **Proje:** PDFBox Offline — 100% offline PDF birleştirme / bölme / önizleme / metadata temizleme
+- **Teknoloji:** Vite + Vanilla JS + pdf-lib + pdfjs-dist (yeni bağımlılık EKLEME)
 - **Git remote:** https://github.com/ahmetiinhoyo/Pdfbox-offline.git (branch: main)
-- **Deploy:** GitHub Pages (push edince otomatik deploy)
+- **Deploy:** GitHub Pages — push edince `.github/workflows/static.yml` otomatik build + deploy
+- **Base path:** `/Pdfbox-offline/` (vite.config.js)
 
-## 📂 Dosya Yapısı
+## 📂 Dosya Yapısı (modüler — her dosya ≤200 satır)
 
-- index.html — Ana HTML (modal, viewer yapısı burada)
-- src/main.js — Tüm uygulama mantığı
-- src/style.css — Tüm stiller
-- src/i18n.js — TR/EN/RU çeviriler
-- vite.config.js — Vite config (base path: /Pdfbox-offline/)
+| Yol | İçerik |
+|---|---|
+| `index.html` | HTML iskeleti: head, top-bar, kartlar, modallar, SVG sprite (kural dışı, tek dosya) |
+| `src/main.js` | Sadece bootstrap: import + `applyTheme`/`applyAccent`/`applyLang` + dark reader uyarısı |
+| `src/core/**` | Altyapı: `state.js`, `dom.js`, `toast.js`, `theme.js`, `lang.js`, `helpers.js`, `pdf.js`, `dark-reader.js` |
+| `src/features/**` | Özellikler: `merge.js`, `split.js`, `meta-tool.js`, `preview/{state,modal,grid,viewer,index}.js` |
+| `src/locales/**` | `tr.js`, `en.js`, `ru.js` — her yeni metin ÜÇ dosyaya da eklenir |
+| `src/i18n.js` | `translations` birleştirme + `detectLang()` + `t(lang, key, ...args)` |
+| `src/styles/**` | `theme, base, topbar, accent-menu, layout, file-drop, file-list, controls, range, footer, toast, modal, preview, viewer, mobile` |
+| `src/style.css` | Sadece `@import` listesi — sıra orijinal cascade sırasıyla birebir aynıdır |
+| `scripts/check-lines.mjs` | 200 satır kuralını denetleyen script |
+
+## 🧭 Modül Mimarisi Kuralları
+
+1. **Bootstrap:** `src/main.js` dışında hiçbir dosya global başlatma yapmaz.
+2. **Özellik modülü deseni:** DOM referansları modül üstünde tanımlanır (script `type="module"`
+   olduğu için HTML zaten parse edilmiş olur), dışa açılan fonksiyonlar `export` edilir.
+3. **Döngüsel import YASAK.** Dil değişince güncellenmesi gereken modüller
+   `registerLangRenderer(fn)` ile kaydolur, `applyLang()` kayıtlıları çağırır.
+4. **Ortak çeviri kullanımı:** `import { t } from '../core/lang.js'` → `t('mergeBtn')`
+   (`core/lang.js` içindeki `t`, `state.lang`'ı otomatik kullanır).
+5. **Yeni özellik ekleme:** `src/features/yeni-ozellik.js` + (gerekiyorsa)
+   `src/styles/yeni-ozellik.css` + `src/style.css`'e bir `@import` satırı + 3 locale dosyasına anahtarlar.
+6. **UI stilleri:** Mevcut sınıfları yeniden kullan (`.card`, `.file-drop`, `.primary-btn`,
+   `.ghost-btn`, `.option-checkbox`, `.preview-modal`). Yeni stil yazmadan önce mevcutları tara.
 
 ## 🌐 Çoklu Dil (i18n)
 
-- translations objesi: tr, en, ru — üç dil de güncel tutulmalı
-- Yeni metin eklerken ÜÇ DİLE de ekle (tr, en, ru)
-- Fonksiyonlu çeviriler: key: (arg1, arg2) => `...`
-- Kullanım: t(currentLang, 'key', arg1, arg2)
+- `src/locales/tr.js`, `en.js`, `ru.js` — üç dil de her zaman senkron tutulur.
+- Yeni metin eklerken **ÜÇ DİLE de** ekle (tr, en, ru).
+- Fonksiyonlu çeviri deseni: `key: (arg1, arg2) => \`...\``
+- Kullanım: özellik modüllerinde `t('key', arg1, arg2)`
+- Statik HTML metinleri: `<span data-i18n="key">` — `applyLang()` otomatik doldurur.
+- Locale dosyaları 180 satıra yaklaşırsa namespace'e böl (`locales/tr/merge.js` gibi).
 
 ## 🎨 Tema & Renk
 
-- data-theme = dark | light
-- data-accent = blue | green | orange | pink
-- Renkler CSS değişkenleri: --accent-1, --accent-2, --bg-1, --card-bg vb.
-- localStorage anahtarları: pdfbox-theme, pdfbox-accent, pdfbox-lang
+- `data-theme` = `dark | light` · `data-accent` = `blue | green | orange | pink`
+- Renkler CSS değişkenleri: `--accent-1`, `--accent-2`, `--card-bg`, `--modal-bg`
+  (`src/styles/theme.css`)
+- localStorage anahtarları: `pdfbox-theme`, `pdfbox-accent`, `pdfbox-lang`
+- Renkleri asla sabit hex olarak yazma; CSS değişkeni kullan.
 
 ## ⚙️ İş Akışı Kuralları
 
-1. Değişiklikten sonra her zaman `npm run build` çalıştır, hata var mı kontrol et.
-2. Build temizse commit + push yap:
+1. Değişiklikten sonra: `npm run build` (hata var mı?) + `npm run check:lines` (limit aşıldı mı?).
+2. İkisi de temizse commit + push:
    `git add . && git commit -m "..." && git pull --rebase origin main && git push`
-3. Commit mesajları Türkçe, kısa ve açıklayıcı.
-4. index.html ve i18n.js'e dokunmadan çözülebilecek şeyleri JS/CSS ile çözmeyi tercih et.
-5. Kullanıcı git push gibi işlemler için requires_approval: true bekler.
+3. Commit mesajları Türkçe, kısa, açıklayıcı ve **ASCII**
+   (ör. `refactor: css 15 module bolundu`).
+4. Git push gibi işlemler için kullanıcı onayı beklenir.
+5. Büyük yeniden yapılandırmalarda faz faz ilerle; her fazda build yeşil kalsın.
+6. CSS bölerken `@import` sırasını asla değiştirme — sıra değişirse görünüm bozulur.
+   Doğrulama: kaynak dilimlerin birleşimi orijinal dosyayla bit-birebir aynı olmalı,
+   build çıktısı CSS hash'i değişmemeli.
 
 ## 🖼️ Önizleme (Preview) Sistemi
 
-- openPreview(files, showHeaders) — tek dosya veya dosya dizisi kabul eder
-- Çoklu modda her dosyanın üstünde başlık (.preview-file-header), altında sayfalar
-- flatPages[] — tüm dosyaların sayfalarını düz (flat) haritada tutar, viewer bunun üzerinden gezer
-- Viewer'da ok tuşları dosyalar arası geçiş yapar (sayaç toplam sayfa üzerinden)
-- Yüksek çözünürlük render: devicePixelRatio hesaba katılır, CSS ile küçültülür
-- "Tümünü Önizle" butonu 2+ dosya varsa görünür (dinamik oluşturulur, HTML'de yok)
+- `openPreview(files, showHeaders)` — tek dosya veya dosya dizisi kabul eder
+- Çoklu modda her dosyanın üstünde başlık (`.preview-file-header`), altında sayfalar
+- `flatPages[]` — tüm dosyaların sayfalarını düz haritada tutar, viewer bunun üzerinden gezer
+- Ok tuşları dosyalar arasında akar (sayaç toplam sayfa üzerinden); Esc → geri/kapat
+- Yüksek çözünürlük render: `devicePixelRatio` hesaba katılır, CSS ile küçültülür
+- "Tümünü Önizle" butonu 2+ dosyada görünür (dinamik oluşturulur, HTML'de yok)
+- Modüller: `src/features/preview/state.js` (ref+state), `modal.js` (kapatma), `grid.js`,
+  `viewer.js`, `index.js` (dışa açılan API)
 
-## 🧹 Metadata Temizleme Sistemi
+##  Metadata Temizleme Sistemi
 
 3 yol var:
-1. **Sol üst 🧹 butonu** (`metaToolBtn`) → `metaToolModal` modalını açar, sadece metadata temizler → `cleanmeta.pdf`
-2. **Birleştir + checkbox** (`mergeCleanMeta`) → birleştir + temizle → `cleanmeta-birlestirilmis.pdf`
-3. **Böl + checkbox** (`splitCleanMeta`) → böl + temizle → `cleanmeta-bolunmus.pdf`
+1. **Sol üst buton** (`metaToolBtn`) → `metaToolModal`, sadece metadata temizler → `cleanmeta.pdf`
+2. **Birleştir + checkbox** (`mergeCleanMeta`) → `cleanmeta-birlestirilmis.pdf`
+3. **Böl + checkbox** (`splitCleanMeta`) → `cleanmeta-bolunmus.pdf`
 
-- `cleanPdfMetadata(pdf)` ortak yardımcı → `setAuthor('')`, `setTitle('')`, `setSubject('')`, `setKeywords([])`, `setCreator('')`, `setProducer('')` (tarihler silinmez)
-- `handleMetaFile(file)` modalda metadata'yı okur ve `.meta-info` kutusunda gösterir
-- `openMetaTool()` / `closeMetaTool()` modal aç/kapa (Esc ile de kapanır)
-- `renderMetaDrop()` dil değişiminde çağrılır (applyLang içinde)
-- Checkbox stilleri: `.option-checkbox`, `.option-box`, `.option-label`
-- Sol buton stili: `.meta-tool-btn`; modal stili: `.meta-tool-content`, `.meta-tool-body`
-</｜｜DSML｜｜ parameter>
-<task_progress>
-- [x] index.html: 🧹 butonu + meta modal + checkbox'lar
-- [x] i18n.js: yeni anahtarlar + preview-all anahtarları korundu
-- [x] main.js: cleanPdfMetadata + checkbox + modal + çoklu preview korundu
-- [x] style.css: yeni stiller + preview-file-header/preview-all-btn korundu
-- [ ] .clinerules güncelle
-- [ ] Build + commit + push
-</task_progress>
-</replace_in_file>
-</｜｜DSML｜｜ parameter>
-</｜｜DSML｜｜ invoke>
+- `cleanPdfMetadata(pdf)` ortak yardımcı (`src/core/helpers.js`) → `setAuthor/Title/Subject/Creator/Producer('')`,
+  `setKeywords([])` — **tarihler silinmez**
+- `handleMetaFile(file)` modalda bulunan metadata'yı `.meta-info` kutusunda gösterir
+- `renderMetaDrop()` dil değişiminde `registerLangRenderer` üzerinden çağrılır
+- Stiller: `.option-checkbox`, `.option-box`, `.option-label`, `.meta-tool-content`, `.meta-tool-body`
 
 ## 🇹🇷 Dil Tercihi
 

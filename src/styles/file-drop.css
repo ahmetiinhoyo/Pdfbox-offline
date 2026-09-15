@@ -1,0 +1,60 @@
+/* ==========================================================
+   FILE DROP
+   ========================================================== */
+.file-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2.25rem 1rem;
+  border: 2px dashed var(--drop-border);
+  border-radius: 12px;
+  background: var(--drop-bg);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.file-drop:hover {
+  border-color: var(--accent-1);
+  background: var(--drop-hover-bg);
+}
+
+.file-drop.dragover {
+  border-color: var(--accent-2);
+  border-style: solid;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-1) 10%, transparent), color-mix(in srgb, var(--accent-2) 10%, transparent));
+  transform: scale(1.01);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-2) 12%, transparent);
+}
+
+.file-drop.dragover .drop-icon {
+  animation: bounce 0.6s infinite alternate;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
+}
+
+.drop-icon {
+  width: 28px;
+  height: 28px;
+  stroke: var(--text-dim);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  transition: transform 0.2s, stroke 0.2s;
+}
+
+.file-drop:hover .drop-icon {
+  stroke: var(--accent-1);
+}
+
+.drop-text {
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
