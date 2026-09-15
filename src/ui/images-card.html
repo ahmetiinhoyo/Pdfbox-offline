@@ -1,0 +1,77 @@
+<section class="card" id="imagesCard">
+  <div class="card-head">
+    <span class="card-head-icon"><svg class="icon" aria-hidden="true"><use href="#i-image"/></svg></span>
+    <div>
+      <h2 data-i18n="imgTitle"></h2>
+      <p class="desc" data-i18n="imgDesc"></p>
+    </div>
+  </div>
+
+  <label class="file-drop" for="imageFiles">
+    <input type="file" id="imageFiles" accept="image/*" multiple hidden />
+    <svg class="drop-icon" aria-hidden="true"><use href="#i-image"/></svg>
+    <span class="drop-text" id="imgDropText" data-i18n="imgDropText"></span>
+  </label>
+
+  <ul id="imgList" class="img-list"></ul>
+
+  <div id="imgStats" class="img-stats" hidden>
+    <span id="imgStatsText" class="img-stats-text"></span>
+    <button id="imgClearBtn" type="button" class="img-clear-btn" data-i18n="imgClear"></button>
+  </div>
+
+  <div class="img-options">
+    <div class="img-option-row">
+      <span class="img-option-label" data-i18n="imgPageSize"></span>
+      <div class="radio-chips">
+        <label class="radio-chip"><input type="radio" name="imgSize" value="a4" checked /><span data-i18n="imgSizeA4"></span></label>
+        <label class="radio-chip"><input type="radio" name="imgSize" value="letter" /><span data-i18n="imgSizeLetter"></span></label>
+        <label class="radio-chip"><input type="radio" name="imgSize" value="fit" /><span data-i18n="imgSizeFit"></span></label>
+      </div>
+    </div>
+
+    <div class="img-option-row">
+      <span class="img-option-label" data-i18n="imgOrientation"></span>
+      <div class="radio-chips">
+        <label class="radio-chip"><input type="radio" name="imgOrient" value="auto" checked /><span data-i18n="imgOrientAuto"></span></label>
+        <label class="radio-chip"><input type="radio" name="imgOrient" value="portrait" /><span data-i18n="imgOrientPortrait"></span></label>
+        <label class="radio-chip"><input type="radio" name="imgOrient" value="landscape" /><span data-i18n="imgOrientLandscape"></span></label>
+      </div>
+    </div>
+
+    <div class="img-option-row">
+      <span class="img-option-label" data-i18n="imgMargin"></span>
+      <div class="radio-chips">
+        <label class="radio-chip"><input type="radio" name="imgMargin" value="none" checked /><span data-i18n="imgMarginNone"></span></label>
+        <label class="radio-chip"><input type="radio" name="imgMargin" value="small" /><span data-i18n="imgMarginSmall"></span></label>
+        <label class="radio-chip"><input type="radio" name="imgMargin" value="medium" /><span data-i18n="imgMarginMedium"></span></label>
+      </div>
+    </div>
+
+    <div class="img-option-row">
+      <span class="img-option-label" data-i18n="imgQuality"></span>
+      <div class="radio-chips">
+        <label class="radio-chip"><input type="radio" name="imgQuality" value="screen" /><span data-i18n="imgQualityScreen"></span></label>
+        <label class="radio-chip"><input type="radio" name="imgQuality" value="high" checked /><span data-i18n="imgQualityHigh"></span></label>
+        <label class="radio-chip"><input type="radio" name="imgQuality" value="original" /><span data-i18n="imgQualityOriginal"></span></label>
+      </div>
+    </div>
+
+    <p class="img-hint" data-i18n="imgQualityHint"></p>
+  </div>
+
+  <label class="option-checkbox">
+    <input type="checkbox" id="imgCleanMeta" />
+    <span class="option-box" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>
+    <span class="option-label" data-i18n="cleanMetaLabel"></span>
+  </label>
+
+  <div class="split-actions">
+    <button id="imgPreviewBtn" class="ghost-btn" type="button" disabled>
+      <svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg>
+      <span data-i18n="previewBtn"></span>
+    </button>
+  </div>
+
+  <button id="imgBtn" class="primary-btn" type="button" disabled data-i18n="imgBtn"></button>
+</section>

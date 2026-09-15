@@ -29,7 +29,7 @@
 | 🧹 Metadata Temizle (3 yol) | ✅ Hazır |
 | 🌙 Koyu / Açık tema + 4 vurgu rengi | ✅ Hazır |
 | 🌍 Çoklu Dil (TR/EN/RU) | ✅ Hazır |
-| 🖼️ Görselden PDF | 🚧 Yakında |
+| 🖼️ Görselden PDF | ✅ Hazır |
 | 🔄 Sayfa Sil / Sırala | 🚧 Yakında |
 | 🗜️ Sıkıştır | 🚧 Yakında |
 

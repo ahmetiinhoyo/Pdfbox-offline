@@ -29,7 +29,7 @@
 | 🧹 Clean Metadata (3 ways) | ✅ Ready |
 | 🌙 Dark / Light theme + 4 accent colors | ✅ Ready |
 | 🌍 Multilingual (EN/TR/RU) | ✅ Ready |
-| 🖼️ Images to PDF | 🚧 Soon |
+| 🖼️ Images to PDF | ✅ Ready |
 | 🔄 Delete / Reorder pages | 🚧 Soon |
 | 🗜️ Compress | 🚧 Soon |
 

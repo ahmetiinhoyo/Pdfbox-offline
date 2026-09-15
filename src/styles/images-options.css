@@ -1,0 +1,77 @@
+/* ==========================================================
+   GÖRSELDEN PDF — sayfa ayarları (radio çipleri)
+   ========================================================== */
+
+.img-options {
+  margin-top: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.img-option-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.img-option-label {
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.radio-chips {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.radio-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.32rem 0.62rem;
+  background: var(--drop-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+
+.radio-chip input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio-chip:hover {
+  background: var(--hover-bg);
+  color: var(--text-soft);
+}
+
+.radio-chip:has(input:checked) {
+  background: color-mix(in srgb, var(--accent-1) 16%, transparent);
+  border-color: color-mix(in srgb, var(--accent-1) 45%, transparent);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.radio-chip:has(input:focus-visible) {
+  outline: 2px solid var(--accent-1);
+  outline-offset: 2px;
+}
+
+.img-hint {
+  font-size: 0.71rem;
+  color: var(--text-dim);
+  line-height: 1.45;
+}

@@ -76,7 +76,9 @@ export function setupDropZone(dropElement, onFiles) {
 }
 
 // PDF metadata temizle
-// Not: Tarihler korunur (setCreationDate/setModificationDate çağrılmaz)
+// Not: Tarihler korunur (setCreationDate çağrılmaz; ModDate pdf-lib tarafından güncellenir).
+// Not: pdf-lib Producer'ı yalnızca kurucuda (create/load) basar; save() boş değeri
+// dokunmaz, bu yüzden setProducer('') çıktıda boş Producer üretir (test edildi).
 export function cleanPdfMetadata(pdf) {
   pdf.setAuthor('');
   pdf.setTitle('');

@@ -1,0 +1,99 @@
+/* ==========================================================
+   GÖRSELDEN PDF — liste ve istatistik
+   ========================================================== */
+
+.img-list {
+  list-style: none;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 0.2rem;
+}
+
+.img-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 0.7rem;
+  background: var(--drop-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  animation: slideIn 0.2s ease-out;
+}
+
+.img-thumb {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 7px;
+  border: 1px solid var(--card-border);
+  background: var(--input-bg);
+  flex-shrink: 0;
+}
+
+.img-meta {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.img-name {
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.img-sub {
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  margin-top: 0.15rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.img-item .icon-btn-sm[disabled] {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.img-stats {
+  margin-top: 0.85rem;
+  padding: 0.55rem 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-1) 8%, transparent), color-mix(in srgb, var(--accent-2) 8%, transparent));
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  animation: slideIn 0.25s ease-out;
+}
+
+.img-stats-text {
+  font-weight: 550;
+}
+
+.img-clear-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.15s;
+  flex-shrink: 0;
+}
+
+.img-clear-btn:hover {
+  color: var(--danger-text);
+}
