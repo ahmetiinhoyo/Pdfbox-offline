@@ -176,7 +176,7 @@ olarak denetlenmesi kolay olsun diye. Kural, `npm run check:lines` komutuyla oto
 | `src/features/` | Özellikler: `merge.js`, `split.js`, `meta-tool.js`, `images/` (5 modül), `preview/` (grid + viewer) |
 | `src/ui/` | Karta özel HTML parçaları (ör. `images-card.html`) — `index.html`'e dokunmadan enjekte edilir |
 | `src/locales/` | `tr.js`, `en.js`, `ru.js` çevirileri |
-| `src/styles/` | 17 stil modülü (tema, kart, buton, modal, önizleme, görsel kartı, mobil) |
+| `src/styles/` | 18 stil modülü (tema, kart, buton, modal, önizleme, görsel kartı, araç sekmeleri, mobil) |
 | `src/style.css` | Stil giriş noktası — sadece `@import` listesi |
 | `scripts/check-lines.mjs` | 200 satır kuralının denetleyicisi |
 

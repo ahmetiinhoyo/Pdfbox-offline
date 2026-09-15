@@ -1,6 +1,12 @@
 // Turkish translations
 export const tr = {
     tagline: "Dosyan cihazından çıkmaz. Reklam yok, kayıt yok.",
+    navMerge: "Birleştir",
+    navSplit: "Böl",
+    navImages: "Görselden PDF",
+    badgeOffline: "%100 Çevrimdışı",
+    badgeNoUpload: "Yükleme yok",
+    badgeNoTrack: "Takip yok",
     mergeTitle: "PDF Birleştir",
     mergeDesc: "Birden fazla PDF seç, sırala, tek dosya olarak indir.",
     dropText: "PDF seçmek için tıkla veya sürükle",

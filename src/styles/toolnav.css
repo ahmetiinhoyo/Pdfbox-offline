@@ -1,0 +1,108 @@
+/* ==========================================================
+   ARAÇ SEKME BAR
+   ========================================================== */
+.tool-nav {
+  display: flex;
+  gap: 0.45rem;
+  margin-bottom: 1.4rem;
+  padding: 0.3rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 13px;
+  box-shadow: 0 4px 18px var(--shadow);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tool-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.tool-tab {
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 42px;
+  padding: 0 1rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.tool-tab .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.tool-tab:hover {
+  background: var(--hover-bg);
+  color: var(--text);
+}
+
+.tool-tab.active {
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--accent-1) 35%, transparent);
+}
+
+/* ==========================================================
+   PANELLER
+   ========================================================== */
+.tool-panel[hidden] {
+  display: none;
+}
+
+.panel-enter {
+  animation: panelIn 0.22s ease both;
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================
+   HERO ROZETLERİ
+   ========================================================== */
+.hero-badges {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  background: color-mix(in srgb, var(--accent-1) 9%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-1) 22%, transparent);
+  border-radius: 999px;
+  color: var(--text-soft);
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.hero-badge .icon {
+  width: 13px;
+  height: 13px;
+  color: var(--accent-1);
+}

@@ -24,17 +24,17 @@ export const els = {
   cleanMeta: null,
 };
 
-// Kartı footer'dan önce ekler. Başarılıysa true döner.
+// Kartı araç paneli alanına ekler. Başarılıysa true döner.
 export function injectImagesCard() {
-  const footer = document.querySelector('main footer');
-  if (!footer) return false;
+  const panels = document.getElementById('toolPanels');
+  if (!panels) return false;
 
   const defs = document.querySelector('svg defs');
   if (defs && !document.getElementById('i-image')) {
     defs.insertAdjacentHTML('beforeend', CARD_ICONS);
   }
 
-  footer.insertAdjacentHTML('beforebegin', cardHtml);
+  panels.insertAdjacentHTML('beforeend', cardHtml);
   return true;
 }
 

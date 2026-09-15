@@ -84,3 +84,12 @@ h2 {
   line-height: 1.45;
 }
 
+/* ==========================================================
+   KART HOVER — mikro etkileşim
+   ========================================================== */
+.card:hover {
+  border-color: color-mix(in srgb, var(--accent-1) 30%, var(--card-border));
+  box-shadow: 0 12px 36px var(--shadow);
+  transform: translateY(-2px);
+}
+

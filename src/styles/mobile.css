@@ -55,4 +55,9 @@
   .viewer-next { right: 0.4rem; }
 
   .option-label { font-size: 0.82rem; }
+
+  .tool-nav { gap: 0.3rem; border-radius: 11px; }
+  .tool-tab { padding: 0 0.7rem; font-size: 0.78rem; min-height: 38px; }
+  .hero-badges { gap: 0.35rem; }
+  .hero-badge { font-size: 0.68rem; padding: 0.3rem 0.6rem; }
 }

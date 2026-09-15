@@ -18,6 +18,11 @@
 .file-drop:hover {
   border-color: var(--accent-1);
   background: var(--drop-hover-bg);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-1) 10%, transparent);
+}
+
+.file-drop:hover .drop-icon {
+  transform: translateY(-2px) scale(1.08);
 }
 
 .file-drop.dragover {

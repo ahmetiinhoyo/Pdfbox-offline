@@ -1,6 +1,12 @@
 // Russian translations
 export const ru = {
     tagline: "Ваш файл не покидает устройство. Без рекламы и слежки.",
+    navMerge: "Объединить",
+    navSplit: "Разделить",
+    navImages: "Изображения в PDF",
+    badgeOffline: "100% офлайн",
+    badgeNoUpload: "Без загрузки",
+    badgeNoTrack: "Без слежки",
     mergeTitle: "Объединить PDF",
     mergeDesc: "Выберите несколько PDF, упорядочите, скачайте одним файлом.",
     dropText: "Нажмите или перетащите PDF",

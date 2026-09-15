@@ -36,7 +36,7 @@
 | `src/features/**` | Özellikler: `merge.js`, `split.js`, `meta-tool.js`, `preview/{state,modal,grid,viewer,index}.js` |
 | `src/locales/**` | `tr.js`, `en.js`, `ru.js` — her yeni metin ÜÇ dosyaya da eklenir |
 | `src/i18n.js` | `translations` birleştirme + `detectLang()` + `t(lang, key, ...args)` |
-| `src/styles/**` | `theme, base, topbar, accent-menu, layout, file-drop, file-list, controls, range, footer, toast, modal, preview, viewer, mobile` |
+| `src/styles/**` | `theme, base, topbar, accent-menu, layout, toolnav, file-drop, file-list, controls, range, footer, toast, modal, preview, viewer, images, images-options, mobile` |
 | `src/style.css` | Sadece `@import` listesi — sıra orijinal cascade sırasıyla birebir aynıdır |
 | `scripts/check-lines.mjs` | 200 satır kuralını denetleyen script |
 

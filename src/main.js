@@ -7,6 +7,7 @@ import { state } from './core/state.js';
 import { initTheme } from './core/theme.js';
 import { applyLang } from './core/lang.js';
 import { watchDarkReader } from './core/dark-reader.js';
+import { initToolNav } from './core/toolnav.js';
 
 // Özellikler (kendi kendini kurar + dil render'larını kaydeder)
 import './features/preview/index.js';
@@ -16,5 +17,6 @@ import './features/meta-tool.js';
 import './features/images/index.js';
 
 initTheme();
+initToolNav();
 applyLang(state.lang);
 watchDarkReader();

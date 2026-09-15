@@ -176,7 +176,7 @@ to audit as an open-source project. The rule is enforced by `npm run check:lines
 | `src/features/` | Features: `merge.js`, `split.js`, `meta-tool.js`, `images/` (5 modules), `preview/` (grid + viewer) |
 | `src/ui/` | Per-card HTML fragments (e.g. `images-card.html`) — injected without touching `index.html` |
 | `src/locales/` | `tr.js`, `en.js`, `ru.js` translations |
-| `src/styles/` | 17 style modules (theme, card, button, modal, preview, images card, mobile) |
+| `src/styles/` | 18 style modules (theme, card, button, modal, preview, images card, tool nav, mobile) |
 | `src/style.css` | Style entry point — only an `@import` list |
 | `scripts/check-lines.mjs` | The 200-line rule checker |
 

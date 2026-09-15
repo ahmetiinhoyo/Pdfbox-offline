@@ -1,6 +1,12 @@
 // English translations
 export const en = {
     tagline: "Your file never leaves your device. No ads, no tracking.",
+    navMerge: "Merge",
+    navSplit: "Split",
+    navImages: "Images to PDF",
+    badgeOffline: "100% Offline",
+    badgeNoUpload: "No uploads",
+    badgeNoTrack: "No tracking",
     mergeTitle: "Merge PDFs",
     mergeDesc: "Select multiple PDFs, order them, download as one file.",
     dropText: "Click or drop to select PDFs",
