@@ -1,8 +1,12 @@
-# 📦 PDFBox Offline
+# 📦 PDFBox Offline — Ücretsiz Çevrimdışı PDF Araçları (Birleştir • Böl • Görselden PDF • Metadata Temizleyici)
 
-> Offline PDF araç kutusu — birleştir, böl, önizle, metadata temizle. Yükleme yok. Reklam yok. Takip yok.
+> **PDFBox Offline**, tamamen tarayıcında çalışan, gizlilik odaklı, %100 çevrimdışı bir PDF araç kutusudur.
+> PDF'leri birleştirin, bölün, JPG/PNG/WEBP görsellerini PDF'e çevirin ve gizli metadata'yı silin —
+> **tek bir byte'i bile sunucuya yüklemeden**. Reklam yok. Takip yok. Kayıt yok. Dosya boyutu sınırı yok.
 
 [![Canlı](https://img.shields.io/badge/🌐_Canlı-Demo-blue?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
+[![Gizlilik](https://img.shields.io/badge/🔒_Gizlilik-100%25_çevrimdışı-success?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
+[![Yükleme](https://img.shields.io/badge/📤_Dosya_yükleme-yok_(yerel_çalışır)-success?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
 [![Kahve Ismarla](https://img.shields.io/badge/☕_Kahve_Ismarla-destek-yellow?style=flat)](https://www.buymeacoffee.com/Thorix)
 [![GitHub stars](https://img.shields.io/github/stars/ahmetiinhoyo/Pdfbox-offline?style=social)](https://github.com/ahmetiinhoyo/Pdfbox-offline)
 
@@ -14,11 +18,13 @@
 
 | 📎 PDF Birleştir | ✂️ PDF Böl | 🧹 Metadata Temizle |
 |:---:|:---:|:---:|
-| ![PDF Birleştir](screenshots/merge.png) | ![PDF Böl](screenshots/split.png) | ![Metadata Temizle](screenshots/clean-metadata.png) |
+| ![PDF dosyalarını sunucuya yüklemeden çevrimdışı birleştir — ücretsiz PDF birleştirici](screenshots/merge.png) | ![PDF'i tarayıcında çevrimdışı böl — gizlilik odaklı, yükleme yapmayan PDF bölücü](screenshots/split.png) | ![Gizli PDF metadata'sını gizlilik için temizle — sunucu kullanmayan çevrimdışı araç](screenshots/clean-metadata.png) |
 
 ---
 
-## ✨ Özellikler
+## ✨ Özellikler — %100 Tarayıcında Çalışan Çevrimdışı PDF Araçları
+
+Aşağıdaki her şey **cihazınızda yerel olarak** çalışır: yükleme yok, bulut işleme yok, dosya analizi yok.
 
 | Özellik | Durum |
 |---|---|
@@ -35,42 +41,43 @@
 
 ---
 
-## 🚀 Canlı Demo
+## 🚀 Ücretsiz Deneyin — Kayıt Yok, Yükleme Yok
 
 **→ [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)**
 
-Tamamen tarayıcında çalışır. Kurulum yok, kayıt yok.
+Tamamen tarayıcınızda çalışır. Kurulum yok, hesap yok, sınır yok — belgeleriniz cihazınızdan asla çıkmaz.
 
 ---
 
-## 🤔 Neden PDFBox?
+## 🤔 Neden Çevrimdışı Bir PDF Aracı? (Gizlilik Önce)
 
-Çoğu online PDF aracı:
-- ❌ Dosyanı **sunucularına** yükler
-- ❌ Reklam ve takip scripti doludur
-- ❌ Boyut sınırı koyar
-- ❌ Kayıt zorunlu tutar
+Çoğu "ücretsiz" online PDF aracı (birleştirici, bölücü, sıkıştırıcı):
+- ❌ Belgelerinizi **kendi sunucularına** yükler — çoğu zaman yurt dışına, çoğu zaman günlerce saklanarak
+- ❌ Reklam, çerez banner'ı ve takip scripti doludur
+- ❌ Ödeme yapmadığınız sürece boyut sınırı ve günlük kota koyar
+- ❌ Kayıt, e-posta hatta kredi kartı ister
 
-**PDFBox Offline:**
-- ✅ **%100 offline** — dosyan cihazdan çıkmaz
-- ✅ **Reklamsız, takipsiz**
-- ✅ **Sınırsız** dosya boyutu
-- ✅ **Kayıt yok**, kullan direkt
+**PDFBox Offline** tam tersini yapar:
+- ✅ **%100 çevrimdışı** — tüm PDF işlemleri tarayıcınızda yerel olarak çalışır; dosyalarınız cihazınızdan asla çıkmaz
+- ✅ **Tasarımdan gizlilik** — sözleşmeler, kimlikler, faturalar, sağlık kayıtları, hukuki ve finansal belgeler için güvenli
+- ✅ **Reklam yok, takip yok, analitik yok** — kapatılacak bir şey bile yok
+- ✅ **Sınırsız dosya boyutu** — tek sınır cihazınız
+- ✅ **Kayıt yok** — sayfayı aç, çalışmaya başla
 - ✅ **Çok dilli** — English / Türkçe / Русский
-- ✅ **Açık kaynak** — istersen kodu incele
+- ✅ **Açık kaynak (MIT)** — her satır GitHub'dan denetlenebilir
 
 ---
 
-## 📖 Kullanım
+## 📖 Nasıl Kullanılır — PDF'leri Yüklemeden Birleştir, Böl, Çevir ve Temizle
 
-### 📎 PDF Birleştir
+### 📎 PDF Dosyalarını Çevrimdışı Birleştir
 1. **PDF Birleştir** alanına tıkla veya sürükle-bırak yap
 2. Birden fazla PDF seç — sayfa sayılarıyla listeye eklenir
 3. İstemediğini çöp kutusu butonuyla kaldır
 4. *(İsteğe bağlı)* **"Metadata'yı temizle"** kutusunu işaretle — çıktıdan yazar, üreten program, başlık, anahtar kelimeler vb. silinir
 5. **"Birleştir ve İndir"** butonuna bas → `birlestirilmis.pdf` (veya `cleanmeta-birlestirilmis.pdf`) iner
 
-### ✂️ PDF Böl
+### ✂️ PDF'i Çevrimdışı Böl
 1. **PDF Böl** alanına tıkla, bir PDF seç
 2. **Sayfa aralığı** kutusuna yaz:
    - `1-3` → 1, 2, 3. sayfalar
@@ -80,7 +87,7 @@ Tamamen tarayıcında çalışır. Kurulum yok, kayıt yok.
 3. *(İsteğe bağlı)* **"Metadata'yı temizle"** kutusunu işaretle
 4. **"Böl ve İndir"** butonuna bas → `bolunmus.pdf` (veya `cleanmeta-bolunmus.pdf`) iner
 
-### 🖼️ Görselden PDF
+### 🖼️ JPG/PNG/WEBP Görsellerini PDF'e Çevir
 1. **Görselden PDF** alanına tıkla veya görsellerini sürükle-bırak yap
    - **JPG, PNG, WEBP, GIF, BMP, AVIF** desteklenir — HEIC dosyaları uyarıyla atlanır
    - Her görsel listede küçük önizlemeyle görünür; **yukarı/aşağı** butonlarıyla sayfa sırasını değiştir
@@ -94,7 +101,7 @@ Tamamen tarayıcında çalışır. Kurulum yok, kayıt yok.
 
 > Not: Her görsel bir sayfaya gelir — sayfa ölçüsüne sığdırılıp ortalanır, sayfa sayısı = görsel sayısı.
 
-### 🖼️ Tümünü Önizle
+### 🖼️ Birleştirmeden Önce Her Sayfayı Önizle
 1. Birleştirme listesine 2+ dosya ekle
 2. **"Tümünü Önizle"** butonuna bas
 3. Her PDF'in sayfaları, **dosya başlıkları altında gruplanmış** şekilde tek galeride — birleştirme sırasına göre görünür
@@ -102,7 +109,7 @@ Tamamen tarayıcında çalışır. Kurulum yok, kayıt yok.
 5. Ok tuşları veya ekrandaki butonlarla gez — **dosyalar arasında akar** (1. dosya biter → 2. dosyanın 1. sayfası)
 6. Sayfalar yüksek çözünürlükte render edilir — metin net görünür
 
-### 🧹 Metadata Temizle
+### 🧹 Gizli PDF Metadata'sını Temizle (Yazar, Üreten Program, Anahtar Kelimeler)
 PDF'lerin içinde gizli bilgi vardır: yazar adı, oluşturan program, tarih, başlık, anahtar kelimeler. 4 yolla temizleyebilirsin:
 
 1. **Sol üstteki "Metadata Temizle" butonu** → özel araç açılır:
@@ -120,6 +127,25 @@ Sağ üstteki **TR / EN / RU** butonlarına bas. Seçim hatırlanır.
 ### 🎨 Tema ve Vurgu Rengi
 - Ay/Güneş butonuyla **koyu / açık** tema değiştir
 - Renk dropdown'ından **4 vurgu renginden** birini seç (mavi, yeşil, turuncu, pembe) — seçili swatch işaretli görünür
+
+---
+
+## ❓ SSS — Çevrimdışı & Gizlilik
+
+**Dosyalarım bir yere yükleniyor mu?**
+Hayır. PDFBox Offline'ın **arka sunucusu yok**. Birleştirme, bölme, görsel çevirme, metadata temizleme — her işlem tarayıcınızda yerel olarak çalışır. Kendiniz doğrulayabilirsiniz: Geliştirici Araçları → Ağ sekmesini açın, bir dosya yükleyin ve izleyin — hiçbir şey hiçbir yere gönderilmez.
+
+**İnternet bağlantısı olmadan çalışır mı?**
+Sayfa GitHub Pages'ten sunulduğu için açmak için bir kez internet gerekir. Sonrasında **tüm işlemler cihazınızda çevrimdışı** yapılır — çalışırken belgeleriniz asla iletilmez.
+
+**Gerçekten ücretsiz mi?**
+Evet — tamamen ücretsiz, reklamsız ve [MIT lisansı](LICENSE) ile açık kaynak.
+
+**Hangi dosya türleri destekleniyor?**
+Birleştirme, bölme ve metadata araçları için PDF; görselden PDF'e çevirici için **JPG, PNG, WEBP, GIF, BMP ve AVIF** (HEIC dosyaları algılanır ve uyarılır).
+
+**Hassas belgeler için (sözleşmeler, kimlikler, faturalar, sağlık kayıtları) güvenli mi?**
+Tam olarak bu yüzden yapıldı: dosyalar cihazınızdan çıkmadığı için sızacak, kaydedilecek veya ihlal edilecek bir şey yok.
 
 ---
 
@@ -174,6 +200,10 @@ Tarayıcında `http://localhost:5173/Pdfbox-offline/` adresini aç.
 ## ☕ Destek
 
 PDFBox Offline zaman kazandırıyorsa [kahve ısmarlayabilirsin](https://www.buymeacoffee.com/Thorix) — projenin reklamsız ve canlı kalmasını sağlar.
+
+---
+
+> **PDFBox Offline** — ücretsiz çevrimdışı PDF birleştirici & bölücü · yükleme yapmadan JPG/PNG'yi PDF'e çevirici · gizlilik odaklı PDF metadata temizleyici. %100 tarayıcıda çalışır: kayıt yok, reklam yok, takip yok, dosya boyutu sınırı yok. Windows, macOS, Linux, Android ve iOS'ta tüm modern tarayıcılarda (Chrome, Firefox, Edge, Safari) çalışır.
 
 ## 📄 Lisans
 
