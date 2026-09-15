@@ -120,10 +120,11 @@ Sağ üstteki **TR / EN / RU** butonlarına bas. Seçim hatırlanır.
 
 ---
 
-## Proje Yapısı (modüler — her dosya ≤ 200 satır)
+## Proje Yapısı (modüler — her kaynak dosya ≤ 200 satır)
 
-Kod, dosya başına **en fazla 200 satır** kuralına göre modüllere bölünmüştür — açık kaynak olarak
-denetlenmesi kolay olsun diye. Kural, `npm run check:lines` komutuyla otomatik denetlenir.
+Kod, kaynak dosya başına **en fazla 200 satır** kuralına göre modüllere bölünmüştür — açık kaynak
+olarak denetlenmesi kolay olsun diye. Kural, `npm run check:lines` komutuyla otomatik denetlenir
+(README'ler ve `llms.txt` bu kuralın dışındadır).
 
 | Yol | İçerik |
 |---|---|

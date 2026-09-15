@@ -1,6 +1,7 @@
-// 200 SATIR KURALI DENETIMI
-// Kullanim: npm run check:lines
-// Kural: hicbir kaynak dosya 200 satiri gecmez (tek muaf: index.html + ikili dosyalar)
+// 200 SATIR KURALI DENETIMI  ->  npm run check:lines
+// Kural: hicbir KAYNAK dosya 200 satiri gecmez. Cline da bu kurala uyar.
+// Muaf: belgeler (README.md, README.tr.md, README.ru.md, llms.txt ve tum *.md)
+//       ve index.html (legacy: kullanici "tek dosyada kalsin" dedi).
 // Not: konsol mesajlari bilerek ASCII - Windows/CI loglarinda bozulmasin.
 
 import fs from 'node:fs';
@@ -20,11 +21,13 @@ const SKIP_EXT = new Set([
   '.woff', '.woff2', '.ttf', '.mp4', '.mov',
 ]);
 
-// Tek tek muaf dosyalar
-const SKIP_FILES = new Set([
-  'package-lock.json', // otomatik uretilir
-  'index.html',        // kullanici karari: HTML iskeleti tek dosyada kalir
-]);
+// Muaf dosyalar: belgeler + legacy HTML iskeleti
+const DOC_FILES = ['README.md', 'README.tr.md', 'README.ru.md', 'llms.txt'];
+const SKIP_FILES = new Set(['package-lock.json', 'index.html']);
+
+function isDoc(file) {
+  return DOC_FILES.includes(path.basename(file)) || path.extname(file).toLowerCase() === '.md';
+}
 
 function countLines(file) {
   const raw = fs.readFileSync(file, 'utf8');
@@ -44,6 +47,7 @@ function walk(dir, out = []) {
     } else if (entry.isFile()) {
       if (SKIP_EXT.has(path.extname(entry.name).toLowerCase())) continue;
       if (SKIP_FILES.has(entry.name)) continue;
+      if (isDoc(full)) continue;
       out.push(full);
     }
   }
@@ -52,19 +56,22 @@ function walk(dir, out = []) {
 
 const files = walk(ROOT).sort();
 const offenders = [];
-let biggest = { file: '-', lines: 0 };
+const sizes = [];
 
 for (const file of files) {
   const lines = countLines(file);
   const rel = path.relative(ROOT, file).replace(/\\/g, '/');
-  if (lines > biggest.lines) biggest = { file: rel, lines };
+  sizes.push({ file: rel, lines });
   if (lines > LIMIT) offenders.push({ file: rel, lines });
 }
 
+sizes.sort((a, b) => b.lines - a.lines);
 offenders.sort((a, b) => b.lines - a.lines);
 
-console.log('Satir limiti: ' + LIMIT + ' satir (muaf: index.html, ikili dosyalar)');
-console.log('Kontrol edilen dosya: ' + files.length);
+console.log('Satir limiti : ' + LIMIT);
+console.log('Muaf belgeler: ' + DOC_FILES.join(', ') + ' (+ tum *.md dosyalari)');
+console.log('Muaf dosya   : index.html (legacy, kullanici karari)');
+console.log('Denetlenen   : ' + files.length + ' kaynak dosya');
 
 if (offenders.length > 0) {
   console.error('');
@@ -78,5 +85,8 @@ if (offenders.length > 0) {
   process.exit(1);
 }
 
-console.log('TAMAM: tum dosyalar uyumlu.');
-console.log('En buyuk dosya: ' + biggest.file + ' (' + biggest.lines + ' satir)');
+console.log('TAMAM: tum kaynak dosyalar 200 satirin altinda.');
+console.log('En buyuk 3 dosya:');
+for (const s of sizes.slice(0, 3)) {
+  console.log('   ' + String(s.lines).padStart(5) + ' satir   ' + s.file);
+}

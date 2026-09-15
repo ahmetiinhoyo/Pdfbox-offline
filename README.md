@@ -120,10 +120,11 @@ Click **TR / EN / RU** in the top right. Your choice is remembered.
 
 ---
 
-## Project Structure (modular — every file ≤ 200 lines)
+## Project Structure (modular — every source file ≤ 200 lines)
 
-The code is split into modules with a hard limit of **200 lines per file** — so it stays easy to
-audit as an open-source project. The rule is enforced by `npm run check:lines`.
+The code is split into modules with a hard limit of **200 lines per source file** — so it stays easy
+to audit as an open-source project. The rule is enforced by `npm run check:lines`
+(READMEs and `llms.txt` are excluded from this rule).
 
 | Path | Contents |
 |---|---|
