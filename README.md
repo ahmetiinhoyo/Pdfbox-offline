@@ -1,8 +1,12 @@
-# 📦 PDFBox Offline
+# 📦 PDFBox Offline — Free Offline PDF Tools (Merge • Split • Images to PDF • Metadata Cleaner)
 
-> Offline PDF toolbox — merge, split, preview, clean metadata. No upload. No ads. No tracking.
+> **PDFBox Offline** is a privacy-first, 100% offline PDF toolbox that runs entirely in your browser.
+> Merge PDFs, split PDFs, convert JPG/PNG/WEBP images to PDF and remove hidden metadata —
+> **without uploading a single byte** to any server. No ads. No tracking. No sign-up. No file size limits.
 
 [![Live](https://img.shields.io/badge/🌐_Live-Demo-blue?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
+[![Privacy](https://img.shields.io/badge/🔒_Privacy-100%25_offline-success?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
+[![Uploads](https://img.shields.io/badge/📤_File_uploads-none_(local_only)-success?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
 [![Buy Me a Coffee](https://img.shields.io/badge/☕_Buy_me_a_coffee-support-yellow?style=flat)](https://www.buymeacoffee.com/Thorix)
 [![GitHub stars](https://img.shields.io/github/stars/ahmetiinhoyo/Pdfbox-offline?style=social)](https://github.com/ahmetiinhoyo/Pdfbox-offline)
 
@@ -14,11 +18,13 @@
 
 | 📎 Merge PDFs | ✂️ Split PDF | 🧹 Clean Metadata |
 |:---:|:---:|:---:|
-| ![Merge PDFs](screenshots/merge.png) | ![Split PDF](screenshots/split.png) | ![Clean Metadata](screenshots/clean-metadata.png) |
+| ![Merge PDF files offline without uploading — free no-upload PDF merger](screenshots/merge.png) | ![Split a PDF offline in your browser — private PDF splitter with no upload](screenshots/split.png) | ![Remove hidden PDF metadata for privacy — offline metadata cleaner, no server involved](screenshots/clean-metadata.png) |
 
 ---
 
-## ✨ Features
+## ✨ Features — Offline PDF Tools, 100% in Your Browser
+
+Everything below runs **locally on your device**: no uploads, no cloud processing, no file analysis.
 
 | Feature | Status |
 |---|---|
@@ -35,42 +41,43 @@
 
 ---
 
-## 🚀 Live Demo
+## 🚀 Try It Free — No Sign-up, No Upload
 
 **→ [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)**
 
-Runs entirely in your browser. No installation, no sign-up.
+Runs entirely in your browser. No installation, no account, no limits — and your documents never leave your device.
 
 ---
 
-## 🤔 Why PDFBox?
+## 🤔 Why an Offline PDF Tool? (Privacy First)
 
-Most online PDF tools:
-- ❌ Upload your file to **their servers**
-- ❌ Are full of ads and tracking scripts
-- ❌ Impose file size limits
-- ❌ Require registration
+Most "free" online PDF tools (mergers, splitters, compressors):
+- ❌ Upload your documents to **their servers** — often abroad, often kept for days
+- ❌ Are full of ads, cookie banners and tracking scripts
+- ❌ Impose file size limits and daily caps unless you pay
+- ❌ Require registration, e-mail or even credit card
 
-**PDFBox Offline:**
-- ✅ **100% offline** — your file never leaves your device
-- ✅ **No ads, no tracking**
-- ✅ **Unlimited** file size
-- ✅ **No sign-up**, just use it
+**PDFBox Offline** is the opposite:
+- ✅ **100% offline** — all PDF processing happens locally in your browser; your files never leave your device
+- ✅ **Privacy by design** — safe for contracts, IDs, invoices, medical records, legal and financial documents
+- ✅ **No ads, no tracking, no analytics** — nothing to opt out of
+- ✅ **Unlimited file size** — the only limit is your device
+- ✅ **No sign-up** — open the page and start working
 - ✅ **Multilingual** — English / Türkçe / Русский
-- ✅ **Open source** — inspect the code yourself
+- ✅ **Open source (MIT)** — every line is auditable on GitHub
 
 ---
 
-## 📖 Usage
+## 📖 How to Use — Merge, Split, Convert & Clean PDFs Without Uploading
 
-### 📎 Merge PDFs
+### 📎 Merge PDF Files Offline
 1. Click the **Merge PDFs** area or drag & drop
 2. Select multiple PDFs — they pile up with page counts
 3. Remove unwanted ones with the trash button
 4. *(Optional)* Check **"Clean metadata"** to strip author, producer, title, keywords etc. from the output
 5. Hit **"Merge & Download"** → `birlestirilmis.pdf` (or `cleanmeta-birlestirilmis.pdf`) gets downloaded
 
-### ✂️ Split PDF
+### ✂️ Split a PDF Offline
 1. Click the **Split PDF** area, pick a PDF
 2. In **Page range**, type what you want:
    - `1-3` → pages 1, 2, 3
@@ -80,7 +87,7 @@ Most online PDF tools:
 3. *(Optional)* Check **"Clean metadata"**
 4. Hit **"Split & Download"** → `bolunmus.pdf` (or `cleanmeta-bolunmus.pdf`) gets downloaded
 
-### 🖼️ Images to PDF
+### 🖼️ Convert JPG/PNG/WEBP Images to PDF
 1. Click the **Images to PDF** area or drag & drop your images
    - **JPG, PNG, WEBP, GIF, BMP, AVIF** are supported — HEIC files are flagged and skipped
    - Each image appears as a thumbnail in the list; reorder pages with the **up/down** buttons
@@ -94,7 +101,7 @@ Most online PDF tools:
 
 > Note: Each image fills one page — scaled to fit and centered; page count = image count.
 
-### 🖼️ Preview All
+### 🖼️ Preview Every Page Before Merging
 1. Add 2+ files to the merge list
 2. Hit **"Preview All"**
 3. Every PDF's pages appear in one gallery, grouped under file headers — in merge order
@@ -102,7 +109,7 @@ Most online PDF tools:
 5. Navigate with arrow keys or on-screen buttons — it flows across files (end of file 1 → start of file 2)
 6. Pages are rendered at high resolution for crisp text
 
-### 🧹 Clean Metadata
+### 🧹 Remove Hidden PDF Metadata (Author, Producer, Keywords)
 PDFs carry hidden info: author name, creating program, dates, title, keywords. Remove it in 4 ways:
 
 1. **Top-left "Clean Metadata" button** → opens a dedicated tool:
@@ -120,6 +127,25 @@ Click **TR / EN / RU** in the top right. Your choice is remembered.
 ### 🎨 Theme & Accent Color
 - Toggle **dark / light** theme with the moon/sun button
 - Pick one of **4 accent colors** (blue, green, orange, pink) from the color dropdown — the selected swatch is highlighted
+
+---
+
+## ❓ FAQ — Offline & Privacy
+
+**Are my files uploaded anywhere?**
+No. PDFBox Offline has **no backend**. Every operation — merging, splitting, image conversion, metadata cleaning — runs locally in your browser. You can verify it yourself: open DevTools → Network tab, load a file, and watch — nothing is sent anywhere.
+
+**Does it work without an internet connection?**
+The page itself is served from GitHub Pages, so you need the internet once to load it. After that, **all processing is done offline on your device** — your documents are never transmitted while you work.
+
+**Is PDFBox Offline really free?**
+Yes — completely free, ad-free and open source under the [MIT license](LICENSE).
+
+**Which file types are supported?**
+PDF files for merge, split and metadata tools; **JPG, PNG, WEBP, GIF, BMP and AVIF** images for the images-to-PDF converter (HEIC files are detected and flagged).
+
+**Is it safe for sensitive documents (contracts, IDs, invoices, medical records)?**
+That is exactly what it is built for: since files never leave your device, there is nothing to leak, log or breach.
 
 ---
 
@@ -174,6 +200,10 @@ Open `http://localhost:5173/Pdfbox-offline/` in your browser.
 ## ☕ Support
 
 If PDFBox Offline saves you time, consider [buying me a coffee](https://www.buymeacoffee.com/Thorix) — it keeps the project ad-free and alive.
+
+---
+
+> **PDFBox Offline** — free offline PDF merger & splitter · no-upload JPG/PNG to PDF converter · private PDF metadata remover. 100% client-side and privacy-first: no registration, no ads, no tracking, unlimited file size. Works in any modern browser (Chrome, Firefox, Edge, Safari) on Windows, macOS, Linux, Android and iOS.
 
 ## 📄 License
 
