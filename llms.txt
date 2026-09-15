@@ -11,8 +11,10 @@ PDFBox Offline is an open-source PDF utility that runs locally on your device. I
 - No tracking, no ads, no account required
 - Merge multiple PDF files
 - Split PDF files
-- Convert images (JPG, PNG, WEBP, GIF, BMP, AVIF) to PDF
-- Reorder, rotate, and manage PDF pages
+- Convert images (JPG, PNG, WEBP, GIF, BMP, AVIF) to PDF with page size, orientation, margin and quality options
+- Clean hidden PDF metadata (author, title, subject, creator, producer, keywords)
+- Multilingual UI (English, Türkçe, Русский)
+- Dark / light theme with 4 accent colors
 - Open source and auditable
 - Modular codebase: every source file is under 200 lines (`npm run check:lines`)
 
@@ -22,7 +24,7 @@ Most online PDF tools require uploading documents to third-party servers. PDFBox
 ## How to use
 1. Open PDFBox Offline.
 2. Select PDF files from your device.
-3. Choose the operation (merge, split, etc.).
+3. Choose the operation (merge, split, images to PDF, metadata cleaning).
 4. Save the result locally.
 
 ## Privacy

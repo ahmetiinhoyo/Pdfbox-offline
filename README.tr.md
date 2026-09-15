@@ -24,12 +24,12 @@
 |---|---|
 | 📎 PDF Birleştir | ✅ Hazır |
 | ✂️ PDF Böl | ✅ Hazır |
+| 🖼️ Görselden PDF (JPG/PNG/WEBP/GIF/BMP/AVIF) | ✅ Hazır |
 | 🖼️ Tümünü Önizle (çoklu dosya galerisi) | ✅ Hazır |
 | 🔍 Tam ekran sayfa görüntüleyici | ✅ Hazır |
-| 🧹 Metadata Temizle (3 yol) | ✅ Hazır |
+| 🧹 Metadata Temizle (4 yol) | ✅ Hazır |
 | 🌙 Koyu / Açık tema + 4 vurgu rengi | ✅ Hazır |
 | 🌍 Çoklu Dil (TR/EN/RU) | ✅ Hazır |
-| 🖼️ Görselden PDF | ✅ Hazır |
 | 🔄 Sayfa Sil / Sırala | 🚧 Yakında |
 | 🗜️ Sıkıştır | 🚧 Yakında |
 
@@ -80,6 +80,20 @@ Tamamen tarayıcında çalışır. Kurulum yok, kayıt yok.
 3. *(İsteğe bağlı)* **"Metadata'yı temizle"** kutusunu işaretle
 4. **"Böl ve İndir"** butonuna bas → `bolunmus.pdf` (veya `cleanmeta-bolunmus.pdf`) iner
 
+### 🖼️ Görselden PDF
+1. **Görselden PDF** alanına tıkla veya görsellerini sürükle-bırak yap
+   - **JPG, PNG, WEBP, GIF, BMP, AVIF** desteklenir — HEIC dosyaları uyarıyla atlanır
+   - Her görsel listede küçük önizlemeyle görünür; **yukarı/aşağı** butonlarıyla sayfa sırasını değiştir
+2. Ayarları seç:
+   - **Sayfa boyutu:** A4 / Letter / Görsele göre (en uzun kenar sınırlı, oran korunur)
+   - **Yön:** Otomatik (görsele göre) / Dikey / Yatay
+   - **Kenar boşluğu:** Yok / Küçük / Orta
+   - **Kalite:** Ekran (en küçük dosya) / Yüksek (dengeli) / Orijinal (en kaliteli)
+3. *(İsteğe bağlı)* **"Metadata'yı temizle"** kutusunu işaretle
+4. **"PDF Oluştur ve İndir"** → `gorselden-pdf.pdf` (veya `cleanmeta-gorselden.pdf`) iner · **Önizle** ile sonucu önce tam ekranda gör
+
+> Not: Her görsel bir sayfaya gelir — sayfa ölçüsüne sığdırılıp ortalanır, sayfa sayısı = görsel sayısı.
+
 ### 🖼️ Tümünü Önizle
 1. Birleştirme listesine 2+ dosya ekle
 2. **"Tümünü Önizle"** butonuna bas
@@ -89,13 +103,14 @@ Tamamen tarayıcında çalışır. Kurulum yok, kayıt yok.
 6. Sayfalar yüksek çözünürlükte render edilir — metin net görünür
 
 ### 🧹 Metadata Temizle
-PDF'lerin içinde gizli bilgi vardır: yazar adı, oluşturan program, tarih, başlık, anahtar kelimeler. 3 yolla temizleyebilirsin:
+PDF'lerin içinde gizli bilgi vardır: yazar adı, oluşturan program, tarih, başlık, anahtar kelimeler. 4 yolla temizleyebilirsin:
 
 1. **Sol üstteki "Metadata Temizle" butonu** → özel araç açılır:
    - PDF seç → tam olarak **hangi metadata bulunduğunu gör** (yazar, başlık, konu, oluşturan, üreten, anahtar kelimeler)
    - Önizle, sonra **"Temizle ve İndir"** bas → `cleanmeta.pdf` iner
 2. **Birleştir + checkbox** → birleştir ve tek seferde temizle
 3. **Böl + checkbox** → böl ve tek seferde temizle
+4. **Görselden PDF + checkbox** → görselleri çevirirken temizle → `cleanmeta-gorselden.pdf`
 
 > Not: Belgenin oluşturma/değiştirme **tarihleri korunur** — sadece kimlik bilgileri silinir.
 
@@ -111,7 +126,8 @@ Sağ üstteki **TR / EN / RU** butonlarına bas. Seçim hatırlanır.
 ## 🛠️ Teknolojiler
 
 - **[Vite](https://vitejs.dev/)** — build tool
-- **[pdf-lib](https://pdf-lib.js.org/)** — PDF işlemleri (birleştirme, bölme, metadata)
+- **[pdf-lib](https://pdf-lib.js.org/)** — PDF işlemleri (birleştirme, bölme, metadata, görsel gömme)
+- **Canvas API** — görsel ölçekleme ve JPEG dönüşümü (görselden PDF)
 - **[pdfjs-dist](https://mozilla.github.io/pdf.js/)** — PDF render (önizlemeler)
 - **Vanilla JS** — framework yok, hafif ve hızlı
 - **Inline SVG ikon sprite** — emoji yok, ikon fontu yok
@@ -131,9 +147,10 @@ olarak denetlenmesi kolay olsun diye. Kural, `npm run check:lines` komutuyla oto
 | `index.html` | HTML iskeleti: top-bar, kartlar, modallar, SVG ikon sprite |
 | `src/main.js` | Başlangıç dosyası (bootstrap) |
 | `src/core/` | Altyapı: durum, DOM yardımcıları, toast, tema, dil, indirme/metadata yardımcıları |
-| `src/features/` | Özellikler: `merge.js`, `split.js`, `meta-tool.js`, `preview/` (grid + viewer) |
+| `src/features/` | Özellikler: `merge.js`, `split.js`, `meta-tool.js`, `images/` (5 modül), `preview/` (grid + viewer) |
+| `src/ui/` | Karta özel HTML parçaları (ör. `images-card.html`) — `index.html`'e dokunmadan enjekte edilir |
 | `src/locales/` | `tr.js`, `en.js`, `ru.js` çevirileri |
-| `src/styles/` | 15 stil modülü (tema, kart, buton, modal, önizleme, mobil) |
+| `src/styles/` | 17 stil modülü (tema, kart, buton, modal, önizleme, görsel kartı, mobil) |
 | `src/style.css` | Stil giriş noktası — sadece `@import` listesi |
 | `scripts/check-lines.mjs` | 200 satır kuralının denetleyicisi |
 
