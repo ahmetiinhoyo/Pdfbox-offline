@@ -4,9 +4,9 @@
 > Merge PDFs, split PDFs, convert JPG/PNG/WEBP images to PDF and remove hidden metadata —
 > **without uploading a single byte** to any server. No ads. No tracking. No sign-up. No file size limits.
 
-[![Live](https://img.shields.io/badge/🌐_Live-Demo-blue?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
-[![Privacy](https://img.shields.io/badge/🔒_Privacy-100%25_offline-success?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
-[![Uploads](https://img.shields.io/badge/📤_File_uploads-none_(local_only)-success?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
+[![Live](https://img.shields.io/badge/🌐_Live-Demo-blue?style=flat)](https://pdfbox-offline.vercel.app/)
+[![Privacy](https://img.shields.io/badge/🔒_Privacy-100%25_offline-success?style=flat)](https://pdfbox-offline.vercel.app/)
+[![Uploads](https://img.shields.io/badge/_File_uploads-none_(local_only)-success?style=flat)](https://pdfbox-offline.vercel.app/)
 [![Buy Me a Coffee](https://img.shields.io/badge/☕_Buy_me_a_coffee-support-yellow?style=flat)](https://www.buymeacoffee.com/Thorix)
 [![GitHub stars](https://img.shields.io/github/stars/ahmetiinhoyo/Pdfbox-offline?style=social)](https://github.com/ahmetiinhoyo/Pdfbox-offline)
 
@@ -43,9 +43,11 @@ Everything below runs **locally on your device**: no uploads, no cloud processin
 
 ## 🚀 Try It Free — No Sign-up, No Upload
 
-**→ [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)**
+**→ [https://pdfbox-offline.vercel.app/](https://pdfbox-offline.vercel.app/)**
 
 Runs entirely in your browser. No installation, no account, no limits — and your documents never leave your device.
+
+> Mirror (same commit): [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
 
 ---
 
@@ -143,7 +145,7 @@ Click **TR / EN / RU** in the top right. Your choice is remembered.
 No. PDFBox Offline has **no backend**. Every operation — merging, splitting, image conversion, metadata cleaning — runs locally in your browser. You can verify it yourself: open DevTools → Network tab, load a file, and watch — nothing is sent anywhere.
 
 **Does it work without an internet connection?**
-The page itself is served from GitHub Pages, so you need the internet once to load it. After that, **all processing is done offline on your device** — your documents are never transmitted while you work.
+The page itself is served from Vercel (with a GitHub Pages mirror), so you need the internet once to load it. After that, **all processing is done offline on your device** — your documents are never transmitted while you work.
 
 **Is PDFBox Offline really free?**
 Yes — completely free, ad-free and open source under the [MIT license](LICENSE).
@@ -164,8 +166,9 @@ That is exactly what it is built for: since files never leave your device, there
 - **[pdfjs-dist](https://mozilla.github.io/pdf.js/)** — PDF rendering (previews)
 - **Vanilla JS** — no framework, fast and light
 - **Inline SVG icon sprite** — no emoji, no icon font
+- **Vercel** — primary host (static Vite deploy, free `*.vercel.app` domain)
 - **GitHub Actions** — CI/CD (auto build + deploy)
-- **GitHub Pages** — free hosting
+- **GitHub Pages** — free mirror host
 
 ---
 
@@ -201,6 +204,25 @@ npm run dev
 ```
 
 Open `http://localhost:5173/Pdfbox-offline/` in your browser.
+
+---
+
+## 🌐 Deployment & Hosting
+
+The app is a static Vite site, so **the exact same commit is hosted on two platforms**:
+
+| Platform | URL | Base path | Setup |
+|---|---|---|---|
+| **Vercel** (primary) | https://pdfbox-offline.vercel.app/ | `/` | Framework preset `Vite`, build `npm run build`, output `dist` — no env vars needed |
+| **GitHub Pages** (mirror) | https://ahmetiinhoyo.github.io/Pdfbox-offline/ | `/Pdfbox-offline/` | `.github/workflows/static.yml` builds and deploys `dist` on every push to `main` |
+
+`vite.config.js` picks the base path automatically:
+
+```js
+base: process.env.VERCEL ? '/' : '/Pdfbox-offline/',
+```
+
+Vercel injects `VERCEL=1` during its build, so assets resolve from `/`; GitHub Actions does not, so the `/Pdfbox-offline/` prefix is kept. No manual configuration is needed on either side.
 
 ---
 

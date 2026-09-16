@@ -4,9 +4,9 @@
 > Объединяйте PDF, разделяйте PDF, конвертируйте изображения JPG/PNG/WEBP в PDF и удаляйте скрытые метаданные —
 > **не загружая ни байта** на сервер. Без рекламы. Без слежки. Без регистрации. Без ограничения размера файлов.
 
-[![Демо](https://img.shields.io/badge/🌐_Демо-Открыть-blue?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
-[![Приватность](https://img.shields.io/badge/🔒_Приватность-100%25_офлайн-success?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
-[![Загрузка файлов](https://img.shields.io/badge/📤_Загрузка_файлов-нет_(локально)-success?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
+[![Демо](https://img.shields.io/badge/🌐_Демо-Открыть-blue?style=flat)](https://pdfbox-offline.vercel.app/)
+[![Приватность](https://img.shields.io/badge/🔒_Приватность-100%25_офлайн-success?style=flat)](https://pdfbox-offline.vercel.app/)
+[![Загрузка файлов](https://img.shields.io/badge/📤_Загрузка_файлов-нет_(локально)-success?style=flat)](https://pdfbox-offline.vercel.app/)
 [![Угостить кофе](https://img.shields.io/badge/☕_Угостить_кофе-поддержать-yellow?style=flat)](https://www.buymeacoffee.com/Thorix)
 [![GitHub stars](https://img.shields.io/github/stars/ahmetiinhoyo/Pdfbox-offline?style=social)](https://github.com/ahmetiinhoyo/Pdfbox-offline)
 
@@ -43,9 +43,11 @@
 
 ## 🚀 Попробуйте бесплатно — без регистрации и загрузки
 
-**→ [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)**
+**→ [https://pdfbox-offline.vercel.app/](https://pdfbox-offline.vercel.app/)**
 
 Работает полностью в вашем браузере. Без установки, без аккаунта, без ограничений — ваши документы никогда не покидают устройство.
+
+> Зеркало (тот же commit): [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
 
 ---
 
@@ -143,7 +145,7 @@ PDF содержат скрытую информацию: имя автора, �
 Нет. У PDFBox Offline **нет бэкенда**. Каждая операция — объединение, разделение, конвертация изображений, очистка метаданных — выполняется локально в вашем браузере. Проверьте сами: откройте DevTools → вкладку Network, загрузите файл и понаблюдайте — ничего никуда не отправляется.
 
 **Работает ли он без интернета?**
-Сама страница подаётся с GitHub Pages, поэтому один раз нужен интернет для загрузки. После этого **вся обработка происходит офлайн на вашем устройстве** — документы никогда не передаются во время работы.
+Сама страница подаётся с Vercel (с зеркалом на GitHub Pages), поэтому один раз нужен интернет для загрузки. После этого **вся обработка происходит офлайн на вашем устройстве** — документы никогда не передаются во время работы.
 
 **PDFBox Offline действительно бесплатный?**
 Да — полностью бесплатный, без рекламы, с открытым кодом по [лицензии MIT](LICENSE).
@@ -164,8 +166,9 @@ PDF — для объединения, разделения и работы с �
 - **[pdfjs-dist](https://mozilla.github.io/pdf.js/)** — рендеринг PDF (просмотр)
 - **Vanilla JS** — без фреймворков, быстро и легко
 - **Inline SVG спрайт иконок** — без эмодзи и иконочных шрифтов
+- **Vercel** — основной хостинг (статический деплой Vite, бесплатный домен `*.vercel.app`)
 - **GitHub Actions** — CI/CD (автосборка + деплой)
-- **GitHub Pages** — бесплатный хостинг
+- **GitHub Pages** — бесплатное зеркало
 
 ---
 
@@ -201,6 +204,25 @@ npm run dev
 ```
 
 Откройте `http://localhost:5173/Pdfbox-offline/` в браузере.
+
+---
+
+## 🌐 Деплой и хостинг
+
+Приложение — статический сайт на Vite, поэтому **один и тот же commit публикуется на двух платформах**:
+
+| Платформа | URL | Базовый путь | Настройка |
+|---|---|---|---|
+| **Vercel** (основная) | https://pdfbox-offline.vercel.app/ | `/` | Пресет `Vite`, сборка `npm run build`, вывод `dist` — переменные окружения не нужны |
+| **GitHub Pages** (зеркало) | https://ahmetiinhoyo.github.io/Pdfbox-offline/ | `/Pdfbox-offline/` | `.github/workflows/static.yml` собирает и публикует `dist` при каждом push в `main` |
+
+`vite.config.js` выбирает базовый путь автоматически:
+
+```js
+base: process.env.VERCEL ? '/' : '/Pdfbox-offline/',
+```
+
+Vercel подставляет `VERCEL=1` во время сборки, поэтому ресурсы берутся из `/`; в GitHub Actions этой переменной нет, поэтому префикс `/Pdfbox-offline/` сохраняется. Ручная настройка не требуется ни там, ни там.
 
 ---
 

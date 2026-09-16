@@ -34,6 +34,8 @@ Most online PDF tools require uploading documents to third-party servers. PDFBox
 - No account or sign-in required.
 
 ## Links
+- Web app: https://pdfbox-offline.vercel.app
+- Mirror: https://ahmetiinhoyo.github.io/Pdfbox-offline/
 - GitHub: https://github.com/ahmetiinhoyo/pdfbox-offline
 - License: See LICENSE in the repository.
 

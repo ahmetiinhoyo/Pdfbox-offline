@@ -4,9 +4,9 @@
 > PDF'leri birleştirin, bölün, JPG/PNG/WEBP görsellerini PDF'e çevirin ve gizli metadata'yı silin —
 > **tek bir byte'i bile sunucuya yüklemeden**. Reklam yok. Takip yok. Kayıt yok. Dosya boyutu sınırı yok.
 
-[![Canlı](https://img.shields.io/badge/🌐_Canlı-Demo-blue?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
-[![Gizlilik](https://img.shields.io/badge/🔒_Gizlilik-100%25_çevrimdışı-success?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
-[![Yükleme](https://img.shields.io/badge/📤_Dosya_yükleme-yok_(yerel_çalışır)-success?style=flat)](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
+[![Canlı](https://img.shields.io/badge/🌐_Canlı-Demo-blue?style=flat)](https://pdfbox-offline.vercel.app/)
+[![Gizlilik](https://img.shields.io/badge/🔒_Gizlilik-100%25_çevrimdışı-success?style=flat)](https://pdfbox-offline.vercel.app/)
+[![Yükleme](https://img.shields.io/badge/📤_Dosya_yükleme-yok_(yerel_çalışır)-success?style=flat)](https://pdfbox-offline.vercel.app/)
 [![Kahve Ismarla](https://img.shields.io/badge/☕_Kahve_Ismarla-destek-yellow?style=flat)](https://www.buymeacoffee.com/Thorix)
 [![GitHub stars](https://img.shields.io/github/stars/ahmetiinhoyo/Pdfbox-offline?style=social)](https://github.com/ahmetiinhoyo/Pdfbox-offline)
 
@@ -43,9 +43,11 @@ Aşağıdaki her şey **cihazınızda yerel olarak** çalışır: yükleme yok, 
 
 ## 🚀 Ücretsiz Deneyin — Kayıt Yok, Yükleme Yok
 
-**→ [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)**
+**→ [https://pdfbox-offline.vercel.app/](https://pdfbox-offline.vercel.app/)**
 
 Tamamen tarayıcınızda çalışır. Kurulum yok, hesap yok, sınır yok — belgeleriniz cihazınızdan asla çıkmaz.
+
+> Yansı (aynı commit): [https://ahmetiinhoyo.github.io/Pdfbox-offline/](https://ahmetiinhoyo.github.io/Pdfbox-offline/)
 
 ---
 
@@ -143,7 +145,7 @@ Sağ üstteki **TR / EN / RU** butonlarına bas. Seçim hatırlanır.
 Hayır. PDFBox Offline'ın **arka sunucusu yok**. Birleştirme, bölme, görsel çevirme, metadata temizleme — her işlem tarayıcınızda yerel olarak çalışır. Kendiniz doğrulayabilirsiniz: Geliştirici Araçları → Ağ sekmesini açın, bir dosya yükleyin ve izleyin — hiçbir şey hiçbir yere gönderilmez.
 
 **İnternet bağlantısı olmadan çalışır mı?**
-Sayfa GitHub Pages'ten sunulduğu için açmak için bir kez internet gerekir. Sonrasında **tüm işlemler cihazınızda çevrimdışı** yapılır — çalışırken belgeleriniz asla iletilmez.
+Sayfa Vercel'den (GitHub Pages yansısıyla birlikte) sunulduğu için açmak için bir kez internet gerekir. Sonrasında **tüm işlemler cihazınızda çevrimdışı** yapılır — çalışırken belgeleriniz asla iletilmez.
 
 **Gerçekten ücretsiz mi?**
 Evet — tamamen ücretsiz, reklamsız ve [MIT lisansı](LICENSE) ile açık kaynak.
@@ -164,8 +166,9 @@ Tam olarak bu yüzden yapıldı: dosyalar cihazınızdan çıkmadığı için s�
 - **[pdfjs-dist](https://mozilla.github.io/pdf.js/)** — PDF render (önizlemeler)
 - **Vanilla JS** — framework yok, hafif ve hızlı
 - **Inline SVG ikon sprite** — emoji yok, ikon fontu yok
+- **Vercel** — birincil hosting (statik Vite deploy, bedava `*.vercel.app` adresi)
 - **GitHub Actions** — CI/CD (otomatik build + deploy)
-- **GitHub Pages** — bedava hosting
+- **GitHub Pages** — bedava yansı (mirror) hosting
 
 ---
 
@@ -201,6 +204,25 @@ npm run dev
 ```
 
 Tarayıcında `http://localhost:5173/Pdfbox-offline/` adresini aç.
+
+---
+
+## 🌐 Yayınlama ve Hosting
+
+Uygulama statik bir Vite sitesi olduğu için **aynı commit iki platformda birlikte yayınlanır**:
+
+| Platform | URL | Base path | Kurulum |
+|---|---|---|---|
+| **Vercel** (birincil) | https://pdfbox-offline.vercel.app/ | `/` | Framework: `Vite`, build: `npm run build`, çıktı: `dist` — ortam değişkeni gerekmez |
+| **GitHub Pages** (yansı) | https://ahmetiinhoyo.github.io/Pdfbox-offline/ | `/Pdfbox-offline/` | `.github/workflows/static.yml`, `main`'e her push'ta `dist`'i deploy eder |
+
+`vite.config.js` base path'i otomatik seçer:
+
+```js
+base: process.env.VERCEL ? '/' : '/Pdfbox-offline/',
+```
+
+Vercel build sırasında `VERCEL=1` değişkenini kendi ekler, bu yüzden dosyalar `/` üzerinden yüklenir; GitHub Actions'ta bu değişken yoktur ve `/Pdfbox-offline/` ön eki korunur. İki tarafta da elle ayar gerekmez.
 
 ---
 
