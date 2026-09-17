@@ -6,6 +6,7 @@ import { t, registerLangRenderer } from '../core/lang.js';
 import { showToast } from '../core/toast.js';
 import { downloadPdf, setupDropZone, cleanPdfMetadata } from '../core/helpers.js';
 import { openPreview } from './preview/index.js';
+import { registerWorkChecker } from '../core/work-guard.js';
 
 const metaToolBtn = document.getElementById('metaToolBtn');
 const metaToolModal = document.getElementById('metaToolModal');
@@ -21,6 +22,9 @@ const metaPreviewBtn = document.getElementById('metaPreviewBtn');
 const metaInfo = document.getElementById('metaInfo');
 
 let metaFile = null;
+
+// Seçili PDF varken sayfadan çıkışta onay istensin
+registerWorkChecker(() => !!metaFile);
 
 function openMetaTool() {
   metaToolModal.hidden = false;

@@ -7,6 +7,10 @@ import { openPreview } from '../preview/index.js';
 import { injectPagesCard, cacheEls, els, getCleanMeta } from './card.js';
 import { ps, loadPages, renderGrid, resetPages, resetOrder } from './grid.js';
 import { buildPagesPdf } from './build.js';
+import { registerWorkChecker } from '../../core/work-guard.js';
+
+// Yüklü PDF varken sayfadan çıkışta onay istensin
+registerWorkChecker(() => !!ps.file);
 
 function setBusy(busy) {
   els.applyBtn.disabled = busy || ps.order.length === 0;

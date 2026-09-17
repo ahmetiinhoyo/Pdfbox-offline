@@ -7,6 +7,7 @@ import {
   downloadPdf, parsePageRange, setupDropZone, cleanPdfMetadata,
 } from '../core/helpers.js';
 import { openPreview } from './preview/index.js';
+import { registerWorkChecker } from '../core/work-guard.js';
 
 const splitInput = document.getElementById('splitFile');
 const splitBtn = document.getElementById('split');
@@ -19,6 +20,9 @@ const splitCleanMeta = document.getElementById('splitCleanMeta');
 
 let splitFile = null;
 let splitPageCount = 0;
+
+// Seçili PDF varken sayfadan çıkışta onay istensin
+registerWorkChecker(() => !!splitFile);
 
 async function handleSplitFile(file) {
   if (!file) return;

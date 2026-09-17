@@ -6,6 +6,7 @@ import { t, registerLangRenderer } from '../core/lang.js';
 import { showToast } from '../core/toast.js';
 import { downloadPdf, setupDropZone, cleanPdfMetadata } from '../core/helpers.js';
 import { openPreview } from './preview/index.js';
+import { registerWorkChecker } from '../core/work-guard.js';
 
 const mergeInput = document.getElementById('files');
 const mergeList = document.getElementById('list');
@@ -17,6 +18,9 @@ const mergeStatsText = document.getElementById('mergeStatsText');
 const mergeCleanMeta = document.getElementById('mergeCleanMeta');
 
 let mergeFiles = [];
+
+// Dosya listesi boş değilken sayfadan çıkışta onay istensin
+registerWorkChecker(() => mergeFiles.length > 0);
 
 // "Tümünü Önizle" butonu (2+ dosyada görünür, HTML'de yok)
 const previewAllBtn = document.createElement('button');

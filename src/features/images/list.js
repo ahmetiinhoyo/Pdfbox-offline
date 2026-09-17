@@ -4,12 +4,16 @@
 import { icon } from '../../core/dom.js';
 import { t } from '../../core/lang.js';
 import { showToast } from '../../core/toast.js';
+import { registerWorkChecker } from '../../core/work-guard.js';
 import { els } from './card.js';
 import {
   isSupportedImage, isHeic, makeThumb, readImageSize, MAX_IMAGES,
 } from './build.js';
 
 export const images = [];
+
+// Görsel listesi boş değilken sayfadan çıkışta onay istensin
+registerWorkChecker(() => images.length > 0);
 
 let adding = false;
 
