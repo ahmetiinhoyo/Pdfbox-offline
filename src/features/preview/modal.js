@@ -4,8 +4,24 @@ import { t } from '../../core/lang.js';
 import { els, pv } from './state.js';
 import { goToPage } from './viewer.js';
 import { resetZoom, zoomBy } from './zoom.js';
+import { goBackToGrid, rewindHistory, setHistoryHandlers } from './history.js';
 
-export function closePreview() {
+// Görüntüleyiciden galeri görünümüne dön (geçmişe dokunmaz)
+export function showGridMode() {
+  if (els.modal.hidden) return;
+
+  pv.isViewerMode = false;
+  els.viewer.hidden = true;
+  els.grid.hidden = false;
+  els.back.hidden = true;
+  els.title.textContent = pv.loadedDocs.length > 1
+    ? t('previewAllTitle', pv.loadedDocs.length, pv.flatPages.length)
+    : t('previewTitle', pv.currentFileName);
+}
+
+// Modalı kapat: yalnızca görünürlük + durum temizliği (geçmişe dokunmaz).
+// Tarayıcı geri tuşu bunu çağırır — kayıt zaten tarayıcı tarafından geri sarıldı.
+function closePreviewNow() {
   els.modal.hidden = true;
   els.grid.innerHTML = '';
   els.viewer.hidden = true;
@@ -20,25 +36,26 @@ export function closePreview() {
   pv.fitScale = 1;
 }
 
+// Dışa açılan kapatma: bıraktığımız geçmiş kayıtlarını da geri sar
+export function closePreview() {
+  rewindHistory();
+  closePreviewNow();
+}
+
+// Tarayıcı geri/ileri tuşları için geri çağrılar
+setHistoryHandlers({ showGrid: showGridMode, close: closePreviewNow });
+
 els.close.addEventListener('click', closePreview);
 els.backdrop.addEventListener('click', closePreview);
 
-els.back.addEventListener('click', () => {
-  pv.isViewerMode = false;
-  els.viewer.hidden = true;
-  els.grid.hidden = false;
-  els.back.hidden = true;
-  els.title.textContent = pv.loadedDocs.length > 1
-    ? t('previewAllTitle', pv.loadedDocs.length, pv.flatPages.length)
-    : t('previewTitle', pv.currentFileName);
-});
+els.back.addEventListener('click', () => goBackToGrid());
 
 document.addEventListener('keydown', (e) => {
   if (els.modal.hidden) return;
 
   if (e.key === 'Escape') {
     if (pv.isViewerMode) {
-      els.back.click();
+      goBackToGrid();
     } else {
       closePreview();
     }

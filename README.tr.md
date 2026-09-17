@@ -158,7 +158,7 @@ Birleştirme, bölme ve metadata araçları için PDF; görselden PDF'e çeviric
 Tam olarak bu yüzden yapıldı: dosyalar cihazınızdan çıkmadığı için sızacak, kaydedilecek veya ihlal edilecek bir şey yok.
 
 **Yanlışlıkla geri tuşuna bastım, emeğim gider mi?**
-Hayır. En az bir dosya yüklüyken sayfa, **çıkmadan önce tarayıcıdan onay ister** (geri tuşu, sekme kapatma, yenileme). Şunu bil: sayfa dosyalarını saklamaz — onaylayıp çıkarsan yüklü dosyalar gider. Her şeyi yerelde tutup hiçbir şeyi sunucuya yüklemememizin diğer yüzü de budur.
+Hayır. Önizleme penceresi açıkken geri tuşu **önce önizlemeyi kapatır** — uygulamadan dışarı atılmazsın. Ayrıca en az bir dosya yüklüyken sayfa, **çıkmadan önce tarayıcıdan onay ister** (geri tuşu, sekme kapatma, yenileme). Şunu bil: sayfa dosyalarını saklamaz — onaylayıp çıkarsan yüklü dosyalar gider. Her şeyi yerelde tutup hiçbir şeyi sunucuya yüklemememizin diğer yüzü de budur.
 
 ---
 

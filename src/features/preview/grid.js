@@ -4,6 +4,7 @@ import { t } from '../../core/lang.js';
 import { pdfjsLib } from '../../core/pdf.js';
 import { els, pv } from './state.js';
 import { openViewer } from './viewer.js';
+import { pushGridState } from './history.js';
 
 export async function openPreview(files, showHeaders = false) {
   if (!files) return;
@@ -21,6 +22,9 @@ export async function openPreview(files, showHeaders = false) {
   els.back.hidden = true;
   pv.zoom = 1;
   pv.fitScale = 1;
+
+  // Tarayıcı geri tuşu siteyi terk etmesin: modal için geçmiş kaydı
+  pushGridState();
 
   try {
     pv.loadedDocs = [];

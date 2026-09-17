@@ -2,6 +2,7 @@
 
 import { els, pv } from './state.js';
 import { applyZoom, setZoomRenderHook } from './zoom.js';
+import { pushViewerState } from './history.js';
 
 export async function openViewer(flatIndex) {
   if (pv.flatPages.length === 0) return;
@@ -12,6 +13,9 @@ export async function openViewer(flatIndex) {
   els.grid.hidden = true;
   els.viewer.hidden = false;
   els.back.hidden = false;
+
+  // Tarayıcı geri tuşu önce buraya dönsün (siteyi terk etmesin)
+  pushViewerState();
 
   await goToPage(flatIndex);
 }

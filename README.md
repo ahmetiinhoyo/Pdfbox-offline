@@ -158,7 +158,7 @@ PDF files for merge, split and metadata tools; **JPG, PNG, WEBP, GIF, BMP and AV
 That is exactly what it is built for: since files never leave your device, there is nothing to leak, log or breach.
 
 **I accidentally hit the back button — will I lose my work?**
-No. As long as at least one file is loaded, the page asks the browser for a **confirmation before you leave** (back button, closing the tab, reloading). Be aware that the page itself never stores your files: if you confirm and leave, the loaded files are gone — that is the flip side of keeping everything local and uploading nothing.
+No. While the preview window is open, the browser **back button first closes the preview** — you are never thrown out of the app. And as long as at least one file is loaded, the page asks the browser for a **confirmation before you leave** (back button, closing the tab, reloading). Be aware that the page itself never stores your files: if you confirm and leave, the loaded files are gone — that is the flip side of keeping everything local and uploading nothing.
 
 ---
 
