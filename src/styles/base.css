@@ -7,6 +7,13 @@
   padding: 0;
 }
 
+/* hidden attribute'u her zaman kazansin.
+   Bazi bilesenlerde (or. .preview-back) display tanimli oldugu icin
+   [hidden] tek basina gizlemiyordu -> buton gorunup islevsiz kaliyordu. */
+[hidden] {
+  display: none !important;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--bg-1) 0%, var(--bg-2) 100%);

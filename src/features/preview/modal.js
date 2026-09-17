@@ -3,6 +3,7 @@
 import { t } from '../../core/lang.js';
 import { els, pv } from './state.js';
 import { goToPage } from './viewer.js';
+import { resetZoom, zoomBy } from './zoom.js';
 
 export function closePreview() {
   els.modal.hidden = true;
@@ -15,6 +16,8 @@ export function closePreview() {
   pv.flatPages = [];
   pv.currentPage = 0;
   pv.renderingTask = null;
+  pv.zoom = 1;
+  pv.fitScale = 1;
 }
 
 els.close.addEventListener('click', closePreview);
@@ -42,5 +45,8 @@ document.addEventListener('keydown', (e) => {
   } else if (pv.isViewerMode) {
     if (e.key === 'ArrowLeft') goToPage(pv.currentPage - 1);
     if (e.key === 'ArrowRight') goToPage(pv.currentPage + 1);
+    if (e.key === '+' || e.key === '=') zoomBy(1);
+    if (e.key === '-' || e.key === '_') zoomBy(-1);
+    if (e.key === '0') resetZoom();
   }
 });

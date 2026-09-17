@@ -24,18 +24,17 @@
   width: 100%;
   height: 100%;
   position: relative;
+  overflow: auto;
 }
 
+/* Genişlik/yükseklik JS ile verilir (sığdırma ölçeği * yakınlaştırma).
+   max-width/max-height burada KULLANILMAZ: aksi halde yakınlaştırma kırpılır. */
 .viewer-canvas-wrap canvas {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
+  margin: auto;
   border-radius: 6px;
   box-shadow: 0 12px 44px rgba(0, 0, 0, 0.5);
   background: white;
   display: block;
-  object-fit: contain;
 }
 
 .viewer-nav {
@@ -97,5 +96,64 @@
   box-shadow: 0 4px 12px var(--shadow);
   z-index: 2;
   pointer-events: none;
+}
+
+/* ==========================================================
+   YAKINLAŞTIRMA ÇUBUĞU
+   ========================================================== */
+.viewer-zoom {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 0.25rem 0.4rem;
+  box-shadow: 0 4px 12px var(--shadow);
+  z-index: 2;
+}
+
+.viewer-zoom-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.viewer-zoom-btn .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.viewer-zoom-btn:hover:not(:disabled) {
+  background: var(--hover-bg);
+  color: var(--accent-1);
+}
+
+.viewer-zoom-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.viewer-zoom-level {
+  min-width: 42px;
+  text-align: center;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  font-variant-numeric: tabular-nums;
+  user-select: none;
 }
 

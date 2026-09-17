@@ -14,6 +14,7 @@ PDFBox Offline is an open-source PDF utility that runs locally on your device. I
 - Convert images (JPG, PNG, WEBP, GIF, BMP, AVIF) to PDF with page size, orientation, margin and quality options
 - Clean hidden PDF metadata (author, title, subject, creator, producer, keywords)
 - Edit PDF pages: delete and reorder pages before downloading
+- Preview gallery for every page + fullscreen page viewer with zoom in/out and fit-to-screen
 - Multilingual UI (English, Türkçe, Русский)
 - Dark / light theme with 4 accent colors
 - Open source and auditable

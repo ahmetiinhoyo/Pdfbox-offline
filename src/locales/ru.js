@@ -5,7 +5,7 @@ export const ru = {
     navSplit: "Разделить",
     navImages: "Изображения в PDF",
     badgeOffline: "100% офлайн",
-    badgeNoUpload: "Без загрузки",
+    badgeNoUpload: "Без загрузки на сервер",
     badgeNoTrack: "Без слежки",
     navPages: "Редактор страниц",
     pagesMoveLeft: "Влево",
@@ -138,4 +138,7 @@ export const ru = {
     imgQualityHigh: "Высокое",
     imgQualityOriginal: "Оригинал",
     imgQualityHint: "Экран: самый маленький файл · Высокое: баланс · Оригинал: лучшее качество (большой файл)",
+    zoomIn: "Увеличить",
+    zoomOut: "Уменьшить",
+    zoomFit: "По размеру экрана",
 };

@@ -33,7 +33,7 @@ Aşağıdaki her şey **cihazınızda yerel olarak** çalışır: yükleme yok, 
 | 🖼️ Görselden PDF (JPG/PNG/WEBP/GIF/BMP/AVIF) | ✅ Hazır |
 | 🔄 Sayfa Sil / Sırala (Sayfa Düzenle) | ✅ Hazır |
 | 🖼️ Tümünü Önizle (çoklu dosya galerisi) | ✅ Hazır |
-| 🔍 Tam ekran sayfa görüntüleyici | ✅ Hazır |
+| 🔍 Tam ekran sayfa görüntüleyici (yakınlaştır · ekrana sığdır) | ✅ Hazır |
 | 🧹 Metadata Temizle (4 yol) | ✅ Hazır |
 | 🌙 Koyu / Açık tema + 4 vurgu rengi | ✅ Hazır |
 | 🌍 Çoklu Dil (TR/EN/RU) | ✅ Hazır |
@@ -117,6 +117,7 @@ Tamamen tarayıcınızda çalışır. Kurulum yok, hesap yok, sınır yok — be
 4. Bir sayfaya tıkla → **tam ekran görüntüleyici** açılır
 5. Ok tuşları veya ekrandaki butonlarla gez — **dosyalar arasında akar** (1. dosya biter → 2. dosyanın 1. sayfası)
 6. Sayfalar yüksek çözünürlükte render edilir — metin net görünür
+7. Ekrandaki **+ / −** butonlarıyla, **Ctrl + fare tekerleği** ile veya **+ / −** tuşlarıyla yakınlaştır/uzaklaştır; **0** tuşu (veya sığdır butonu) sayfayı ekrana sığdırır
 
 ### 🧹 Gizli PDF Metadata'sını Temizle (Yazar, Üreten Program, Anahtar Kelimeler)
 PDF'lerin içinde gizli bilgi vardır: yazar adı, oluşturan program, tarih, başlık, anahtar kelimeler. 4 yolla temizleyebilirsin:

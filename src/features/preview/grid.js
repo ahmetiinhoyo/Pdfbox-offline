@@ -19,6 +19,8 @@ export async function openPreview(files, showHeaders = false) {
   els.viewer.hidden = true;
   els.grid.hidden = false;
   els.back.hidden = true;
+  pv.zoom = 1;
+  pv.fitScale = 1;
 
   try {
     pv.loadedDocs = [];

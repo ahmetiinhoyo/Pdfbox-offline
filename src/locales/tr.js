@@ -5,7 +5,7 @@ export const tr = {
     navSplit: "Böl",
     navImages: "Görselden PDF",
     badgeOffline: "%100 Çevrimdışı",
-    badgeNoUpload: "Yükleme yok",
+    badgeNoUpload: "Sunucuya yükleme yok",
     badgeNoTrack: "Takip yok",
     navPages: "Sayfa Düzenle",
     pagesMoveLeft: "Sola taşı",
@@ -139,4 +139,7 @@ export const tr = {
     imgQualityHigh: "Yüksek",
     imgQualityOriginal: "Orijinal",
     imgQualityHint: "Ekran: en küçük dosya · Yüksek: dengeli kalite · Orijinal: en yüksek kalite (büyük dosya)",
+    zoomIn: "Yakınlaştır",
+    zoomOut: "Uzaklaştır",
+    zoomFit: "Ekrana sığdır",
 };

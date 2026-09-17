@@ -33,7 +33,7 @@ Everything below runs **locally on your device**: no uploads, no cloud processin
 | 🖼️ Images to PDF (JPG/PNG/WEBP/GIF/BMP/AVIF) | ✅ Ready |
 | 🔄 Edit Pages (delete / reorder) | ✅ Ready |
 | 🖼️ Preview All (multi-file gallery) | ✅ Ready |
-| 🔍 Fullscreen page viewer | ✅ Ready |
+| 🔍 Fullscreen page viewer (zoom · fit to screen) | ✅ Ready |
 | 🧹 Clean Metadata (4 ways) | ✅ Ready |
 | 🌙 Dark / Light theme + 4 accent colors | ✅ Ready |
 | 🌍 Multilingual (EN/TR/RU) | ✅ Ready |
@@ -117,6 +117,7 @@ Most "free" online PDF tools (mergers, splitters, compressors):
 4. Click any page to open the **fullscreen viewer**
 5. Navigate with arrow keys or on-screen buttons — it flows across files (end of file 1 → start of file 2)
 6. Pages are rendered at high resolution for crisp text
+7. Zoom with the on-screen **+ / −** buttons, **Ctrl + scroll wheel**, or the **+ / −** keys; press **0** (or the fit button) to bring the page back to screen size
 
 ### 🧹 Remove Hidden PDF Metadata (Author, Producer, Keywords)
 PDFs carry hidden info: author name, creating program, dates, title, keywords. Remove it in 4 ways:

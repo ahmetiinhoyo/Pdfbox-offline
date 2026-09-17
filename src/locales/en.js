@@ -5,7 +5,7 @@ export const en = {
     navSplit: "Split",
     navImages: "Images to PDF",
     badgeOffline: "100% Offline",
-    badgeNoUpload: "No uploads",
+    badgeNoUpload: "No server uploads",
     badgeNoTrack: "No tracking",
     navPages: "Edit Pages",
     pagesMoveLeft: "Move left",
@@ -138,4 +138,7 @@ export const en = {
     imgQualityHigh: "High",
     imgQualityOriginal: "Original",
     imgQualityHint: "Screen: smallest file · High: balanced quality · Original: best quality (large file)",
+    zoomIn: "Zoom in",
+    zoomOut: "Zoom out",
+    zoomFit: "Fit to screen",
 };

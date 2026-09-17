@@ -13,6 +13,10 @@ export const els = {
   prev: document.getElementById('viewerPrev'),
   next: document.getElementById('viewerNext'),
   counter: document.getElementById('viewerCounter'),
+  zoomIn: document.getElementById('viewerZoomIn'),
+  zoomOut: document.getElementById('viewerZoomOut'),
+  zoomFit: document.getElementById('viewerZoomFit'),
+  zoomLevel: document.getElementById('viewerZoomLevel'),
 };
 
 export const pv = {
@@ -23,4 +27,6 @@ export const pv = {
   isViewerMode: false,
   renderingTask: null,
   currentFileName: '',
+  zoom: 1,
+  fitScale: 1,
 };
