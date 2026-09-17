@@ -42,8 +42,15 @@ export function closePreview() {
   closePreviewNow();
 }
 
-// Tarayıcı geri/ileri tuşları için geri çağrılar
-setHistoryHandlers({ showGrid: showGridMode, close: closePreviewNow });
+// Tarayıcı geri/ileri tuşları için geri çağrılar.
+// Modal kapalıyken gelen popstate zararsız olmalı: temizliği tekrar çalıştırma.
+setHistoryHandlers({
+  showGrid: showGridMode,
+  close: () => {
+    if (els.modal.hidden) return;
+    closePreviewNow();
+  },
+});
 
 els.close.addEventListener('click', closePreview);
 els.backdrop.addEventListener('click', closePreview);
