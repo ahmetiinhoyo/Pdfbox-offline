@@ -19,6 +19,7 @@ PDFBox Offline is an open-source PDF utility that runs locally on your device. I
 - Dark / light theme with 4 accent colors
 - Open source and auditable
 - Modular codebase: every source file is under 200 lines (`npm run check:lines`)
+- Installable Progressive Web App (PWA): a built-in "Install app" button and full offline caching through a service worker — after the first load the whole UI works with no internet
 
 ## Why it matters
 Most online PDF tools require uploading documents to third-party servers. PDFBox Offline keeps files on the user's device, making it suitable for contracts, IDs, financial documents, medical records, and other private data.

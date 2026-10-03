@@ -141,4 +141,11 @@ export const ru = {
     zoomIn: "Увеличить",
     zoomOut: "Уменьшить",
     zoomFit: "По размеру экрана",
+
+    // PWA (устанавливаемое приложение)
+    installBtn: "Установить приложение",
+    installDone: "Приложение установлено",
+    installIosHint: "В Safari: Поделиться → На экран «Домой»",
+    installUnavailable: "Установка сейчас недоступна",
+    offlineReady: "Готово к работе офлайн",
 };

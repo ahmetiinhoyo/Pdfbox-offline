@@ -37,6 +37,7 @@ Everything below runs **locally on your device**: no uploads, no cloud processin
 | 🧹 Clean Metadata (4 ways) | ✅ Ready |
 | 🌙 Dark / Light theme + 4 accent colors | ✅ Ready |
 | 🌍 Multilingual (EN/TR/RU) | ✅ Ready |
+| 📲 Install as an app (PWA) — offline-ready | ✅ Ready |
 | 🗜️ Compress | 🚧 Soon |
 
 ---
@@ -138,6 +139,15 @@ Click **TR / EN / RU** in the top right. Your choice is remembered.
 - Toggle **dark / light** theme with the moon/sun button
 - Pick one of **4 accent colors** (blue, green, orange, pink) from the color dropdown — the selected swatch is highlighted
 
+### 📲 Install as an App (PWA)
+PDFBox Offline is an installable Progressive Web App and works **fully offline** after the first load.
+
+1. Open the site in **Chrome, Edge or another Chromium browser**
+2. Click **"Install app"** in the top bar (the button appears once the browser allows installation)
+3. Confirm — the app opens in its own window and keeps working with **no internet connection**
+
+> On **iPhone / iPad (Safari):** tap **Share → Add to Home Screen**. The install button appears there too as a reminder.
+
 ---
 
 ## ❓ FAQ — Offline & Privacy
@@ -146,7 +156,7 @@ Click **TR / EN / RU** in the top right. Your choice is remembered.
 No. PDFBox Offline has **no backend**. Every operation — merging, splitting, image conversion, metadata cleaning — runs locally in your browser. You can verify it yourself: open DevTools → Network tab, load a file, and watch — nothing is sent anywhere.
 
 **Does it work without an internet connection?**
-The page itself is served from Vercel (with a GitHub Pages mirror), so you need the internet once to load it. After that, **all processing is done offline on your device** — your documents are never transmitted while you work.
+The page itself is served from Vercel (with a GitHub Pages mirror), so you need the internet once to load it. After that, **all processing is done offline on your device** — your documents are never transmitted while you work. You can also **install it as an app** (PWA): once installed, the whole interface is cached by a service worker and opens **with no internet at all**.
 
 **Is PDFBox Offline really free?**
 Yes — completely free, ad-free and open source under the [MIT license](LICENSE).
@@ -170,6 +180,7 @@ No. While the preview window is open, the browser **back button first closes the
 - **[pdfjs-dist](https://mozilla.github.io/pdf.js/)** — PDF rendering (previews)
 - **Vanilla JS** — no framework, fast and light
 - **Inline SVG icon sprite** — no emoji, no icon font
+- **Progressive Web App** — installable + offline caching (hand-written service worker + Web App Manifest)
 - **Vercel** — primary host (static Vite deploy, free `*.vercel.app` domain)
 - **GitHub Actions** — CI/CD (auto build + deploy)
 - **GitHub Pages** — free mirror host
@@ -190,7 +201,8 @@ to audit as an open-source project. The rule is enforced by `npm run check:lines
 | `src/features/` | Features: `merge.js`, `split.js`, `meta-tool.js`, `images/` (5 modules), `pages/` (4 modules), `preview/` (grid + viewer) |
 | `src/ui/` | Per-card HTML fragments (e.g. `images-card.html`) — injected without touching `index.html` |
 | `src/locales/` | `tr.js`, `en.js`, `ru.js` translations |
-| `src/styles/` | 19 style modules (theme, card, button, modal, preview, images card, tool nav, page editor, mobile) |
+| `src/styles/` | 20 style modules (theme, card, button, modal, preview, images card, tool nav, page editor, PWA, mobile) |
+| `src/service-worker.js` + `public/manifest.json` | PWA: offline cache template + Web App Manifest (precache list injected at build time) |
 | `src/style.css` | Style entry point — only an `@import` list |
 | `scripts/check-lines.mjs` | The 200-line rule checker |
 

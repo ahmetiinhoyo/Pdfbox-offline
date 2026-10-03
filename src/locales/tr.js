@@ -142,4 +142,11 @@ export const tr = {
     zoomIn: "Yakınlaştır",
     zoomOut: "Uzaklaştır",
     zoomFit: "Ekrana sığdır",
+
+    // PWA (kurulabilir uygulama)
+    installBtn: "Uygulamayı Yükle",
+    installDone: "Uygulama yüklendi",
+    installIosHint: "Safari'de: Paylaş → Ana Ekrana Ekle",
+    installUnavailable: "Yükleme şu anda kullanılamıyor",
+    offlineReady: "Çevrimdışı kullanıma hazır",
 };

@@ -141,4 +141,11 @@ export const en = {
     zoomIn: "Zoom in",
     zoomOut: "Zoom out",
     zoomFit: "Fit to screen",
+
+    // PWA (installable app)
+    installBtn: "Install app",
+    installDone: "App installed",
+    installIosHint: "In Safari: Share → Add to Home Screen",
+    installUnavailable: "Install isn't available right now",
+    offlineReady: "Ready for offline use",
 };

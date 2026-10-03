@@ -1,0 +1,32 @@
+/* ==========================================================
+   PWA (kurulabilir uygulama)
+   ========================================================== */
+.top-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* "Uygulamayi Yukle" butonu: vurgu rengiyle one cikar */
+.install-pill {
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  border-color: transparent;
+  color: #fff;
+}
+
+.install-pill .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.install-pill:hover {
+  color: #fff;
+  border-color: transparent;
+  filter: brightness(1.08);
+}
+
+@media (max-width: 560px) {
+  .tool-pill.install-pill {
+    padding: 0 0.7rem;
+  }
+}

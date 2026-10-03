@@ -36,9 +36,12 @@
 | `src/features/**` | Özellikler: `merge.js`, `split.js`, `meta-tool.js`, `images/{card,list,normalize,build,index}.js`, `pages/{card,grid,build,index}.js`, `preview/{state,modal,grid,viewer,index}.js` |
 | `src/locales/**` | `tr.js`, `en.js`, `ru.js` — her yeni metin ÜÇ dosyaya da eklenir |
 | `src/i18n.js` | `translations` birleştirme + `detectLang()` + `t(lang, key, ...args)` |
-| `src/styles/**` | `theme, base, topbar, accent-menu, layout, toolnav, file-drop, file-list, controls, range, footer, toast, modal, preview, viewer, images, images-options, pages, mobile` |
+| `src/styles/**` | `theme, base, topbar, accent-menu, layout, toolnav, file-drop, file-list, controls, range, footer, toast, modal, preview, viewer, images, images-options, pages, pwa, mobile` |
 | `src/style.css` | Sadece `@import` listesi — sıra orijinal cascade sırasıyla birebir aynıdır |
 | `scripts/check-lines.mjs` | 200 satır kuralını denetleyen script |
+| `src/core/pwa.js` | Service Worker kaydı + "Uygulamayı Yükle" butonu (`initPwa()`) |
+| `src/service-worker.js` | Çevrimdışı önbellek şablonu — precache listesi + sürüm build'de enjekte edilir |
+| `public/manifest.json` + `public/icons/*.png` | Web App Manifest + PWA ikonları (kaynak: `public/favicon.svg`) |
 
 ## 🧭 Modül Mimarisi Kuralları
 
@@ -107,6 +110,18 @@
 - `handleMetaFile(file)` modalda bulunan metadata'yı `.meta-info` kutusunda gösterir
 - `renderMetaDrop()` dil değişiminde `registerLangRenderer` üzerinden çağrılır
 - Stiller: `.option-checkbox`, `.option-box`, `.option-label`, `.meta-tool-content`, `.meta-tool-body`
+
+## 📲 PWA (Kurulabilir & Çevrimdışı)
+
+- `vite.config.js` içindeki `pdfboxServiceWorker()` eklentisi, build sonrası tüm varlıkları ve `public/`
+  dosyalarını listeleyip `src/service-worker.js` şablonuna enjekte eder → `dist/service-worker.js`
+- Yeni sürüm yayınlarken `vite.config.js` içindeki `CACHE_VERSION` değerini artır (eski önbellek activate'te silinir)
+- `src/core/pwa.js` → `initPwa()`: SW kaydı (yalnızca PROD) + `installPwaBtn` butonu (HTML'de `hidden` başlar)
+- SW stratejisi: kurulumda tüm varlıklar (`Promise.allSettled`), gezinmede network-first + index fallback,
+  varlıklarda cache-first
+- Base path dinamik (Vercel `/`, GitHub Pages `/Pdfbox-offline/`); SW kapsamı `self.location` üzerinden
+  türetilir → service worker içine sabit yol yazma
+- i18n anahtarları: `installBtn`, `installDone`, `installIosHint`, `installUnavailable`, `offlineReady`
 
 ## 🇹🇷 Dil Tercihi
 

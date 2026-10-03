@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PDFBox Offline — Merge & Split PDFs Without Uploading</title>
   <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0a0b0e" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="PDFBox" />
+  <meta name="mobile-web-app-capable" content="yes" />
 
   <meta name="description" content="Merge and split PDF files 100% offline in your browser. No uploads, no ads, no tracking. Free and open source PDF toolbox." />
   <meta name="keywords" content="pdf merge, pdf split, offline pdf, private pdf tool, pdf merger, pdf splitter, no upload pdf, free pdf tool" />
@@ -21,6 +26,8 @@
   <meta name="twitter:description" content="100% offline PDF toolbox. No ads, no tracking, no sign-up." />
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon-180x180.png" />
+  <link rel="manifest" href="/manifest.json" />
   <link rel="stylesheet" href="/src/style.css" />
 </head>
 <body>
@@ -47,6 +54,7 @@
       <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
       <symbol id="i-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
       <symbol id="i-files" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><polyline points="15 2 15 7 20 7"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
       <symbol id="i-zoom-in" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></symbol>
       <symbol id="i-zoom-out" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></symbol>
       <symbol id="i-zoom-fit" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
@@ -55,10 +63,17 @@
 
   <!-- ========== ÜST BAR ========== -->
   <div class="top-bar">
-    <button id="metaToolBtn" class="tool-pill" title="Metadata Temizle">
-      <svg class="icon" aria-hidden="true"><use href="#i-eraser"/></svg>
-      <span class="tool-pill-label" data-i18n="metaToolBtnLabel"></span>
-    </button>
+    <div class="top-left">
+      <button id="metaToolBtn" class="tool-pill" title="Metadata Temizle">
+        <svg class="icon" aria-hidden="true"><use href="#i-eraser"/></svg>
+        <span class="tool-pill-label" data-i18n="metaToolBtnLabel"></span>
+      </button>
+
+      <button id="installPwaBtn" class="tool-pill install-pill" title="Install app" hidden>
+        <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
+        <span class="tool-pill-label" data-i18n="installBtn"></span>
+      </button>
+    </div>
 
     <div class="top-controls">
       <div class="lang-switch">

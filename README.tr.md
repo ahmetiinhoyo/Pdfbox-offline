@@ -37,6 +37,7 @@ Aşağıdaki her şey **cihazınızda yerel olarak** çalışır: yükleme yok, 
 | 🧹 Metadata Temizle (4 yol) | ✅ Hazır |
 | 🌙 Koyu / Açık tema + 4 vurgu rengi | ✅ Hazır |
 | 🌍 Çoklu Dil (TR/EN/RU) | ✅ Hazır |
+| 📲 Uygulama olarak yükle (PWA) — çevrimdışı çalışır | ✅ Hazır |
 | 🗜️ Sıkıştır | 🚧 Yakında |
 
 ---
@@ -138,6 +139,15 @@ Sağ üstteki **TR / EN / RU** butonlarına bas. Seçim hatırlanır.
 - Ay/Güneş butonuyla **koyu / açık** tema değiştir
 - Renk dropdown'ından **4 vurgu renginden** birini seç (mavi, yeşil, turuncu, pembe) — seçili swatch işaretli görünür
 
+### 📲 Uygulama Olarak Yükle (PWA)
+PDFBox Offline kurulabilir bir PWA'dır ve ilk açılıştan sonra **tamamen çevrimdışı** çalışır.
+
+1. Siteyi **Chrome, Edge veya başka bir Chromium tarayıcıda** aç
+2. Üst bardaki **"Uygulamayı Yükle"** butonuna bas (buton, tarayıcı yüklemeye izin verdiğinde görünür)
+3. Onayla — uygulama kendi penceresinde açılır ve **internet olmadan** çalışmaya devam eder
+
+> **iPhone / iPad (Safari):** **Paylaş → Ana Ekrana Ekle** yolunu izle. Buton orada da hatırlatma olarak görünür.
+
 ---
 
 ## ❓ SSS — Çevrimdışı & Gizlilik
@@ -146,7 +156,7 @@ Sağ üstteki **TR / EN / RU** butonlarına bas. Seçim hatırlanır.
 Hayır. PDFBox Offline'ın **arka sunucusu yok**. Birleştirme, bölme, görsel çevirme, metadata temizleme — her işlem tarayıcınızda yerel olarak çalışır. Kendiniz doğrulayabilirsiniz: Geliştirici Araçları → Ağ sekmesini açın, bir dosya yükleyin ve izleyin — hiçbir şey hiçbir yere gönderilmez.
 
 **İnternet bağlantısı olmadan çalışır mı?**
-Sayfa Vercel'den (GitHub Pages yansısıyla birlikte) sunulduğu için açmak için bir kez internet gerekir. Sonrasında **tüm işlemler cihazınızda çevrimdışı** yapılır — çalışırken belgeleriniz asla iletilmez.
+Sayfa Vercel'den (GitHub Pages yansısıyla birlikte) sunulduğu için açmak için bir kez internet gerekir. Sonrasında **tüm işlemler cihazınızda çevrimdışı** yapılır — çalışırken belgeleriniz asla iletilmez. Ayrıca **uygulama olarak kurabilirsin** (PWA): kurulduktan sonra arayüzün tamamı service worker tarafından önbelleğe alınır ve **internet olmadan** açılır.
 
 **Gerçekten ücretsiz mi?**
 Evet — tamamen ücretsiz, reklamsız ve [MIT lisansı](LICENSE) ile açık kaynak.
@@ -170,6 +180,7 @@ Hayır. Önizleme penceresi açıkken geri tuşu **önce önizlemeyi kapatır** 
 - **[pdfjs-dist](https://mozilla.github.io/pdf.js/)** — PDF render (önizlemeler)
 - **Vanilla JS** — framework yok, hafif ve hızlı
 - **Inline SVG ikon sprite** — emoji yok, ikon fontu yok
+- **Progressive Web App (PWA)** — kurulabilir + çevrimdışı önbellek (elle yazılmış service worker + Web App Manifest)
 - **Vercel** — birincil hosting (statik Vite deploy, bedava `*.vercel.app` adresi)
 - **GitHub Actions** — CI/CD (otomatik build + deploy)
 - **GitHub Pages** — bedava yansı (mirror) hosting
@@ -190,7 +201,8 @@ olarak denetlenmesi kolay olsun diye. Kural, `npm run check:lines` komutuyla oto
 | `src/features/` | Özellikler: `merge.js`, `split.js`, `meta-tool.js`, `images/` (5 modül), `pages/` (4 modül), `preview/` (grid + viewer) |
 | `src/ui/` | Karta özel HTML parçaları (ör. `images-card.html`) — `index.html`'e dokunmadan enjekte edilir |
 | `src/locales/` | `tr.js`, `en.js`, `ru.js` çevirileri |
-| `src/styles/` | 19 stil modülü (tema, kart, buton, modal, önizleme, görsel kartı, araç sekmeleri, sayfa düzenleyici, mobil) |
+| `src/styles/` | 20 stil modülü (tema, kart, buton, modal, önizleme, görsel kartı, araç sekmeleri, sayfa düzenleyici, PWA, mobil) |
+| `src/service-worker.js` + `public/manifest.json` | PWA: çevrimdışı önbellek şablonu + Web App Manifest (precache listesi build'de enjekte edilir) |
 | `src/style.css` | Stil giriş noktası — sadece `@import` listesi |
 | `scripts/check-lines.mjs` | 200 satır kuralının denetleyicisi |
 
