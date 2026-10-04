@@ -123,6 +123,13 @@
   türetilir → service worker içine sabit yol yazma
 - i18n anahtarları: `installBtn`, `installDone`, `installIosHint`, `installUnavailable`, `offlineReady`
 
+## 📊 Analitik Şeffaflığı
+
+- `index.html` sonunda **Cloudflare Web Analytics** beacon'ı vardır (çerezsiz, yalnızca anonim ziyaret sayısı). KALDIRILMAZ.
+- Bu yüzden "izleme/takip yok" veya "analitik yok" ifadesi KULLANILMAZ; bunun yerine
+  "çerezsiz gizlilik dostu istatistik / cookie-free privacy analytics" denir.
+- Footer notu `analyticsNote` anahtarıyla 3 dilde verilir; README'ler ve `llms.txt`'te de aynı şeffaflık cümlesi bulunur.
+
 ## 🇹🇷 Dil Tercihi
 
 Kullanıcıyla Türkçe konuş. Samimi ama teknik ol. Kod, değişken ve fonksiyon isimleri İngilizce kalabilir.

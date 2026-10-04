@@ -1,12 +1,12 @@
 // English translations
 export const en = {
-    tagline: "Your file never leaves your device. No ads, no tracking.",
+    tagline: "Your file never leaves your device. No ads, no tracking cookies.",
     navMerge: "Merge",
     navSplit: "Split",
     navImages: "Images to PDF",
     badgeOffline: "100% Offline",
     badgeNoUpload: "No server uploads",
-    badgeNoTrack: "No tracking",
+    badgeNoTrack: "Cookie-free analytics",
     navPages: "Edit Pages",
     pagesMoveLeft: "Move left",
     pagesMoveRight: "Move right",
@@ -31,6 +31,7 @@ export const en = {
     fileListLabel: "Selected files:",
     remove: "Remove",
     footer: "100% offline · Files never touch a server",
+    analyticsNote: "Cloudflare Web Analytics is used only to count anonymous visits; no cookies or personal data are collected.",
     needTwo: "You need at least 2 PDFs",
 
     splitTitle: "Split PDF",

@@ -2,7 +2,7 @@
 
 > **PDFBox Offline** is a privacy-first, 100% offline PDF toolbox that runs entirely in your browser.
 > Merge PDFs, split PDFs, convert JPG/PNG/WEBP images to PDF and remove hidden metadata —
-> **without uploading a single byte** to any server. No ads. No tracking. No sign-up. No file size limits.
+> **without uploading a single byte** to any server. No ads. No tracking cookies. No sign-up. No file size limits. Only cookie-free privacy analytics (anonymous visit counts).
 
 [![Live](https://img.shields.io/badge/🌐_Live-Demo-blue?style=flat)](https://pdfbox-offline.vercel.app/)
 [![Privacy](https://img.shields.io/badge/🔒_Privacy-100%25_offline-success?style=flat)](https://pdfbox-offline.vercel.app/)
@@ -63,7 +63,8 @@ Most "free" online PDF tools (mergers, splitters, compressors):
 **PDFBox Offline** is the opposite:
 - ✅ **100% offline** — all PDF processing happens locally in your browser; your files never leave your device
 - ✅ **Privacy by design** — safe for contracts, IDs, invoices, medical records, legal and financial documents
-- ✅ **No ads, no tracking, no analytics** — nothing to opt out of
+- ✅ **Cookie-free privacy analytics** — no ads, no tracking cookies; anonymous visit counts only, nothing to opt out of
+- ✅ **Transparency** — Cloudflare Web Analytics is used only to count anonymous visits; no cookies or personal data are collected.
 - ✅ **Unlimited file size** — the only limit is your device
 - ✅ **No sign-up** — open the page and start working
 - ✅ **Multilingual** — English / Türkçe / Русский
@@ -248,7 +249,7 @@ If PDFBox Offline saves you time, consider [buying me a coffee](https://www.buym
 
 ---
 
-> **PDFBox Offline** — free offline PDF merger & splitter · no-upload JPG/PNG to PDF converter · private PDF metadata remover. 100% client-side and privacy-first: no registration, no ads, no tracking, unlimited file size. Works in any modern browser (Chrome, Firefox, Edge, Safari) on Windows, macOS, Linux, Android and iOS.
+> **PDFBox Offline** — free offline PDF merger & splitter · no-upload JPG/PNG to PDF converter · private PDF metadata remover. 100% client-side and privacy-first: no registration, no ads, no tracking cookies (only cookie-free privacy analytics), unlimited file size. Works in any modern browser (Chrome, Firefox, Edge, Safari) on Windows, macOS, Linux, Android and iOS.
 
 ## 📄 License
 

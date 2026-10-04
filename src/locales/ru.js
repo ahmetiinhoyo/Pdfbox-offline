@@ -1,12 +1,12 @@
 // Russian translations
 export const ru = {
-    tagline: "Ваш файл не покидает устройство. Без рекламы и слежки.",
+    tagline: "Ваш файл не покидает устройство. Без рекламы и cookie-слежки.",
     navMerge: "Объединить",
     navSplit: "Разделить",
     navImages: "Изображения в PDF",
     badgeOffline: "100% офлайн",
     badgeNoUpload: "Без загрузки на сервер",
-    badgeNoTrack: "Без слежки",
+    badgeNoTrack: "Без cookie-аналитики",
     navPages: "Редактор страниц",
     pagesMoveLeft: "Влево",
     pagesMoveRight: "Вправо",
@@ -31,6 +31,7 @@ export const ru = {
     fileListLabel: "Выбранные файлы:",
     remove: "Удалить",
     footer: "100% офлайн · Файлы не отправляются на сервер",
+    analyticsNote: "Cloudflare Web Analytics используется только для подсчёта анонимных посещений; файлы cookie и персональные данные не собираются.",
     needTwo: "Нужно минимум 2 PDF",
 
     splitTitle: "Разделить PDF",

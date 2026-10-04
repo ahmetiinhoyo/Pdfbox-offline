@@ -12,6 +12,16 @@ footer {
   margin-bottom: 0.9rem;
 }
 
+/* Analitik şeffaflık notu (footer) */
+.footer-note {
+  max-width: 48ch;
+  margin: 0 auto 0.9rem;
+  color: var(--text-dim);
+  font-size: 0.74rem;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
 .footer-links {
   display: flex;
   justify-content: center;

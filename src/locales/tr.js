@@ -1,12 +1,12 @@
 // Turkish translations
 export const tr = {
-    tagline: "Dosyan cihazından çıkmaz. Reklam yok, kayıt yok.",
+    tagline: "Dosyan cihazından çıkmaz. Reklam yok, çerez yok.",
     navMerge: "Birleştir",
     navSplit: "Böl",
     navImages: "Görselden PDF",
     badgeOffline: "%100 Çevrimdışı",
     badgeNoUpload: "Sunucuya yükleme yok",
-    badgeNoTrack: "Takip yok",
+    badgeNoTrack: "Çerezsiz istatistik",
     navPages: "Sayfa Düzenle",
     pagesMoveLeft: "Sola taşı",
     pagesMoveRight: "Sağa taşı",
@@ -31,6 +31,7 @@ export const tr = {
     fileListLabel: "Seçilen dosyalar:",
     remove: "Kaldır",
     footer: "100% offline çalışır · Dosyalar sunucuya gitmez",
+    analyticsNote: "Cloudflare Web Analytics sadece anonim ziyaretçi sayısını ölçmek için kullanılır; çerez (cookie) veya kişisel veri toplanmaz.",
     needTwo: "En az 2 PDF seçmelisin",
 
     splitTitle: "PDF Böl",

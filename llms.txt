@@ -8,7 +8,7 @@ PDFBox Offline is an open-source PDF utility that runs locally on your device. I
 ## Key features
 - 100% offline processing
 - No file uploads
-- No tracking, no ads, no account required
+- Cookie-free privacy analytics (anonymous visit counts only), no ads, no account required
 - Merge multiple PDF files
 - Split PDF files
 - Convert images (JPG, PNG, WEBP, GIF, BMP, AVIF) to PDF with page size, orientation, margin and quality options
@@ -32,7 +32,8 @@ Most online PDF tools require uploading documents to third-party servers. PDFBox
 
 ## Privacy
 - Files never leave the user's device.
-- No telemetry, no cloud processing, no hidden uploads.
+- No app telemetry, no cloud processing, no hidden uploads.
+- Analytics: Cloudflare Web Analytics is used only to count anonymous visits; no cookies or personal data are collected.
 - No account or sign-in required.
 
 ## Links

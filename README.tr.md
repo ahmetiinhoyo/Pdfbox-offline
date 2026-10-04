@@ -2,7 +2,7 @@
 
 > **PDFBox Offline**, tamamen tarayıcında çalışan, gizlilik odaklı, %100 çevrimdışı bir PDF araç kutusudur.
 > PDF'leri birleştirin, bölün, JPG/PNG/WEBP görsellerini PDF'e çevirin ve gizli metadata'yı silin —
-> **tek bir byte'i bile sunucuya yüklemeden**. Reklam yok. Takip yok. Kayıt yok. Dosya boyutu sınırı yok.
+> **tek bir byte'i bile sunucuya yüklemeden**. Reklam yok. Takip çerezi yok. Kayıt yok. Dosya boyutu sınırı yok. Sadece çerezsiz gizlilik dostu istatistik (anonim ziyaret sayısı).
 
 [![Canlı](https://img.shields.io/badge/🌐_Canlı-Demo-blue?style=flat)](https://pdfbox-offline.vercel.app/)
 [![Gizlilik](https://img.shields.io/badge/🔒_Gizlilik-100%25_çevrimdışı-success?style=flat)](https://pdfbox-offline.vercel.app/)
@@ -63,7 +63,8 @@ Tamamen tarayıcınızda çalışır. Kurulum yok, hesap yok, sınır yok — be
 **PDFBox Offline** tam tersini yapar:
 - ✅ **%100 çevrimdışı** — tüm PDF işlemleri tarayıcınızda yerel olarak çalışır; dosyalarınız cihazınızdan asla çıkmaz
 - ✅ **Tasarımdan gizlilik** — sözleşmeler, kimlikler, faturalar, sağlık kayıtları, hukuki ve finansal belgeler için güvenli
-- ✅ **Reklam yok, takip yok, analitik yok** — kapatılacak bir şey bile yok
+- ✅ **Çerezsiz gizlilik dostu istatistik** — reklam yok, takip çerezi yok; yalnızca anonim ziyaret sayısı, kapatılacak bir şey yok
+- ✅ **Şeffaflık** — Cloudflare Web Analytics sadece anonim ziyaretçi sayısını ölçmek için kullanılır; çerez (cookie) veya kişisel veri toplanmaz.
 - ✅ **Sınırsız dosya boyutu** — tek sınır cihazınız
 - ✅ **Kayıt yok** — sayfayı aç, çalışmaya başla
 - ✅ **Çok dilli** — English / Türkçe / Русский
@@ -248,7 +249,7 @@ PDFBox Offline zaman kazandırıyorsa [kahve ısmarlayabilirsin](https://www.buy
 
 ---
 
-> **PDFBox Offline** — ücretsiz çevrimdışı PDF birleştirici & bölücü · yükleme yapmadan JPG/PNG'yi PDF'e çevirici · gizlilik odaklı PDF metadata temizleyici. %100 tarayıcıda çalışır: kayıt yok, reklam yok, takip yok, dosya boyutu sınırı yok. Windows, macOS, Linux, Android ve iOS'ta tüm modern tarayıcılarda (Chrome, Firefox, Edge, Safari) çalışır.
+> **PDFBox Offline** — ücretsiz çevrimdışı PDF birleştirici & bölücü · yükleme yapmadan JPG/PNG'yi PDF'e çevirici · gizlilik odaklı PDF metadata temizleyici. %100 tarayıcıda çalışır: kayıt yok, reklam yok, takip çerezi yok (sadece çerezsiz gizlilik dostu istatistik), dosya boyutu sınırı yok. Windows, macOS, Linux, Android ve iOS'ta tüm modern tarayıcılarda (Chrome, Firefox, Edge, Safari) çalışır.
 
 ## 📄 Lisans
 

@@ -1,7 +1,7 @@
 {
   "name": "PDFBox Offline",
   "short_name": "PDFBox",
-  "description": "Merge, split, preview and clean PDF metadata 100% offline in your browser. No uploads, no ads, no tracking.",
+  "description": "Merge, split, preview and clean PDF metadata 100% offline in your browser. No uploads, no ads, no tracking cookies — only cookie-free privacy analytics.",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",
